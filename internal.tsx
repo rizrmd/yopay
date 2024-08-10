@@ -6,12 +6,10 @@ export const Loading = () => {
           @keyframes pulse {
             0% {
               opacity: 1;
-              transform: scale(1);
             }
 
             50% {
               opacity: 0.5;
-              transform: scale(1.1);
             }
 
             100% {
