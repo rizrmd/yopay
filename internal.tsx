@@ -18,9 +18,9 @@ export const Loading = () => {
           }
 
           & {
-            width: 50px;
-            height: 50px;
-            border-radius: 4px;
+            width: 80px;
+            height: 80px;
+            border-radius: 6px;
             animation: pulse 1s infinite;
           }
         `}
