@@ -1,6 +1,6 @@
 import { sessionServer } from "lib/session/server";
 import type {} from "./typings/global";
-import { UserData } from "app/session";
+import { UserData } from "app/lib/session";
 
 const session = sessionServer<UserData>({
   on: {

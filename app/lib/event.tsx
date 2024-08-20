@@ -7,8 +7,11 @@ prasi_events("tablelist", "where", async (table, where) => {
 });
 
 prasi_events("form", "before_delete", async (md, fm) => {
-  if (["product", "bundle", "category"].includes(fm.props.gen_table) && fm.data.id) {
-    await db[fm.props.gen_table].update({
+  if (
+    ["product", "bundle", "category"].includes(fm.props.gen_table) &&
+    fm.data.id
+  ) {
+    await (db as any)[fm.props.gen_table].update({
       where: {
         id: fm.data.id,
       },
