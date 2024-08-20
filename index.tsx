@@ -1,6 +1,7 @@
 import "@/utils/init";
 import "app/css/build.css";
 import "app/event";
+export { HeaderTitled } from "app/HeaderTitled";
 import { lang } from "lib/lang";
 export * from "@/exports";
 export { icon } from "app/icon";
