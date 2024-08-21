@@ -17,9 +17,11 @@ export const HeaderTitled = ({
     local.label = "";
     local.back_url = "";
     fetchLinkParams(parseLink()).then((links) => {
-      if (links.length > 0 && links[0]?.prefix?.length > 0) {
-        local.label = links[0].prefix[0].label;
-        local.back_url = links[0].prefix[0].url;
+      if (links.length > 0) {
+        const idx = links.length - 1;
+
+        local.label = links[idx].prefix[0].label;
+        local.back_url = links[idx].prefix[0].url;
       }
       local.render();
     });
@@ -37,7 +39,7 @@ export const HeaderTitled = ({
         if (local.back_url) {
           navigate(local.back_url);
         } else {
-          navigate('/')
+          navigate("/");
         }
       }}
     >

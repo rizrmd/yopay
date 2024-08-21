@@ -1,4 +1,4 @@
-import { sessionClient } from "lib/session/client";
+import { sessionClient } from "lib/utils/client-session";
 
 export type UserData = {
   role: string;
