@@ -1,5 +1,5 @@
-import { newRouter } from "lib/server/server-route";
+import { newServerRouter } from "lib/server/server-route";
 
-export const routes = newRouter({
+export const router = newServerRouter({
   register: ["/register", () => import("./router/register")],
 });
