@@ -14,5 +14,5 @@ export default async function (
     role: "manager",
     expired_at: dayjs().add(1, "day").unix(),
   });
-  return null;
+  return "andinoa";
 }
