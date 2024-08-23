@@ -2,7 +2,6 @@
 
 import { SessionContext } from "lib/server/server-route";
 import { EsensiSession } from "../session";
-import dayjs from "dayjs";
 
 export default async function (
   this: SessionContext<EsensiSession>,
@@ -12,7 +11,12 @@ export default async function (
   this.session.create({
     uid: "ABC",
     role: "manager",
-    expired_at: dayjs().add(1, "day").unix(),
+    data: { phone: "08123712371283" },
   });
-  return "andinoa";
+
+  const first = this.session.findFirst();
+  console.log(first)
+  // console.log(first?.destroy());
+
+  return this.session.findMany().length;
 }

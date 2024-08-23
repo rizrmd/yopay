@@ -33,7 +33,9 @@ export const HeaderTitled = ({
 
   return (
     <div
-      className="c-flex c-items-center c-space-x-2"
+      className={cx(
+        "c-flex c-items-center c-space-x-2 c-flex-1 c-w-full c-h-full c-px-2"
+      )}
       onClick={(e) => {
         e.preventDefault();
         if (local.back_url) {

@@ -1,6 +1,4 @@
-import { SessionData } from "lib/server/server-session";
-
-export type EsensiSession = SessionData<{
+export type EsensiSession = Partial<{
   name: string;
   phone: string;
   email: string;

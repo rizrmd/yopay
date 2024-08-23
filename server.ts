@@ -6,10 +6,11 @@ import { router } from "app/server/router";
 
 export const server: PrasiServer = {
   session: null as any,
-  async init(arg) {
+  async init() {
     this.session = createSessionServer<UserData>({
+      site_id: this.site_id,
       router: useServerRouter(router),
-    }); 
+    });
   },
   async http({ req, handle, mode, url, index, server }) {
     return await this.session.handle({ req, handle, mode, url });
