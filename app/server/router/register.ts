@@ -8,15 +8,15 @@ export default async function (
   username: string,
   password: string
 ) {
-  this.session.create({
-    uid: "ABC",
-    role: "manager",
-    data: { phone: "08123712371283" },
-  });
+  // this.session.create({
+  //   uid: "ABC",
+  //   role: "manager",
+  //   data: { phone: "08123712371283" },
+  // });
 
   const first = this.session.findFirst();
-  console.log(first)
-  // console.log(first?.destroy());
+  // console.log(first)
+  console.log(first?.destroy());
 
   return this.session.findMany().length;
 }
