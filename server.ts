@@ -1,18 +1,16 @@
-import { createSessionServer } from "lib/server/session/server-session";
-import type {} from "./typings/global";
 import { UserData } from "app/lib/session";
 import { useServerRouter } from "lib/server/server-route";
+import { initSessionServer } from "lib/session/server-session";
+import type {} from "./typings/global";
 import { router } from "app/server/router";
 
 export const server: PrasiServer = {
-  session: null as any,
   async init() {
-    this.session = createSessionServer<UserData>({
-      site_id: this.site_id,
-      server_router: useServerRouter(router),
+    initSessionServer<UserData>(this, {
+      router: useServerRouter(router),
     });
   },
-  async http({ req, handle, mode, url, index, server }) {
+  async http({ req, handle, mode, url }) {
     return await this.session.handle({ req, handle, mode, url });
   },
 };
