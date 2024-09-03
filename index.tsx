@@ -1,10 +1,8 @@
 import "@/utils/init";
 import "app/css/build.css";
 import "app/lib/event";
-import { router } from "app/server/router";
 import { EsensiSession } from "app/server/session";
 import { lang } from "lib/lang";
-import { newClientRouter } from "lib/server/server-route";
 import { newClientSession } from "lib/session/client-session";
 export * from "@/exports";
 export { HeaderTitled } from "app/comps/HeaderTitled";
@@ -18,9 +16,14 @@ export const _session = newClientSession<EsensiSession>({
   tracker: { enabled: true },
   on: {
     async afterInit(session) {
-      await session.logout();
+      console.log('client session: after init',session.status)
     },
-    async afterLogin(session) {},
-    async afterLogout(session) {},
+    async afterLogin(session) {
+      console.log('client session: after login')
+    },
+    async afterLogout(session) {
+      console.log('client session: after logout')
+    },
   },
-});
+}); 
+ 

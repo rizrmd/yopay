@@ -9,7 +9,7 @@ export const server: PrasiServer = {
     initSessionServer<UserData>(this, {
       router: useServerRouter(router),
     });
-  },
+  }, 
   async http({ req, handle, mode, url }) {
     return await this.session.handle({ req, handle, mode, url });
   },
