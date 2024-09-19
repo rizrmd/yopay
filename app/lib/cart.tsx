@@ -23,6 +23,7 @@ export const cart = {
     const items: CartItem[] = [];
     const cart_raw = localStorage.getItem("esensi-cart");
     if (cart_raw) {
+      console.log('ccxvxvxvx');
       try {
         const products: any[] = [];
         const bundles: any[] = [];

@@ -5,7 +5,7 @@ function getRandomInt(min: number, max: number) {
 }
 
 export default async function (no_hp: string) {
-  const generated_otp = getRandomInt(0, 9999);
+  const generated_otp = String(getRandomInt(0, 9999)).padStart(4, '0');
 
   const formData = new FormData();
   formData.append("target", no_hp);

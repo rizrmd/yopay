@@ -16,14 +16,18 @@ export const _session = newClientSession<EsensiSession>({
   tracker: { enabled: true },
   on: {
     async afterInit(session) {
-      console.log('client session: after init',session.status)
+      console.log("client session: after init", session.status);
     },
     async afterLogin(session) {
-      console.log('client session: after login')
+      console.log("client session: after login");
     },
     async afterLogout(session) {
-      console.log('client session: after logout')
+      console.log("client session: after logout");
     },
   },
-}); 
- 
+});
+export { checkEsensiPhoneCustomer, validateEmail } from "app/lib/register";
+
+import { router } from "app/server/router";
+import { newClientRouter } from "lib/server/server-route";
+export const _server = newClientRouter(router);
