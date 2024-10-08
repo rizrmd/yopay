@@ -59,6 +59,8 @@
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",
-    "xlsx": "npm:@e965/xlsx"
+    "xlsx": "npm:@e965/xlsx",
+    "react-qr-code": "^2.0.15",
+    "qr-scanner": "^1.4.2"
   }
 }

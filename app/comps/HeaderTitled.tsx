@@ -1,5 +1,5 @@
-import { parseLink } from "lib/comps/form/field/type/TypeLink";
 import { fetchLinkParams, Spinner } from "lib/exports";
+import { parseLink } from "lib/utils/fetch-link-params";
 import { useLocal } from "lib/utils/use-local";
 import { useEffect } from "react";
 
