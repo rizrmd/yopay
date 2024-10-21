@@ -4,17 +4,6 @@ export type trxSalesListResponse = {
   ok: boolean;
   count: number;
   data: any;
-  // data:
-  //   | {
-  //       id: string;
-  //       sales_lines: {
-  //         id: string;
-  //         unit_price: number;
-  //         qty: number;
-  //         total_price: number;
-  //       }[];
-  //     }[]
-  //   | null;
 };
 
 export default async function (
@@ -25,18 +14,10 @@ export default async function (
       id_customer: customerId,
       status: trxSalesStatus.PAID,
     },
-    select: { id: true },
+    include: {
+      t_sales_line: true,
+    },
   });
-  if (t_sales_list) {
-    for (let i = 0; i < t_sales_list.length; i++) {
-      const lines = await db.t_sales_line.findMany({
-        where: {
-          id_sales: t_sales_list[i].id
-        }
-      });
-      t_sales_list[i].lines = lines;
-    }
-  }
   return t_sales_list && !!t_sales_list.length
     ? {
         ok: true,

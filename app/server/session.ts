@@ -43,6 +43,7 @@ export const newEsensiSession = (router: any) => {
           const ses_data: EsensiSession = { ...result.data };
           session.save(ses_data);
           session.status = "active";
+          session.current = ses_data;
           // navigate("/home");
         } else {
           session.status = "guest";

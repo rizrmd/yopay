@@ -7,10 +7,7 @@ export default prasiApi(async function (
   id_product: string,
   id_sales: string
 ): Promise<any> {
-  console.log("download", id_product, id_sales);
   const { req, server } = this;
-  console.log("ip address", server.requestIP(req)?.address);
-  console.log("api/download", id_product, id_sales);
 
   const product = await db.product.findFirst({
     where: {
