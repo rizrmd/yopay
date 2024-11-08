@@ -1,9 +1,11 @@
-import { product } from "../../../../typings/prisma";
 import { trxSalesListResponse } from "../trx-sales/get/all-paid";
 
 export default async function (
   customerId: string
 ): Promise<trxSalesListResponse> {
+  // const xxx = await db.$queryRaw`select * from t_sales limit 1`
+  // console.log(xxx)
+
   // get all t_sales of this customer
   let salesList = await db.t_sales.findMany({
     where: { id_customer: customerId },
@@ -16,8 +18,17 @@ export default async function (
   for (let i = 0; i < salesList.length; i++) {
     const lines = salesList[i].t_sales_line;
     for (let j = 0; j < lines.length; j++) {
-      if (productIds.findIndex((y) => y === lines[j].id_product) < 0)
-        productIds.push(lines[j].id_product);
+      if (lines[j].id_product) {
+        if (productIds.findIndex((y) => y === lines[j].id_product) < 0)
+          productIds.push(lines[j].id_product!);
+      } else if (lines[j].id_bundle) {
+        let bundleProducts = await db.bundle_product.findMany({
+          where: { id_bundle: lines[j].id_bundle! },
+          select: { id_product: true },
+        });
+        if (productIds.findIndex((y) => y === lines[j].id_bundle) < 0)
+          productIds.push(...bundleProducts.map((x) => x.id_product));
+      }
     }
   }
 

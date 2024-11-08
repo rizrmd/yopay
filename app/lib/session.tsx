@@ -1,6 +1,20 @@
+import { router } from "app/server/router";
+import { newClientRouter } from "lib/server/server-route";
+import { customer } from "../../typings/prisma";
 
 export interface UserData {
   uid?: string;
   role?: string;
   name?: string;
-};
+}
+
+interface Result {
+  customer?: any;
+}
+
+export async function checkSession(phone: string): Promise<customer | null> {
+  if (!phone) return null;
+  return await db.customer.findFirst({
+    where: { whatsapp: phone, deleted_at: null },
+  });
+}

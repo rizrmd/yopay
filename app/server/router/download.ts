@@ -8,7 +8,6 @@ export default prasiApi(async function (
   id_sales: string
 ): Promise<any> {
   const { req, server } = this;
-
   const product = await db.product.findFirst({
     where: {
       id: id_product,

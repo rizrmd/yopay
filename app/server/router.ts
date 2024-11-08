@@ -5,6 +5,7 @@ export const router = newServerRouter({
   login: ["/api/login", () => import("./router/login")],
   otp: ["/send-otp", () => import("./router/send-otp")],
   download: ["/api/download/*", () => import("./router/download")],
+  track: ["/api/track/*", () => import("./router/track")],
   paymentSuccess: ["/pay/success", () => import("./router/payment/success")],
   paymentPending: ["/pay/pending", () => import("./router/payment/pending")],
   paymentError: ["/pay/error", () => import("./router/payment/error")],
