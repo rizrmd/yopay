@@ -1,4 +1,4 @@
-import { UserData } from "app/lib/session";
+import { UserData } from "app/lib/bizpro/session";
 import { useServerRouter } from "lib/server/server-route";
 import { initSessionServer } from "lib/session/server-session";
 import type {} from "./typings/global";

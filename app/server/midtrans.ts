@@ -6,34 +6,8 @@ declare global {
   }
 }
 
-const _midtrans_sandboxScriptUrl =
-  "https://app.sandbox.midtrans.com/snap/snap.js";
-const _midtrans_productionScriptUrl = "https://app.midtrans.com/snap/snap.js";
-const _midtrans_clientKey = "SB-Mid-client-d_1PPYJ8JrPKrYeL";
-const _midtrans_serverKey = "SB-Mid-server-X4B-891uHMUMZhBVJdarTwDG";
 
-export function _midtrans_init() {
-  let scriptTag = document.createElement("script");
-  scriptTag.src = isDev
-    ? _midtrans_sandboxScriptUrl
-    : _midtrans_productionScriptUrl;
-  scriptTag.type = "text/javascript";
-  // scriptTag.async = true;
-  scriptTag.setAttribute("data-client-key", _midtrans_clientKey);
-  document.head.appendChild(scriptTag);
-  // return () => document.body.removeChild(scriptTag);
-}
-
-const _midtrans_base64AuthHeader =
-  "Basic U0ItTWlkLXNlcnZlci1YNEItODkxdUhNVU1aaEJWSmRhclR3REc6";
-
-const _midtrans_httpHeaders = {
-  Accept: "application/json",
-  "Content-Type": "application/json",
-  Authorization: _midtrans_base64AuthHeader,
-};
-
-type trxTokenRequest = {
+type trxRequestParam = {
   transaction_details: {
     order_id: string;
     gross_amount: number;
@@ -49,32 +23,22 @@ type trxTokenRequest = {
   };
 };
 
-type trxTokenResponse = {
+type trxResponse = {
   token: string;
   redirect_url: string;
+  error_messages?: string[];
 };
 
-export const _midtrans_sandboxChargeAPI =
-  "https://app.sandbox.midtrans.com/snap/v1/transactions";
-export const _midtrans_productionChargeAPI =
-  "https://app.midtrans.com/snap/v1/transactions";
-
-export function _midtrans_pay(data: trxTokenRequest) {
+export function _midtrans_pay(data: trxRequestParam) {
   return new Promise<{ status: string; result?: any }>(async (resolve) => {
-    const r = await fetch(
-      `/_proxy/${
-        isDev ? _midtrans_sandboxChargeAPI : _midtrans_productionChargeAPI
-      }`,
-      {
-        method: "POST",
-        headers: _midtrans_httpHeaders,
-        body: JSON.stringify(data),
-      }
-    );
 
     if (r.ok) {
-      const json: trxTokenResponse = await r.json();
-      window.snap.pay(json.token, {
+      const json: trxResponse = await r.json();
+      if (json?.error_messages) {
+        resolve({ status: "error", result: json?.error_messages.join(". ") });
+        return;
+      }
+      window.snap?.pay(json?.token, {
         onSuccess: function (result: any) {
           /* You may add your own implementation here */
           resolve({ status: "success", result });
@@ -93,5 +57,6 @@ export function _midtrans_pay(data: trxTokenRequest) {
         },
       });
     }
+    resolve({ status: "error" });
   });
 }

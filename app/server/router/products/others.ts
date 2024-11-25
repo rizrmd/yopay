@@ -1,8 +1,8 @@
-import { trxSalesListResponse } from "../trx-sales/get/all-paid";
+import { trxSalesAllPaidResponse } from "app/lib/bizpro/trx";
 
 export default async function (
   customerId: string
-): Promise<trxSalesListResponse> {
+): Promise<trxSalesAllPaidResponse> {
   // const xxx = await db.$queryRaw`select * from t_sales limit 1`
   // console.log(xxx)
 

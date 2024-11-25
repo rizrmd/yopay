@@ -1,5 +1,5 @@
 import { trxSalesStatus } from "app/enums";
-import { CartItem } from "app/lib/cart";
+import { CartItem } from "app/lib/bizpro/cart";
 
 export type trxData = {
   id_customer: string;

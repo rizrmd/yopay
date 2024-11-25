@@ -1,4 +1,4 @@
-import { trx, trxSalesAllPaidResponse } from "app/lib/trx";
+import { trx, trxSalesAllPaidResponse } from "app/lib/bizpro/trx";
 
 export default async function (
   customerId: string

@@ -2,7 +2,7 @@ import {
   trxData,
   trx,
   trxSalesNotPaidResponse,
-} from "app/lib/trx";
+} from "app/lib/bizpro/trx";
 
 export default async function (
   data: trxData,

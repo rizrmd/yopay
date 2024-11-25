@@ -1,7 +1,7 @@
-import { trxData, trx } from "app/lib/trx";
+import { trxData, trx } from "app/lib/bizpro/trx";
 import { _midtrans_pay } from "app/server/midtrans";
 import { EsensiSession } from "app/server/session";
-import { _server } from "./_server";
+import { _server } from "../utils/_server";
 
 export type CartItem = {
   id: string;
@@ -110,6 +110,7 @@ export const cart = {
     const _session = arg._session;
     const list = await this.load();
     if (!_session.current) return false;
+    if (this.total <= 0) return false;
     let data: trxData = {
       id_customer: _session.current.uid!,
       status: "cart",
@@ -128,6 +129,7 @@ export const cart = {
     }
     if (!t_sales) return false;
     data.status = "paid";
+
     const result = await _midtrans_pay({
       transaction_details: {
         order_id: t_sales.id,
@@ -157,7 +159,9 @@ export const cart = {
       await trx.update(data, t_sales.id);
       navigate("/download/" + t_sales.id);
       return true;
-    }
+    } else if (result?.result) {
+      alert(result?.result);
+    } 
     return false;
   },
 };

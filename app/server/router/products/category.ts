@@ -1,8 +1,8 @@
-import { trxSalesListResponse } from "../trx-sales/get/all-paid";
+import { trxSalesAllPaidResponse } from "app/lib/bizpro/trx";
 
 export default async function (
   category: string,
-): Promise<trxSalesListResponse> {
+): Promise<trxSalesAllPaidResponse> {
   const cat = await db.category.findFirst({
     where: { name: category },
     include: { product_category: true },

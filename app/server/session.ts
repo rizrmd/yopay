@@ -1,4 +1,4 @@
-import { UserData } from "app/lib/session";
+import { UserData } from "app/lib/bizpro/session";
 import { newClientSession } from "lib/session/client-session";
 import type { LoginResult } from "app/server/router/login";
 
