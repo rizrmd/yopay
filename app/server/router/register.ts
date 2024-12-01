@@ -1,12 +1,12 @@
 import { prasiApi } from "lib/server/server-route";
 import { SessionContext } from "lib/session/type";
-import { EsensiSession } from "../session";
 import { otp } from "../lib/otp";
+import { EsensiSession } from "../session";
 
 export default prasiApi(async function (
   this: SessionContext<EsensiSession>,
   { phone, email, name }: { phone: string; email: string; name: string }
-): Promise<void> {
+) {
   const customer = await db.customer.findFirst({
     where: { whatsapp: phone },
   });
@@ -20,9 +20,6 @@ export default prasiApi(async function (
       },
       select: { id: true },
     });
-    const res = await otp.send(whatsapp);
-    navigate("/checkout/otp", {
-      where: { whatsapp, otp: res },
-    });
+    return await otp.send(whatsapp);
   }
 });

@@ -1,5 +1,3 @@
-import { router } from "app/server/router";
-import { newClientRouter } from "lib/server/server-route";
 import { customer } from "../../../typings/prisma";
 
 export interface UserData {
