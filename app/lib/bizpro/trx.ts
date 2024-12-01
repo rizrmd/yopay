@@ -1,3 +1,4 @@
+import { createId } from "@paralleldrive/cuid2";
 import { trxSalesStatus } from "app/enums";
 import { CartItem } from "app/lib/bizpro/cart";
 
@@ -18,14 +19,14 @@ export type trxSalesAllPaidResponse = {
 export type trxSalesNotPaidResponse = {
   ok: boolean;
   count: number;
-  data: { id: string } | null;
+  data: { id: string; midtrans_order_id: string } | null;
 };
 
 export const trx = {
   create: async (data: trxData): Promise<trxSalesNotPaidResponse> => {
     const t_sales_lines = data.info.cart.map((x) => ({
-      id_product: x.type === 'product' ? x.id : undefined,
-      id_bundle: x.type === 'bundle' ? x.id : undefined,
+      id_product: x.type === "product" ? x.id : undefined,
+      id_bundle: x.type === "bundle" ? x.id : undefined,
       qty: 1,
       unit_price: Number(x.real_price),
       total_price: Number(x.real_price),
@@ -37,10 +38,11 @@ export const trx = {
           createMany: {
             skipDuplicates: true,
             data: t_sales_lines,
-          }
-        }
+          },
+        },
+        midtrans_order_id: createId(),
       },
-      select: { id: true },
+      select: { id: true, midtrans_order_id: true },
     });
     return t_sales
       ? {
@@ -50,11 +52,14 @@ export const trx = {
         }
       : { ok: true, count: 0, data: null };
   },
-  update: async (data: trxData, id: string): Promise<trxSalesNotPaidResponse> =>{
+  update: async (
+    data: trxData,
+    id: string
+  ): Promise<trxSalesNotPaidResponse> => {
     let t_sales = await db.t_sales.update({
       where: { id },
       data: { ...data, updated_at: new Date() },
-      select: { id: true },
+      select: { id: true, midtrans_order_id: true },
     });
     return t_sales
       ? {
@@ -91,7 +96,7 @@ export const trx = {
             not: trxSalesStatus.PAID,
           },
         },
-        select: { id: true },
+        select: { id: true, midtrans_order_id: true },
       });
       return t_sales
         ? {
@@ -101,5 +106,5 @@ export const trx = {
           }
         : { ok: true, count: 0, data: null };
     },
-  }
-}
+  },
+};

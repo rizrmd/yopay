@@ -2,6 +2,7 @@ import { trxData, trx } from "app/lib/bizpro/trx";
 import { _midtrans_pay } from "app/lib/bizpro/midtrans";
 import { EsensiSession } from "app/server/session";
 import { _server } from "../utils/_server";
+import { createId } from "@paralleldrive/cuid2";
 
 export type CartItem = {
   id: string;
@@ -120,6 +121,11 @@ export const cart = {
     };
     let res = await trx.get.notPaid(_session.current.uid!);
     let t_sales = null;
+
+    if (!res.data?.midtrans_order_id && res.data) {
+      res.data.midtrans_order_id = createId();
+    }
+
     if (res.data) {
       const _res = await trx.update(data, res.data.id);
       t_sales = _res.data;
@@ -130,9 +136,9 @@ export const cart = {
     if (!t_sales) return false;
     data.status = "paid";
 
-    const result = await _midtrans_pay({
+    const result = await _midtrans_pay(t_sales.id, {
       transaction_details: {
-        order_id: t_sales.id,
+        order_id: t_sales.midtrans_order_id,
         gross_amount: this.total,
       },
       credit_card: { secure: true },
@@ -143,6 +149,7 @@ export const cart = {
         phone: _session.current.phone!,
       },
     });
+
     if (result.status === "success" && t_sales) {
       _server.track({
         session: _session.current,
@@ -161,7 +168,7 @@ export const cart = {
       return true;
     } else if (result?.result) {
       alert(result?.result);
-    } 
+    }
     return false;
   },
 };
