@@ -1,8 +1,28 @@
 import { trxSalesAllPaidResponse } from "app/lib/bizpro/trx";
 
 export default async function (
-  customerId: string
+  customerId?: string
 ): Promise<trxSalesAllPaidResponse> {
+  if (!customerId) {
+    const productsCount = await db.product.count();
+    const skip = Math.floor(Math.random() * productsCount);
+    const data = await db.product.findMany({
+      take: 5,
+      skip: skip,
+      select: {
+        id: true,
+        cover: true,
+        desc: true,
+        currency: true,
+        name: true,
+        real_price: true,
+        strike_price: true,
+        slug: true,
+      },
+    });
+    return { ok: true, count: data.length, data };
+  }
+
   // const xxx = await db.$queryRaw`select * from t_sales limit 1`
   // console.log(xxx)
 

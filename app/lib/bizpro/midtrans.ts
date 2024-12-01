@@ -82,7 +82,7 @@ export async function _midtrans_pay(t_sales_id: string, data: trxTokenRequest) {
     ).json()) as { token?: string; error_messages: string[] };
 
     if (r.error_messages?.[0].includes("transaction_details.order_id")) {
-      // retry 1 time 
+      // retry 1 time
       const retry = await _server.midtransOrderId(
         t_sales_id,
         data.transaction_details.order_id
@@ -106,16 +106,28 @@ export async function _midtrans_pay(t_sales_id: string, data: trxTokenRequest) {
 
     if (!r.error_messages) {
       window.snap.pay(r.token, {
-        onSuccess: function (result: any) {
+        onSuccess: async function (result: any) {
           /* You may add your own implementation here */
+          await db.t_sales.update({
+            where: { id: t_sales_id },
+            data: { midtrans_success: result },
+          });
           resolve({ status: "success", result });
         },
-        onPending: function (result: any) {
+        onPending: async function (result: any) {
           /* You may add your own implementation here */
+          await db.t_sales.update({
+            where: { id: t_sales_id },
+            data: { midtrans_pending: result },
+          });
           resolve({ status: "pending", result });
         },
-        onError: function (result: any) {
+        onError: async function (result: any) {
           /* You may add your own implementation here */
+          await db.t_sales.update({
+            where: { id: t_sales_id },
+            data: { midtrans_error: result },
+          });
           resolve({ status: "error", result });
         },
         onClose: function () {

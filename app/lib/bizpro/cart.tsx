@@ -167,7 +167,9 @@ export const cart = {
       navigate("/download/" + t_sales.id);
       return true;
     } else if (result?.result) {
-      alert(result?.result);
+      alert(JSON.stringify(result?.result));
+    } else if (result.status === "close") {
+      history.back();
     }
     return false;
   },
