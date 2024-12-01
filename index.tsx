@@ -22,7 +22,7 @@ export { _server, _session } from "app/lib/utils/_server";
 export { checkSession } from "app/lib/bizpro/session";
 // #endregion
 
-export * from "app/server/midtrans";
+export * from "app/lib/bizpro/midtrans";
 export { trxSalesStatus } from "app/enums";
 export { dashboard } from "app/lib/bizpro/dashboard";
 export { validate as is_uuid } from "uuid";

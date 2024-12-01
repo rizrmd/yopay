@@ -1,5 +1,5 @@
 import { trxData, trx } from "app/lib/bizpro/trx";
-import { _midtrans_pay } from "app/server/midtrans";
+import { _midtrans_pay } from "app/lib/bizpro/midtrans";
 import { EsensiSession } from "app/server/session";
 import { _server } from "../utils/_server";
 
