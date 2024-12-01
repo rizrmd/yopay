@@ -2,7 +2,7 @@ import { EsensiSession } from "./session";
 
 const accessToken =
   "EAAY3qcN0znYBO6EKugZBEj7BLY4ZBTRkZChmZAFDXeHXXwOxNddTJE1vo1VbvJyUZCX9wJFKlJxeaFF9blskTuG3pVzlxqVZAebhtuyDMjgjoy4DOq7aeOprZC9YH0E3rSebSESzChYTFkbRGvnRjM7jZBZBFNnVYJamL8ell7kTM0HVMxUjO4mMIZCuuwoZB7tIcZBwswZDZD";
-const pixelId = "960408691867202";
+export const pixelId = "960408691867202";
 type argParamType = {
   session: EsensiSession | null;
   eventName: string;

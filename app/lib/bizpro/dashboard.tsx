@@ -7,25 +7,19 @@ type paramType = {
 
 export const dashboard = {
   async todaySalesAmount(param: paramType): Promise<number> {
-    const author = param?.authorId
-      ? ` and p.id_author = '${param.authorId}'`
-      : "";
-    const customer = param?.customerId
-      ? ` and s.id_customer = '${param.customerId}'`
-      : "";
     let x: any[];
     if (param.authorId && param.customerId) {
       x =
-        await db.$queryRawUnsafe`select coalesce(sum(l.total_price), 0) total from t_sales_line l join product p on p.id = l.id_product join t_sales s on s.id = l.id_sales where s.status = 'paid' and to_char(s.created_at, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD') and p.id_author = ${param.authorId}::uuid and s.id_customer = ${param.customerId}::uuid`;
+        await db.$queryRaw`select coalesce(sum(l.total_price), 0) total from t_sales_line l join product p on p.id = l.id_product join t_sales s on s.id = l.id_sales where s.status = 'paid' and to_char(s.created_at, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD') and p.id_author = ${param.authorId}::uuid and s.id_customer = ${param.customerId}::uuid`;
     } else if (param.authorId && !param.customerId) {
       x =
-        await db.$queryRawUnsafe`select coalesce(sum(l.total_price), 0) total from t_sales_line l join product p on p.id = l.id_product join t_sales s on s.id = l.id_sales where s.status = 'paid' and to_char(s.created_at, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD') and p.id_author = ${param.authorId}::uuid`;
+        await db.$queryRaw`select coalesce(sum(l.total_price), 0) total from t_sales_line l join product p on p.id = l.id_product join t_sales s on s.id = l.id_sales where s.status = 'paid' and to_char(s.created_at, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD') and p.id_author = ${param.authorId}::uuid`;
     } else if (!param.authorId && param.customerId) {
       x =
-        await db.$queryRawUnsafe`select coalesce(sum(l.total_price), 0) total from t_sales_line l join product p on p.id = l.id_product join t_sales s on s.id = l.id_sales where s.status = 'paid' and to_char(s.created_at, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD') and s.id_customer = ${param.customerId}::uuid`;
+        await db.$queryRaw`select coalesce(sum(l.total_price), 0) total from t_sales_line l join product p on p.id = l.id_product join t_sales s on s.id = l.id_sales where s.status = 'paid' and to_char(s.created_at, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD') and s.id_customer = ${param.customerId}::uuid`;
     } else {
       x =
-        await db.$queryRawUnsafe`select coalesce(sum(l.total_price), 0) total from t_sales_line l join product p on p.id = l.id_product join t_sales s on s.id = l.id_sales where s.status = 'paid' and to_char(s.created_at, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD')`;
+        await db.$queryRaw`select coalesce(sum(l.total_price), 0) total from t_sales_line l join product p on p.id = l.id_product join t_sales s on s.id = l.id_sales where s.status = 'paid' and to_char(s.created_at, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD')`;
     }
     if (x?.length > 0) {
       return Number(x[0].total);

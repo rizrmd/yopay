@@ -26,3 +26,4 @@ export * from "app/server/midtrans";
 export { trxSalesStatus } from "app/enums";
 export { dashboard } from "app/lib/bizpro/dashboard";
 export { validate as is_uuid } from "uuid";
+export { Movable } from "app/lib/ui/movable";

@@ -29,6 +29,10 @@ type trxResponse = {
   error_messages?: string[];
 };
 
+export function _midtrans_init() {
+  let scriptTag = document.createElement("script");
+}
+
 export function _midtrans_pay(data: trxRequestParam) {
   return new Promise<{ status: string; result?: any }>(async (resolve) => {
 
