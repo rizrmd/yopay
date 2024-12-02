@@ -13,6 +13,7 @@ export const Reader = () => {
   const toc = useRef<NavItem[]>([]);
   const local = useLocal({
     book: null as null | Partial<product>,
+    link: "",
     chapter: "",
     page: <></>,
   });
@@ -26,6 +27,22 @@ export const Reader = () => {
         })
         .then((book) => {
           local.book = book;
+
+          if (book) {
+            try {
+              const file = (JSON.parse(book.product_file) as string[]).find(
+                (e) => e.includes(".epub")
+              );
+              if (file) {
+                local.link = siteurl(file);
+              } else {
+                alert("Book not found");
+                local.link =
+                  "https://raw.githubusercontent.com/altmshfkgudtjr/react-epub-viewer/refs/heads/main/public/files/Alices%20Adventures%20in%20Wonderland.epub";
+              }
+            } catch (e) {}
+          }
+
           local.render();
         });
     } else {
@@ -34,7 +51,7 @@ export const Reader = () => {
     }
   }, [params.id]);
 
-  if (!local.book)
+  if (!local.link)
     return (
       <div className="c-flex c-items-center c-justify-center c-flex-1 w-full">
         <Spinner className="mr-1" />
@@ -53,7 +70,7 @@ export const Reader = () => {
       ></style>
       <ReaderTop left={local.chapter} right={local.page} />
       <ReactReader
-        url="https://raw.githubusercontent.com/altmshfkgudtjr/react-epub-viewer/refs/heads/main/public/files/Alices%20Adventures%20in%20Wonderland.epub"
+        url={local.link}
         location={location}
         showToc={false}
         getRendition={(_rendition: Rendition) => {
@@ -93,7 +110,9 @@ export const Reader = () => {
             const chapter = toc.current.find((item) => item.href === href);
             local.page = (
               <>
-                <sup>{displayed.page}</sup>/<sub>{displayed.total}</sub>
+                <sup className="c-whitespace-nowrap">{displayed.page}</sup>
+                <div>/</div>
+                <sub className="c-whitespace-nowrap">{displayed.total}</sub>
               </>
             );
             local.chapter = chapter ? chapter.label : "Alice in Wonderland";

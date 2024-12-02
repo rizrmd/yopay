@@ -19,6 +19,30 @@ export const server: PrasiServer = {
     if (landing) {
       return landing;
     }
+    if (url.pathname.startsWith(`/product-img/`)) {
+      const id = url.pathname.substring("/product-img/".length);
+      if (validate(id)) {
+        const res = await db.product.findFirst({
+          where: { id },
+          select: { img_file: true },
+        });
+
+        const files = JSON.parse(res?.img_file || "[]");
+        if (files[0]) {
+          const search = req.url.split("?").pop();
+          const res = await fetch(
+            `https://beta.esensi.online/${files[0].replace(
+              `_file`,
+              "_img"
+            )}?${search}`
+          );
+          return new Response(await res.arrayBuffer(), {
+            headers: { ...res.headers, "content-encoding": undefined },
+          });
+        }
+        return new Response("", { status: 404 });
+      }
+    }
 
     if (url.pathname.startsWith("/reload-landing/")) {
       const id = url.pathname.substring("/reload-landing/".length);

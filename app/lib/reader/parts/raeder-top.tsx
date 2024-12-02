@@ -34,7 +34,7 @@ export const ReaderTop = ({
         className={"c-flex c-items-center c-text-xs c-px-2 c-justify-between c-flex-1"}
       >
         <div>{left}</div>
-        <div>{right}</div>
+        <div className="c-flex c-items-center">{right}</div>
       </div>
     </div>
   );
