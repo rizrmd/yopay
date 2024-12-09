@@ -1,5 +1,6 @@
 import { UserData } from "app/lib/bizpro/session";
 import { handleLanding, reloadLanding } from "app/server/landing";
+import { fbPixelScript } from "app/server/landing/render";
 import { router } from "app/server/router";
 import { useServerRouter } from "lib/server/server-route";
 import { initSessionServer } from "lib/session/server-session";
@@ -11,6 +12,7 @@ export const server: PrasiServer = {
     initSessionServer<UserData>(this, {
       router: useServerRouter(router),
     });
+    console.log("Esensi Online: Started", Date.now());
   },
   async http(arg) {
     const { req, handle, mode, url, server } = arg;
@@ -52,6 +54,18 @@ export const server: PrasiServer = {
       return new Response("ok");
     }
 
-    return await this.session.handle({ req, handle, mode, url, server });
+    const res = await this.session.handle({ req, handle, mode, url, server });
+
+    console.log(url.pathname, res.headers.get("content-type"))
+    if (res.headers.get("content-type") === "text/html") {
+      let html = await res.text();
+      html = html.replace('</head>', `${fbPixelScript()}</head>`)
+      return new Response(html, {
+        headers: res.headers,
+        status: res.status,
+      });
+    }
+    return res;
   },
 };
+

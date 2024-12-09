@@ -58,6 +58,11 @@ export const renderLanding = (page: LandingPage, preview?: boolean) => {
             bottom: 0px;
             overflow-y: auto;
           }
+
+          img {
+            width: 100%;
+            max-width: ${preview ? 240 : 500}px;
+          }
         `}
       >
         {page.landing_items.map((e, idx) => {
@@ -86,6 +91,14 @@ try {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${page.title}</title>
   <style id="_goober">${extractCss()}</style>
+  ${fbPixelScript()}
+</head>
+${content}
+</html>`;
+};
+
+export const fbPixelScript = () => {
+  return `
 <!-- Facebook Pixel Code -->
 <script>
   !function(f,b,e,v,n,t,s)
@@ -103,8 +116,5 @@ try {
   <img height="1" width="1" style="display:none" 
        src="https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1"/>
 </noscript>
-<!-- End Facebook Pixel Code -->
-</head>
-${content}
-</html>`;
-};
+<!-- End Facebook Pixel Code -->`
+}
