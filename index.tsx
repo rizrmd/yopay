@@ -31,3 +31,4 @@ export { Movable } from "app/lib/ui/movable";
 
 export { Reader } from "app/lib/reader/reader";
 
+export { fbq } from "app/lib/bizpro/fbq";

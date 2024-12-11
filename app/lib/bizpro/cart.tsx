@@ -3,6 +3,7 @@ import { _midtrans_pay } from "app/lib/bizpro/midtrans";
 import { EsensiSession } from "app/server/session";
 import { _server } from "../utils/_server";
 import { createId } from "@paralleldrive/cuid2";
+import { fbq } from "./fbq";
 
 export type CartItem = {
   id: string;
@@ -151,17 +152,7 @@ export const cart = {
     });
 
     if (result.status === "success" && t_sales) {
-      _server.track({
-        session: _session.current,
-        eventName:
-          "Customer " +
-          _session.current.email +
-          ": Payment success for sales ID " +
-          t_sales.id +
-          " with gross amount " +
-          cart.total,
-        eventSourceUrl: "/checkout" + (arg.isAfterOtp ? "/:otp" : ""),
-      });
+      fbq("track", "Purchase", { currency: "IDR", value: cart.total });
       localStorage.removeItem("esensi-cart");
       await trx.update(data, t_sales.id);
       navigate("/download/" + t_sales.id);

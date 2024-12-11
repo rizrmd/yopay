@@ -51,7 +51,7 @@ export const newEsensiSession = (router: any) => {
         }
       },
       async afterLogout(session) {
-        if (!isEditor) {
+        if (typeof window !== 'undefined' && !(window as any).isEditor) {
           session.status = "guest";
           this.clear();
           location.reload();

@@ -1,7 +1,9 @@
 import { renderToString } from "react-dom/server";
 import { LandingSection } from "./section";
 import { extractCss } from "goober";
-import { pixelId } from "../fb-conversion-api";
+
+export const pixelId = "960408691867202";
+
 export type LandingPage = {
   id: string;
   slug: string;
@@ -116,5 +118,5 @@ export const fbPixelScript = () => {
   <img height="1" width="1" style="display:none" 
        src="https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1"/>
 </noscript>
-<!-- End Facebook Pixel Code -->`
-}
+<!-- End Facebook Pixel Code -->`;
+};

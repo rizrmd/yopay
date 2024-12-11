@@ -13,7 +13,7 @@ export const otp = {
       method: "POST",
       body: formData,
       headers: {
-        Authorization: "h-ZWMzLW2xe1By2U4XFp",
+        Authorization: "KTjWCiAsBZz8hKW8VZGm",
       },
     });
     return generated_otp;

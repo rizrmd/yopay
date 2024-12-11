@@ -3,7 +3,10 @@ import { handleLanding, reloadLanding } from "app/server/landing";
 import { fbPixelScript } from "app/server/landing/render";
 import { router } from "app/server/router";
 import { useServerRouter } from "lib/server/server-route";
-import { initSessionServer } from "lib/session/server-session";
+import {
+  initSessionServer,
+  SessionServerHandler,
+} from "lib/session/server-session";
 import { validate } from "uuid";
 
 export const server: PrasiServer = {
@@ -54,18 +57,15 @@ export const server: PrasiServer = {
       return new Response("ok");
     }
 
-    const res = await this.session.handle({ req, handle, mode, url, server });
-
-    console.log(url.pathname, res.headers.get("content-type"))
-    if (res.headers.get("content-type") === "text/html") {
-      let html = await res.text();
-      html = html.replace('</head>', `${fbPixelScript()}</head>`)
-      return new Response(html, {
-        headers: res.headers,
-        status: res.status,
-      });
-    }
-    return res;
+    const session_handler = this.session as SessionServerHandler;
+    return await session_handler.handle(arg, {
+      rewrite({ headers, body }) {
+        if (headers?.["content-type"] === "text/html") {
+          let html = body as string;
+          return html.replace("</head>", `${fbPixelScript()}</head>`);
+        }
+        return body;
+      },
+    });
   },
 };
-
