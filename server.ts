@@ -3,6 +3,8 @@ import { handleLanding, reloadLanding } from "app/server/landing";
 import { fbPixelScript } from "app/server/landing/render";
 import { router } from "app/server/router";
 import { useServerRouter } from "lib/server/server-route";
+import { g } from "lib/server/utils/dir";
+import { join } from "path";
 import {
   initSessionServer,
   SessionServerHandler,
@@ -18,12 +20,13 @@ export const server: PrasiServer = {
     console.log("Esensi Online: Started", Date.now());
   },
   async http(arg) {
-    const { req, handle, mode, url, server } = arg;
+    const { req, url, } = arg;
     const landing = handleLanding(arg);
 
     if (landing) {
       return landing;
     }
+
     if (url.pathname.startsWith(`/product-img/`)) {
       const id = url.pathname.substring("/product-img/".length);
       if (validate(id)) {

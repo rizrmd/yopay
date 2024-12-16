@@ -1,7 +1,5 @@
 import { _server } from "../utils/_server";
 
-const mode = "dev" as "dev" | "prod";
-
 declare global {
   interface Window {
     snap: any;
@@ -27,7 +25,7 @@ export async function _midtrans_init() {
     }
     let scriptTag = document.createElement("script");
     scriptTag.src =
-      mode === "dev"
+      midtrans["_midtrans_mode"] === "dev"
         ? _midtrans_sandboxScriptUrl
         : _midtrans_productionScriptUrl;
     scriptTag.type = "text/javascript";
@@ -71,7 +69,9 @@ export async function _midtrans_pay(t_sales_id: string, data: trxTokenRequest) {
     let r = (await (
       await fetch(
         `/_proxy/${
-          mode ? _midtrans_sandboxChargeAPI : _midtrans_productionChargeAPI
+          midtrans["_midtrans_mode"]
+            ? _midtrans_sandboxChargeAPI
+            : _midtrans_productionChargeAPI
         }`,
         {
           method: "POST",
@@ -92,7 +92,9 @@ export async function _midtrans_pay(t_sales_id: string, data: trxTokenRequest) {
         r = await (
           await fetch(
             `/_proxy/${
-              mode ? _midtrans_sandboxChargeAPI : _midtrans_productionChargeAPI
+              midtrans["_midtrans_mode"]
+                ? _midtrans_sandboxChargeAPI
+                : _midtrans_productionChargeAPI
             }`,
             {
               method: "POST",

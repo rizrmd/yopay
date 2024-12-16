@@ -7,4 +7,4 @@ export const fbq: (
     | "Purchase"
     | "Search",
   data?: { value: number; currency: "IDR" }
-) => void = (window as any).fbq;
+) => void = (window as any).fbq || (() => {});

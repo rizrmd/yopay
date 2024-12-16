@@ -1,11 +1,13 @@
 import { prasiApi } from "lib/server/server-route";
 import { SessionContext } from "lib/session/type";
 import { EsensiSession } from "../session";
+import { createId } from "@paralleldrive/cuid2";
+import sendCustomerWA from "./send-wa";
 
 export default prasiApi(async function (
   this: SessionContext<EsensiSession>,
   id_product: string,
-  id_sales: string
+  id_customer: string
 ): Promise<any> {
   const { req, server } = this;
   const product = await db.product.findFirst({
@@ -13,17 +15,45 @@ export default prasiApi(async function (
       id: id_product,
     },
     select: {
-      product_file: true,
+      name: true,
     },
   });
   if (!product) return { ok: false, download: [] };
-  const parsedArray = JSON.parse(product.product_file) as string[];
-  await db.t_sales_download.create({
-    data: {
+  const existing = await db.t_sales_download.findFirst({
+    where: {
       id_product,
-      id_sales,
-      ip_address: server.requestIP(req)?.address ?? ''
+      id_customer,
+      downloaded_at: null,
     },
   });
-  return { ok: true, download: parsedArray };
+
+  let download_key = "";
+  if (!existing) {
+    const new_dl = await db.t_sales_download.create({
+      data: {
+        id_product,
+        id_customer,
+        ip_address: server.requestIP(req)?.address ?? "",
+        download_key: createId(),
+        downloaded_at: null
+      },
+    });
+    download_key = new_dl.download_key;
+  } else {
+    download_key = existing.download_key;
+  }
+
+  await sendCustomerWA(
+    id_customer,
+    `\
+Terima kasih telah membeli produk di esensi online.
+
+Anda akan mendownload produk ini:
+${product.name}
+
+Klik link berikut ini (berlaku 1x download):
+https://beta.esensi.online/dl/${download_key}`
+  );
+
+  return { ok: true };
 });
