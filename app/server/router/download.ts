@@ -50,7 +50,7 @@ Terima kasih telah membeli produk Esensi Semesta:
 ${product.name}
 
 Klik link berikut ini (berlaku 1x download):
-https://beta.esensi.online/dl/${download_key}
+https://esensi.online/dl/${download_key}
 
 Untuk download ulang silahkan login dan buka My Library di website https://esensi.online
 

@@ -24,7 +24,7 @@ export const Loading = () => {
             animation: pulse 1s infinite;
           }
         `}
-        src="https://beta.esensi.online/_file/5b8a55fa-29b5-409d-b6b6-3dbf6d500126.webp"
+        src="https://esensi.online/_file/5b8a55fa-29b5-409d-b6b6-3dbf6d500126.webp"
       />
     </>
   );

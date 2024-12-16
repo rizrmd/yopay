@@ -48,7 +48,7 @@ export const LandingSection = ({
 
 const img_url = (src: string, preview: boolean) => {
   return (
-    `https://beta.esensi.online/` +
+    `https://esensi.online/` +
     src.replace(`_file/`, `_img/`) +
     `?w=${preview ? 240 : 500}`
   );

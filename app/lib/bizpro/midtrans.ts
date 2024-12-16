@@ -17,7 +17,7 @@ export async function _midtrans_init() {
     (window as any)._midtrans = {};
     midtrans = (window as any)._midtrans;
     const res = await (
-      await fetch(`/_proxy/https://beta.esensi.online/_midtrans`)
+      await fetch(`/_proxy/https://esensi.online/_midtrans`)
     ).json();
 
     for (const [k, v] of Object.entries(res)) {

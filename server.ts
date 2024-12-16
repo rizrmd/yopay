@@ -39,7 +39,7 @@ export const server: PrasiServer = {
         if (files[0]) {
           const search = req.url.split("?").pop();
           const res = await fetch(
-            `https://beta.esensi.online/${files[0].replace(
+            `https://esensi.online/${files[0].replace(
               `_file`,
               "_img"
             )}?${search}`
