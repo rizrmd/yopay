@@ -35,7 +35,7 @@ export default prasiApi(async function (
         id_customer,
         ip_address: server.requestIP(req)?.address ?? "",
         download_key: createId(),
-        downloaded_at: null
+        downloaded_at: null,
       },
     });
     download_key = new_dl.download_key;
@@ -46,13 +46,16 @@ export default prasiApi(async function (
   await sendCustomerWA(
     id_customer,
     `\
-Terima kasih telah membeli produk di esensi online.
-
-Anda akan mendownload produk ini:
+Terima kasih telah membeli produk Esensi Semesta:
 ${product.name}
 
 Klik link berikut ini (berlaku 1x download):
-https://beta.esensi.online/dl/${download_key}`
+https://beta.esensi.online/dl/${download_key}
+
+Untuk download ulang silahkan login dan buka My Library di website https://esensi.online
+
+Tips: simpan nomer ini untuk mempermudah download, tinggal klik.
+`
   );
 
   return { ok: true };
