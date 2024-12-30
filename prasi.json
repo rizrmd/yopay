@@ -1,0 +1,16 @@
+{
+  "version": 4,
+  "paths": {
+    "index": "index.tsx",
+    "internal": "internal.tsx",
+    "server": "server.ts",
+    "typings": "typings/generated.d.ts",
+    "dir": {
+      "nova": "/Users/riz/Developer/data/nova-static",
+      "site": "/Users/riz/Developer/data/code/bf706e40-2a3a-4148-9cdd-75d4483328d7/site",
+      "build": "/Users/riz/Developer/data/code/bf706e40-2a3a-4148-9cdd-75d4483328d7/site/build/",
+      "upload": "/Users/riz/Developer/data/code/bf706e40-2a3a-4148-9cdd-75d4483328d7/site/upload",
+      "public": "/Users/riz/Developer/data/code/bf706e40-2a3a-4148-9cdd-75d4483328d7/site/src/public"
+    }
+  }
+}
