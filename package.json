@@ -5,7 +5,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.26.12",
-    "@hookform/resolvers": "^3.3.4",
+    "@hookform/resolvers": "^3.3.4", 
     "@paralleldrive/cuid2": "^2.2.2",
     "@prisma/client": "^5.13.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
@@ -76,6 +76,6 @@
     "tailwindcss": "^3.4.15",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",
-    "xlsx": "npm:@e965/xlsx"
+    "xlsx": "^0.18.5"
   }
 }
