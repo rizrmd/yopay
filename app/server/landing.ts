@@ -1,8 +1,7 @@
+import { css } from "goober";
 import { ServerContext } from "lib/session/type";
 import trim from "lodash.trim";
 import { LandingPage, renderLanding } from "./landing/render";
-import { css } from "goober";
-import { dir } from "lib/server/utils/dir";
 
 const g = global as any;
 g.css = css;

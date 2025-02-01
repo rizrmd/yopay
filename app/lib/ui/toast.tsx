@@ -7,7 +7,6 @@ export const success = (arg: { body: any }) => {
         "c-cursor-pointer",
         css`
           padding: 20px;
-          font-family: ABeeZee;
         `
       )}
       onClick={toast.dismiss}

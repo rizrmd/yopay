@@ -69,7 +69,7 @@ export async function _midtrans_pay(t_sales_id: string, data: trxTokenRequest) {
     let r = (await (
       await fetch(
         `/_proxy/${
-          midtrans["_midtrans_mode"]
+          midtrans["_midtrans_mode"] === "dev"
             ? _midtrans_sandboxChargeAPI
             : _midtrans_productionChargeAPI
         }`,
@@ -92,7 +92,7 @@ export async function _midtrans_pay(t_sales_id: string, data: trxTokenRequest) {
         r = await (
           await fetch(
             `/_proxy/${
-              midtrans["_midtrans_mode"]
+              midtrans["_midtrans_mode"] === "dev"
                 ? _midtrans_sandboxChargeAPI
                 : _midtrans_productionChargeAPI
             }`,

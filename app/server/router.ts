@@ -5,7 +5,7 @@ export const router = newServerRouter({
   register: ["/register", () => import("./router/register")],
   login: ["/api/login", () => import("./router/login")],
   otp: ["/send-otp", () => import("./router/send-otp")],
-  wa: ["/send-wa", () => import("./router/send-wa")],
+  wa: ["/api/send-wa", () => import("./router/wa")],
   download: ["/api/download/*", () => import("./router/download")],
   midtransOrderId: [
     "/pay/gen_order_id",

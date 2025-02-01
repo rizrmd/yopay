@@ -2,7 +2,7 @@ import { prasiApi } from "lib/server/server-route";
 import { SessionContext } from "lib/session/type";
 import { EsensiSession } from "../session";
 import { createId } from "@paralleldrive/cuid2";
-import sendCustomerWA from "./send-wa";
+import sendCustomerWA from "../send-wa";
 
 export default prasiApi(async function (
   this: SessionContext<EsensiSession>,

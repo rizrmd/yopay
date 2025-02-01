@@ -50,6 +50,6 @@ const img_url = (src: string, preview: boolean) => {
   return (
     `https://esensi.online/` +
     src.replace(`_file/`, `_img/`) +
-    `?w=${preview ? 240 : 500}`
+    `?w=${preview ? 240 : 1000}`
   );
 };

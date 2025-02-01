@@ -1,8 +1,86 @@
 import { trxSalesAllPaidResponse } from "app/lib/bizpro/trx";
 
 export default async function (
-  customerId?: string
+  customerId?: string | { id: string; type: "product" | "bundle" }[]
 ): Promise<trxSalesAllPaidResponse> {
+  if (customerId && Array.isArray(customerId)) {
+    if (customerId.length === 0) {
+      const productsCount = await db.product.count();
+      const skip = Math.floor(Math.random() * productsCount);
+      const data = await db.product.findMany({
+        take: 5,
+        skip: skip,
+        select: {
+          id: true,
+          cover: true,
+          desc: true,
+          currency: true,
+          name: true,
+          real_price: true,
+          strike_price: true,
+          slug: true,
+        },
+      });
+      return { ok: true, count: data.length, data };
+    }
+    const existingCart = customerId;
+
+    const firstProduct = await db.product.findUnique({
+      where: { id: existingCart[0].id },
+      include: { product_category: true },
+    });
+
+    if (!firstProduct?.product_category?.[0]) {
+      return { ok: true, count: 0, data: null };
+    }
+
+    const categoryId = firstProduct.product_category;
+    const products = await db.product.findMany({
+      where: {
+        product_category: {
+          some: {
+            id_category: {
+              in: categoryId.map((x) => x.id_category),
+            },
+          },
+        },
+      },
+      select: {
+        id: true,
+        cover: true,
+        desc: true,
+        currency: true,
+        name: true,
+        real_price: true,
+        strike_price: true,
+        slug: true,
+      },
+      take: 8,
+    });
+
+    if (products.length < 8) {
+      const moreProducts = await db.product.findMany({
+        where: {
+          id: { notIn: products.map(p => p.id) }
+        },
+        select: {
+          id: true,
+          cover: true,
+          desc: true,
+          currency: true,
+          name: true,
+          real_price: true,
+          strike_price: true,
+          slug: true,
+        },
+        take: 8 - products.length,
+      });
+      products.push(...moreProducts);
+    }
+
+    return { ok: true, count: products.length, data: products };
+  }
+
   if (!customerId) {
     const productsCount = await db.product.count();
     const skip = Math.floor(Math.random() * productsCount);

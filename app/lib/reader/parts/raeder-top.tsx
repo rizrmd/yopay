@@ -31,9 +31,9 @@ export const ReaderTop = ({
         <ChevronLeft size={20} />
       </div>
       <div
-        className={"c-flex c-items-center c-text-xs c-px-2 c-justify-between c-flex-1"}
+        className={"c-flex c-items-stretch c-text-xs c-px-2 c-justify-between c-flex-1"}
       >
-        <div>{left}</div>
+        {left}
         <div className="c-flex c-items-center">{right}</div>
       </div>
     </div>

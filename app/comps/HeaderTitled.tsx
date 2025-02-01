@@ -31,6 +31,8 @@ export const HeaderTitled = ({
     if (!local.loaded) return <Spinner />;
   }
 
+  console.log(local);
+
   return (
     <div
       className={cx(
@@ -41,7 +43,7 @@ export const HeaderTitled = ({
         if (local.back_url) {
           navigate(local.back_url);
         } else {
-          navigate("/");
+          navigate("/store");
         }
       }}
     >

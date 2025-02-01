@@ -15,6 +15,7 @@ export const Reader = () => {
     book: null as null | Partial<product>,
     link: "",
     chapter: "",
+    show_toc: false,
     page: <></>,
   });
   useEffect(() => {
@@ -36,7 +37,6 @@ export const Reader = () => {
               if (file) {
                 local.link = siteurl(file);
               } else {
-                alert("Book not found");
                 local.link =
                   "https://raw.githubusercontent.com/altmshfkgudtjr/react-epub-viewer/refs/heads/main/public/files/Alices%20Adventures%20in%20Wonderland.epub";
               }
@@ -46,8 +46,12 @@ export const Reader = () => {
           local.render();
         });
     } else {
-      alert("Invalid Book");
-      navigate("/download/_");
+      if (!isEditor) {
+        local.link =
+          "https://raw.githubusercontent.com/altmshfkgudtjr/react-epub-viewer/refs/heads/main/public/files/Alices%20Adventures%20in%20Wonderland.epub";
+
+        local.render();
+      }
     }
   }, [params.id]);
 
@@ -68,7 +72,37 @@ export const Reader = () => {
       <style
         dangerouslySetInnerHTML={{ __html: `body { overflow:hidden; }` }}
       ></style>
-      <ReaderTop left={local.chapter} right={local.page} />
+      {local.show_toc && (
+        <div className="absolute z-10 left-0 top-0 w-64 h-full bg-white border-r shadow-lg p-4 overflow-auto">
+          {toc.current.map((item, idx) => (
+            <div
+              key={idx}
+              className="py-2 px-3 hover:bg-gray-100 cursor-pointer"
+              onClick={() => {
+                rendition.current?.display(item.href);
+                local.show_toc = false;
+                local.render();
+              }}
+            >
+              {item.label}
+            </div>
+          ))}
+        </div>
+      )}
+      <ReaderTop
+        left={
+          <div
+            onClick={() => {
+              local.show_toc = true;
+              local.render();
+            }}
+            className="cursor-pointer flex items-center"
+          >
+            {local.show_toc ? "Daftar Isi" : local.chapter}
+          </div>
+        }
+        right={local.page}
+      />
       <ReactReader
         url={local.link}
         location={location}

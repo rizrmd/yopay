@@ -40,7 +40,7 @@ export const trx = {
             data: t_sales_lines,
           },
         },
-        midtrans_order_id: createId(),
+        midtrans_order_id: "esn-" + createId(),
       },
       select: { id: true, midtrans_order_id: true },
     });

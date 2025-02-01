@@ -27,15 +27,7 @@ export const Movable = ({
           renderList={({ children, props }) => <ul {...props}>{children}</ul>}
           renderItem={({ props, value, index }) => {
             return (
-              <li
-                {...props}
-                className={cx(
-                  "c-list-none c-text-[14px]",
-                  css`
-                    font-family: ABeeZee;
-                  `
-                )}
-              >
+              <li {...props} className={cx("c-list-none c-text-[14px]")}>
                 <PassProp item={value} idx={index || 0} children={children} />
               </li>
             );

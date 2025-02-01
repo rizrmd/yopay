@@ -1,4 +1,12 @@
-export const sendCustomerWA = async function (uid: string, msg: string) {
+import { prasiApi } from "lib/server/server-route";
+import { SessionContext } from "lib/session/type";
+import { EsensiSession } from "../session";
+
+export default prasiApi(async function (
+  this: SessionContext<EsensiSession>,
+  data: { uid: string; msg: string }
+) {
+  const { uid, msg } = data;
   const u = await db.customer.findFirst({ where: { id: uid } });
   if (u && u.whatsapp) {
     const formData = new FormData();
@@ -15,5 +23,4 @@ export const sendCustomerWA = async function (uid: string, msg: string) {
     return { status: "ok" };
   }
   return { status: "failed - not found" };
-};
-export default sendCustomerWA;
+});
