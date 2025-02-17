@@ -101,6 +101,15 @@ ${content}
 
 export const fbPixelScript = () => {
   return `
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BJ7CS4RB6N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BJ7CS4RB6N');
+</script>
 <!-- Facebook Pixel Code -->
 <script>
   !function(f,b,e,v,n,t,s)

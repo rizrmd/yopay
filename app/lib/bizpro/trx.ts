@@ -8,6 +8,7 @@ export type trxData = {
   total: number;
   currency: string;
   info: { cart: CartItem[] };
+  midtrans_order_id: string;
 };
 
 export type trxSalesAllPaidResponse = {
@@ -40,7 +41,6 @@ export const trx = {
             data: t_sales_lines,
           },
         },
-        midtrans_order_id: "esn-" + createId(),
       },
       select: { id: true, midtrans_order_id: true },
     });

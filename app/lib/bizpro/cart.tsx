@@ -174,13 +174,12 @@ export const cart = {
       total: this.total,
       currency: this.currency,
       info: { cart: list },
+      midtrans_order_id: "",
     };
     let res = await trx.get.notPaid(_session.current.uid!);
     let t_sales = null;
 
-    if (res.data) {
-      res.data.midtrans_order_id = "esn-" + createId();
-    }
+    data.midtrans_order_id = "t-" + createId();
 
     if (res.data) {
       const _res = await trx.update(data, res.data.id);
@@ -189,6 +188,7 @@ export const cart = {
       const _res = await trx.create(data);
       t_sales = _res.data;
     }
+
     if (!t_sales) return false;
     data.status = "paid";
 
@@ -207,7 +207,13 @@ export const cart = {
     });
 
     if (result.status === "success" && t_sales) {
-      fbq("track", "Purchase", { currency: "IDR", value: cart.total });
+      fbq("track", "Purchase", {
+        currency: "IDR",
+        value: cart.total,
+        content_ids: cart.items.map((e) => e.id),
+        content_type: "product_group",
+        num_items: cart.items.length,
+      });
       localStorage.removeItem("esensi-cart");
       await trx.update(data, t_sales.id);
       navigate("/download/" + t_sales.id);
@@ -216,8 +222,7 @@ export const cart = {
       alert("Transaksi dibatalkan");
       location.reload();
     } else if (result.status === "close") {
-      history.back();
     }
-    return false;
+    return true;
   },
 };

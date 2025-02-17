@@ -84,9 +84,7 @@ export const server: PrasiServer = {
       });
 
       if (!dl) {
-        
       }
-
 
       if (dl?.product.product_file) {
         const rpath = JSON.parse(dl.product.product_file)[0].replace(
@@ -125,6 +123,7 @@ export const server: PrasiServer = {
         if (headers?.["content-type"] === "text/html") {
           let html = body as string;
 
+          let view_content = "";
           if (
             url.pathname.startsWith("/product/") ||
             url.pathname.startsWith("/bundle/")
@@ -149,11 +148,28 @@ export const server: PrasiServer = {
         cover.replace("_file", "_img") + "?h=400"
       )}"/> 
       </head>`;
+              view_content =
+                `<script>
+          fbq('track', 'ViewContent', ` +
+                JSON.stringify({
+                  content_ids: [sku],
+                  content_type: "product_group",
+                  content_name: title,
+                  currency: "IDR",
+                  num_items: 1,
+                  value: price
+                }) + 
+                `);
+          </script>`;
+
               html = html.replace("</head>", meta);
             }
           }
 
-          return html.replace("</head>", `${fbPixelScript()}</head>`);
+          return html.replace(
+            "</head>",
+            `${fbPixelScript()}${view_content}</head>`
+          );
         }
         return body;
       },

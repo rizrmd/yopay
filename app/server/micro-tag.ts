@@ -22,7 +22,7 @@ export const reloadSlugs = async () => {
           product_category: {
             select: { category: { select: { name: true } } },
           },
-          id:true,
+          id: true,
           desc: true,
           sku: true,
           name: true,
@@ -31,9 +31,9 @@ export const reloadSlugs = async () => {
           cover: true,
         },
       })
-    ).map((e) => ({
+    ).map((e: any) => ({
       ...e,
-      category: e.product_category.map((e) => e.category.name),
+      category: e.product_category.map((e: any) => e.category.name),
     })),
     ...(
       await db.bundle.findMany({
@@ -41,7 +41,7 @@ export const reloadSlugs = async () => {
         select: {
           slug: true,
           bundle_category: { select: { category: { select: { name: true } } } },
-          id:true,
+          id: true,
           desc: true,
           sku: true,
           name: true,
@@ -50,9 +50,9 @@ export const reloadSlugs = async () => {
           cover: true,
         },
       })
-    ).map((e) => ({
+    ).map((e: any) => ({
       ...e,
-      category: e.bundle_category.map((e) => e.category.name),
+      category: e.bundle_category.map((e: any) => e.category.name),
     })),
   ];
 
@@ -60,12 +60,12 @@ export const reloadSlugs = async () => {
     e.desc = e.desc.replace(/<[^>]*>/g, "").split("\n")[0];
 
     slugs[e.slug] = {
-      price: Number(e.strike_price || e.real_price || 0),
+      price: Number(e.real_price || e.strike_price || 0),
       title: e.name,
-      desc: e.desc, 
+      desc: e.desc,
       category: e.category.join(", "),
       cover: e.cover,
-      sku: e.sku || e.id
+      sku: e.sku || e.id,
     };
   }
 };

@@ -6,5 +6,11 @@ export const fbq: (
     | "InitiateCheckout"
     | "Purchase"
     | "Search",
-  data?: { value: number; currency: "IDR" }
+  data?: {
+    value: number;
+    currency: "IDR";
+    content_ids?: string[];
+    content_type?: string;
+    num_items?: number;
+  }
 ) => void = (window as any).fbq || (() => {});

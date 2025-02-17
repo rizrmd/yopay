@@ -5,7 +5,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.26.12",
-    "@hookform/resolvers": "^3.3.4", 
+    "@hookform/resolvers": "^3.3.4",
     "@paralleldrive/cuid2": "^2.2.2",
     "@prisma/client": "^5.13.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
@@ -22,7 +22,6 @@
     "@radix-ui/react-switch": "^1.1.0",
     "@radix-ui/react-tabs": "^1.0.4",
     "@react-input/mask": "^1.2.11",
-    "@rivercode/facebook-conversion-api": "^1.1.8",
     "@types/autosize": "^4.0.3",
     "@types/facebook-nodejs-business-sdk": "^20.0.2",
     "@types/lodash.capitalize": "^4.2.9",
@@ -37,6 +36,7 @@
     "add": "^2.0.6",
     "any-date-parser": "^1.5.4",
     "autosize": "^6.0.1",
+    "aws-sdk": "^2.1692.0",
     "bun-types": "^1.1.24",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -79,6 +79,6 @@
     "tailwindcss": "^3.4.15",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",
-    "xlsx": "^0.18.5"
+    "xlsx": "npm:@e965/xlsx"
   }
 }
