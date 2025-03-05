@@ -5,6 +5,7 @@ import { lang } from "lib/lang";
 export * from "@/exports";
 export { HeaderTitled } from "app/comps/HeaderTitled";
 export { cart, CartItem } from "app/lib/bizpro/cart";
+export { default as EmblaCarousel } from "app/comps/EmblaCarousel";
 export {
   checkEsensiPhoneCustomer,
   validateEmail,

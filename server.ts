@@ -147,7 +147,8 @@ export const server: PrasiServer = {
       <meta property="og:image" content="https://esensi.online/${encodeURI(
         cover.replace("_file", "_img") + "?h=400"
       )}"/> 
-      </head>`;
+      </head>`; 
+      
               view_content =
                 `<script>
           fbq('track', 'ViewContent', ` +
