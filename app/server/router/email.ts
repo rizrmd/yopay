@@ -3,12 +3,15 @@ import { SessionContext } from "lib/session/type";
 import { EsensiSession } from "../session";
 import { sendEmail } from "app/lib/bizpro/email";
 
-export default prasiApi(async function (this: SessionContext<EsensiSession>) {
-  const result = await sendEmail({
-    to: "rizky05@gmail.com",
-    subject: "haloha",
-    body: "haloha",
-  });
+export default prasiApi(async function (
+  this: SessionContext<EsensiSession>,
+  arg: {
+    to: string;
+    subject: string;
+    body: string;
+  }
+) {
+  const result = await sendEmail(arg);
 
-  return "as" + result;
+  return { result };
 });

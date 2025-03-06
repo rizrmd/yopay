@@ -12,7 +12,7 @@ export default prasiApi(async function (
   });
   if (!customer) {
     const whatsapp = "+62" + phone;
-    await db.customer.create({
+    const user = await db.customer.create({
       data: {
         name: name,
         email: email,
@@ -20,6 +20,7 @@ export default prasiApi(async function (
       },
       select: { id: true },
     });
-    return await otp.send(whatsapp);
+    await otp.send(whatsapp);
+    return { uid: user.id };
   }
 });
