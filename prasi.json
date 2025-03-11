@@ -12,5 +12,6 @@
       "upload": "/Users/riz/Developer/data/code/bf706e40-2a3a-4148-9cdd-75d4483328d7/site/upload",
       "public": "/Users/riz/Developer/data/code/bf706e40-2a3a-4148-9cdd-75d4483328d7/site/src/public"
     }
-  }
+  },
+  "exclude": ["nodemailer", "dotenv"]
 }

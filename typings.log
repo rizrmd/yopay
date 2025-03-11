@@ -1,0 +1,14 @@
+[2J[3J[H10:56:30 PM - Starting compilation in watch mode...
+
+error TS2688: Cannot find type definition file for 'mime'.
+  The file is in the program because:
+    Entry point for implicit type library 'mime'
+
+10:56:33 PM - Found 1 error. Watching for file changes.
+[2J[3J[H10:57:08 PM - File change detected. Starting incremental compilation...
+
+error TS2688: Cannot find type definition file for 'mime'.
+  The file is in the program because:
+    Entry point for implicit type library 'mime'
+
+10:57:15 PM - Found 1 error. Watching for file changes.

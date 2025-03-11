@@ -1,11 +1,10 @@
+import { createId } from "@paralleldrive/cuid2";
+import { Hr, Link, Preview, Text } from "@react-email/components";
+import { sendEmail } from "app/lib/bizpro/email";
 import { prasiApi } from "lib/server/server-route";
 import { SessionContext } from "lib/session/type";
-import { EsensiSession } from "../session";
-import { createId } from "@paralleldrive/cuid2";
-import sendCustomerWA from "../send-wa";
-import { sendEmail } from "app/lib/bizpro/email";
-import { Hr, Link, Preview, Row, Text } from "@react-email/components";
 import { Section } from "lucide-react";
+import { EsensiSession } from "../session";
 
 export default prasiApi(async function (
   this: SessionContext<EsensiSession>,

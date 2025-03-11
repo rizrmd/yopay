@@ -114,6 +114,8 @@ export async function _midtrans_pay(t_sales_id: string, data: trxTokenRequest) {
             where: { id: t_sales_id },
             data: { midtrans_success: result },
           });
+
+          _server.paymentSuccess(t_sales_id);
           resolve({ status: "success", result });
         },
         onPending: async function (result: any) {

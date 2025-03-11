@@ -1,24 +1,21 @@
-const KIRIM_EMAIL_API_KEY = process.env.KIRIM_EMAIL_API_KEY;
-const KIRIM_EMAIL_API_URL =
-  "https://aplikasi.kirim.email/api/v3/transactional/messages";
-const from = "info@esensi.online";
-const domain = "esensi.online";
+import { ReactElement } from "react";
+
+import { render } from "@react-email/render";
+import { isValidElement } from "react";
 import {
   Body,
   Column,
   Container,
   Head,
   Heading,
-  Hr,
   Html,
   Img,
   Preview,
-  Row,
   Section,
+  Row,
   Text,
+  Hr,
 } from "@react-email/components";
-import { render } from "@react-email/render";
-import { isValidElement, ReactElement } from "react";
 
 export const sendEmail = async (arg: {
   to: string;
@@ -28,100 +25,98 @@ export const sendEmail = async (arg: {
   footer?: string;
 }) => {
   try {
-    const formData = new FormData();
-    formData.append("from", from); // Replace with your email
-    formData.append("to", arg.to);
-    formData.append("subject", arg.subject);
-    formData.append(
-      "html",
-      await render(
-        <Html>
-          <Head />
-          <Body style={main}>
-            <Preview>{arg.subject}</Preview>
-            <Container style={container}>
-              <Section style={logoContainer}>
-                <Img
-                  src={`https://esensi.online/logo.webp`}
-                  width="50"
-                  height="50"
-                  alt="Esensi Online"
-                />
+    const htmlBody = await render(
+      <Html>
+        <Head />
+        <Body style={main}>
+          <Preview>{arg.subject}</Preview>
+          <Container style={container}>
+            <Section style={logoContainer}>
+              <Img
+                src={`https://esensi.online/logo.webp`}
+                width="50"
+                height="50"
+                alt="Esensi Online"
+              />
+            </Section>
+
+            {isValidElement(arg.body) ? (
+              arg.body
+            ) : (
+              <>
+                <Heading style={h1}>{arg.subject}</Heading>
+                <Text style={heroText}>{arg.body}</Text>
+              </>
+            )}
+
+            {arg.code && (
+              <Section style={codeBox}>
+                <Text style={confirmationCodeText}>{arg.code}</Text>
               </Section>
+            )}
 
-              {isValidElement(arg.body) ? (
-                arg.body
-              ) : (
-                <>
-                  <Heading style={h1}>{arg.subject}</Heading>
-                  <Text style={heroText}>{arg.body}</Text>
-                </>
-              )}
+            {arg.footer && <Text style={text}>{arg.footer}</Text>}
 
-              {arg.code && (
-                <Section style={codeBox}>
-                  <Text style={confirmationCodeText}>{arg.code}</Text>
-                </Section>
-              )}
-
-              {arg.footer && <Text style={text}>{arg.footer}</Text>}
-
-              <Hr className="border-t border-gray-300" />
-              <Section>
-                <Row>
-                  <Column style={{ width: "50px" }}>
-                    <Img
-                      src={`https://esensi.online/logo.webp`}
-                      width="40"
-                      height="40"
-                      alt="Esensi Online"
-                    />
-                  </Column>
-                  <Column>
-                    <Text className="m-0">
-                      Esensi Online
-                      <br />
-                      PT. Meraih Ilmu Semesta
-                    </Text>
-                  </Column>
-                </Row>
-              </Section>
-            </Container>
-          </Body>
-        </Html>,
-        { pretty: true }
-      )
+            <Hr className="border-t border-gray-300" />
+            <Section>
+              <Row>
+                <Column style={{ width: "50px" }}>
+                  <Img
+                    src={`https://esensi.online/logo.webp`}
+                    width="40"
+                    height="40"
+                    alt="Esensi Online"
+                  />
+                </Column>
+                <Column>
+                  <Text className="m-0">
+                    Esensi Online
+                    <br />
+                    PT. Meraih Ilmu Semesta
+                  </Text>
+                </Column>
+              </Row>
+            </Section>
+          </Container>
+        </Body>
+      </Html>,
+      { pretty: true }
     );
+ 
+    if (typeof window === "undefined") {
+      const nodemailer = (await import("nodemailer")).default;
+      const dotenv = (await import("dotenv")).default;
 
-    const response = await fetch(KIRIM_EMAIL_API_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `Basic ${Buffer.from(
-          `api:${KIRIM_EMAIL_API_KEY}`
-        ).toString("base64")}`,
-        domain, // Replace with your actual domain
-      },
-      body: formData,
-    });
+      // Initialize dotenv
+      dotenv.config({
+        path: "/app/prasi/data/code/bf706e40-2a3a-4148-9cdd-75d4483328d7/site/src/.env",
+      });
 
-    if (!response.ok) {
-      throw new Error(
-        `Email sending failed: ${response.status} ${response.statusText}`
-      );
+      // Create a transporter using SMTP
+      const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: parseInt(process.env.SMTP_PORT || "587"),
+        secure: process.env.SMTP_SECURE === "true",
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        },
+      });
+
+      // Send mail with defined transport object
+      const info = await transporter.sendMail({
+        from: process.env.SMTP_FROM || "info@esensi.online",
+        to: arg.to,
+        subject: arg.subject,
+        html: htmlBody,
+      });
+
+      return { info };
     }
-
-    return await response.json();
   } catch (error: any) {
     console.error("Failed to send email:", error);
     return error?.message;
   }
-};
-
-const footerLogos = {
-  marginBottom: "32px",
-  paddingLeft: "8px",
-  paddingRight: "8px",
-  display: "block",
 };
 
 const main = {

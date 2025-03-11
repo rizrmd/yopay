@@ -30,6 +30,7 @@
     "@types/lodash.get": "^4.4.9",
     "@types/lodash.snakecase": "^4.1.9",
     "@types/lodash.trim": "^4.5.9",
+    "@types/nodemailer": "^6.4.17",
     "@types/react": "^18.2.65",
     "@types/react-dom": "^18.3.0",
     "@types/uuid": "^9.0.8",
@@ -43,7 +44,7 @@
     "crypto": "^1.0.1",
     "date-fns": "^3.3.1",
     "dayjs": "^1.11.11",
-    "drizzle-kit": "^0.24.1",
+    "dotenv": "^16.4.7",
     "drizzle-orm": "^0.33.0",
     "embla-carousel-react": "^8.0.2",
     "exceljs": "^4.4.0",
@@ -57,7 +58,9 @@
     "lodash.trim": "^4.5.1",
     "lucide-react": "^0.418.0",
     "md5": "^2.3.0",
+    "mime": "^4.0.6",
     "next-themes": "^0.3.0",
+    "nodemailer": "^6.10.0",
     "path": "^0.12.7",
     "prisma": "^5.13.0",
     "qr-scanner": "^1.4.2",
@@ -82,6 +85,6 @@
     "xlsx": "npm:@e965/xlsx"
   },
   "devDependencies": {
-    "@types/mime": "^3.0.4"
+    "@types/mime": "^4.0.0"
   }
 }

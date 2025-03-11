@@ -1,6 +1,7 @@
-export enum trxSalesStatus {
-  CART = "cart",
-  EXPIRED = "expired",
-  PAID = "paid",
-  VOID = "void",
-}
+export const trxSalesStatus = {
+  CART: "cart",
+  EXPIRED: "expired",
+  PAID: "paid",
+  VOID: "void",
+} as const; 
+ 
