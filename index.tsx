@@ -18,17 +18,13 @@ export { success } from "app/lib/ui/toast";
 export { _server, _session } from "app/lib/utils/_server";
 export { cacheResult } from "app/lib/utils/cache-result";
 export { restoreScroll } from "app/lib/utils/restore-scroll";
-
-// #region session & router
-await lang.init("id");
-// #endregion
-
 export { trxSalesStatus } from "app/enums";
 export { dashboard } from "app/lib/bizpro/dashboard";
-export * from "app/lib/bizpro/midtrans";
 export { MobileLayout } from "app/lib/ui/mobile-layout";
 export { Movable } from "app/lib/ui/movable";
 export { validate as is_uuid } from "uuid";
-
 export { fbq } from "app/lib/bizpro/fbq";
 export { Reader } from "app/lib/reader/reader";
+export * from "app/lib/bizpro/midtrans";
+
+await lang.init("id");

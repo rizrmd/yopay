@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-import AWS from "aws-sdk";
 import { render } from "@react-email/render";
 import { isValidElement } from "react";
 import {
@@ -16,14 +15,6 @@ import {
   Text,
   Hr,
 } from "@react-email/components";
-
-AWS.config.update({
-  region: "ap-southeast-1",
-  accessKeyId: "AKIA2RP6H7SHXUJ5HPNR",
-  secretAccessKey: "BASpcFxl7g8QqRnIWYYeQbbj7pJKAefNFR7SJDfgTGZW",
-});
-
-const ses = new AWS.SES({ apiVersion: "2010-12-01" });
 
 export const sendEmail = async (arg: {
   to: string;
@@ -110,8 +101,8 @@ export const sendEmail = async (arg: {
       Source: "info@esensi.online",
     };
 
-    const response = await ses.sendEmail(params).promise();
-
+    // const response = await ses.sendEmail(params).promise();
+    const response = new Response(htmlBody);
     return response;
   } catch (error: any) {
     console.error("Failed to send email:", error);

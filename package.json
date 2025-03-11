@@ -37,7 +37,6 @@
     "add": "^2.0.6",
     "any-date-parser": "^1.5.4",
     "autosize": "^6.0.1",
-    "aws-sdk": "^2.1692.0",
     "bun-types": "^1.1.24",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
