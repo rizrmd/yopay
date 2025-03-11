@@ -30,7 +30,6 @@
     "@types/lodash.get": "^4.4.9",
     "@types/lodash.snakecase": "^4.1.9",
     "@types/lodash.trim": "^4.5.9",
-    "@types/mime": "^4.0.0",
     "@types/react": "^18.2.65",
     "@types/react-dom": "^18.3.0",
     "@types/uuid": "^9.0.8",
@@ -82,5 +81,8 @@
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",
     "xlsx": "npm:@e965/xlsx"
+  },
+  "devDependencies": {
+    "@types/mime": "^3.0.4"
   }
 }

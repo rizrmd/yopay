@@ -9,6 +9,7 @@ export const router = newServerRouter({
     wa: ["/api/send-wa", () => import("./router/wa")],
     midtrx: ["/_midtrx/*", () => import("./router/midtrx")],
     email: ["/_email", () => import("./router/email")],
+    email_ses: ["/_ses", () => import("./router/emailses")],
     download: ["/api/download/*", () => import("./router/download")],
     midtransOrderId: [
         "/pay/gen_order_id",

@@ -1,5 +1,4 @@
-const KIRIM_EMAIL_API_KEY =
-  "8d65f2eb4f10312be1d51cc4e46abbc2746cb2b5ddb5c2452c357dd1afa480b2";
+const KIRIM_EMAIL_API_KEY = process.env.KIRIM_EMAIL_API_KEY;
 const KIRIM_EMAIL_API_URL =
   "https://aplikasi.kirim.email/api/v3/transactional/messages";
 const from = "info@esensi.online";
@@ -10,16 +9,15 @@ import {
   Container,
   Head,
   Heading,
+  Hr,
   Html,
   Img,
   Preview,
-  Section,
   Row,
+  Section,
   Text,
-  Hr,
 } from "@react-email/components";
 import { render } from "@react-email/render";
-import { Link } from "lucide-react";
 import { isValidElement, ReactElement } from "react";
 
 export const sendEmail = async (arg: {

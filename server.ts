@@ -1,29 +1,30 @@
 import { UserData } from "app/lib/bizpro/session";
 import { handleLanding, reloadLanding } from "app/server/landing";
 import { fbPixelScript } from "app/server/landing/render";
-import { microTag, reloadSlugs, slugs } from "app/server/micro-tag";
+import { reloadSlugs, slugs } from "app/server/micro-tag";
 import { router } from "app/server/router";
 import { useServerRouter } from "lib/server/server-route";
 import {
   initSessionServer,
   SessionServerHandler,
 } from "lib/session/server-session";
+import snakeCase from "lodash.snakecase";
+import mime from "mime";
 import { basename } from "path";
 import { validate } from "uuid";
-import mime from "mime";
-import snakeCase from "lodash.snakecase";
 
 const links = new Set<string>();
 
 export const server: PrasiServer = {
-  async init() {
+  async init() { 
     reloadLanding();
     reloadSlugs();
     initSessionServer<UserData>(this, {
       router: useServerRouter(router),
     });
-    console.log("Esensi Online: Started", Date.now());
+    console.log("Esensi: Started", Date.now());
   },
+
   async http(arg) {
     const { req, url } = arg;
 
@@ -132,6 +133,7 @@ export const server: PrasiServer = {
             if (pathname && slugs[pathname]) {
               const { title, desc, price, category, cover, sku } =
                 slugs[pathname];
+                
               const meta = `
       <meta property="og:title" content="${title}"/> 
       <meta property="og:description" content="${desc}"/>
