@@ -76,6 +76,7 @@
     "react-reader": "^2.0.11",
     "react-resizable-panels": "^2.0.11",
     "read-excel-file": "^5.7.1",
+    "readable-stream": "^4.7.0",
     "rou3": "^0.5.1",
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.2.1",
@@ -86,5 +87,9 @@
   },
   "devDependencies": {
     "@types/mime": "^4.0.0"
-  }
+  },
+  "trustedDependencies": [
+    "core-js",
+    "es5-ext"
+  ]
 }
