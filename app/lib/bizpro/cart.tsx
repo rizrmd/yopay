@@ -191,6 +191,7 @@ export const cart = {
 
     if (!t_sales) return false;
     data.status = "paid";
+    _server.paymentPending(t_sales.id);
 
     const result = await _midtrans_pay(t_sales.id, {
       transaction_details: {
@@ -213,6 +214,7 @@ export const cart = {
         content_ids: cart.items.map((e) => e.id),
         content_type: "product_group",
         num_items: cart.items.length,
+        orderID: t_sales.midtrans_order_id,
       });
       localStorage.removeItem("esensi-cart");
       await trx.update(data, t_sales.id);

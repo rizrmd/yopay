@@ -3,7 +3,7 @@ import { CartItem } from "app/lib/bizpro/cart";
 
 export type trxData = {
   id_customer: string;
-  status: trxSalesStatus | string;
+  status: typeof trxSalesStatus | string;
   total: number;
   currency: string;
   info: { cart: CartItem[] };
@@ -33,7 +33,7 @@ export const trx = {
     }));
     let t_sales = await db.t_sales.create({
       data: {
-        ...data,
+        ...(data as any),
         t_sales_line: {
           createMany: {
             skipDuplicates: true,
@@ -57,7 +57,7 @@ export const trx = {
   ): Promise<trxSalesNotPaidResponse> => {
     let t_sales = await db.t_sales.update({
       where: { id },
-      data: { ...data, updated_at: new Date() },
+      data: { ...(data as any), updated_at: new Date() },
       select: { id: true, midtrans_order_id: true },
     });
     return t_sales
@@ -78,7 +78,7 @@ export const trx = {
         include: {
           t_sales_line: true,
         },
-      });
+      }); 
       return t_sales_list && !!t_sales_list.length
         ? {
             ok: true,

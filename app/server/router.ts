@@ -8,15 +8,20 @@ export const router = newServerRouter({
   check_otp: ["/check-otp", () => import("./router/check-otp")],
   wa: ["/api/send-wa", () => import("./router/wa")],
   midtrx: ["/_midtrx/*", () => import("./router/midtrx")],
-  email: ["/_email", () => import("./router/email")],
   download: ["/api/download/*", () => import("./router/download")],
   midtransOrderId: [
     "/pay/gen_order_id",
     () => import("./router/payment/gen_order_id"),
   ],
-  paymentSuccess: ["/pay/success/:sales_id", () => import("./router/payment/success")],
+  paymentSuccess: [
+    "/pay/success/:sales_id",
+    () => import("./router/payment/success"),
+  ],
   exportSales: ["/export_sales/*", () => import("./router/export-sales")],
-  paymentPending: ["/pay/pending", () => import("./router/payment/pending")],
+  paymentPending: [
+    "/pay/pending/:sales_id",
+    () => import("./router/payment/pending"),
+  ],
   paymentError: ["/pay/error", () => import("./router/payment/error")],
   salesPerMonth: [
     "/api/sales-per-month",

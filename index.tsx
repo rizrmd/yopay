@@ -1,8 +1,8 @@
 import "@/utils/init";
 import "app/css/build.css";
 import "app/lib/utils/event";
-import { lang } from "lib/lang";
 export * from "@/exports";
+import { baseurl } from "@/exports";
 export { HeaderTitled } from "app/comps/HeaderTitled";
 export { cart, CartItem } from "app/lib/bizpro/cart";
 export { default as EmblaCarousel } from "app/comps/EmblaCarousel";
@@ -27,4 +27,4 @@ export { fbq } from "app/lib/bizpro/fbq";
 export { Reader } from "app/lib/reader/reader";
 export * from "app/lib/bizpro/midtrans";
 
-await lang.init("id");
+export const isReader = localStorage.getItem("isReader") === "true";

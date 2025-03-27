@@ -29,7 +29,7 @@ export const otp = {
       });
 
       formData.append("target", customer.whatsapp);
-      formData.append("message", "OTP Esensi Online: " + generated_otp);
+      formData.append("message", "OTP: " + generated_otp + " (Esensi Online)");
       fetch("https://api.fonnte.com/send", {
         method: "POST",
         body: formData,

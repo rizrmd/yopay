@@ -1,0 +1,1220 @@
+diff --git a/node_modules/react-pdf/LICENSE b/node_modules/react-pdf/LICENSE
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/README.md b/node_modules/react-pdf/README.md
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Document.d.ts b/node_modules/react-pdf/dist/cjs/Document.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Document.js b/node_modules/react-pdf/dist/cjs/Document.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/DocumentContext.d.ts b/node_modules/react-pdf/dist/cjs/DocumentContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/DocumentContext.js b/node_modules/react-pdf/dist/cjs/DocumentContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/LinkService.d.ts b/node_modules/react-pdf/dist/cjs/LinkService.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/LinkService.js b/node_modules/react-pdf/dist/cjs/LinkService.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Message.d.ts b/node_modules/react-pdf/dist/cjs/Message.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Message.js b/node_modules/react-pdf/dist/cjs/Message.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Outline.d.ts b/node_modules/react-pdf/dist/cjs/Outline.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Outline.js b/node_modules/react-pdf/dist/cjs/Outline.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/OutlineContext.d.ts b/node_modules/react-pdf/dist/cjs/OutlineContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/OutlineContext.js b/node_modules/react-pdf/dist/cjs/OutlineContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/OutlineItem.d.ts b/node_modules/react-pdf/dist/cjs/OutlineItem.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/OutlineItem.js b/node_modules/react-pdf/dist/cjs/OutlineItem.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Page.d.ts b/node_modules/react-pdf/dist/cjs/Page.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Page.js b/node_modules/react-pdf/dist/cjs/Page.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Page/AnnotationLayer.css b/node_modules/react-pdf/dist/cjs/Page/AnnotationLayer.css
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Page/AnnotationLayer.d.ts b/node_modules/react-pdf/dist/cjs/Page/AnnotationLayer.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Page/AnnotationLayer.js b/node_modules/react-pdf/dist/cjs/Page/AnnotationLayer.js
+old mode 100644
+new mode 100755
+index 35809f2..d033fdf
+--- a/node_modules/react-pdf/dist/cjs/Page/AnnotationLayer.js
++++ b/node_modules/react-pdf/dist/cjs/Page/AnnotationLayer.js
+@@ -1,162 +1,256 @@
+ "use strict";
+-'use client';
+-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+-    if (k2 === undefined) k2 = k;
+-    var desc = Object.getOwnPropertyDescriptor(m, k);
+-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+-      desc = { enumerable: true, get: function() { return m[k]; } };
+-    }
+-    Object.defineProperty(o, k2, desc);
+-}) : (function(o, m, k, k2) {
+-    if (k2 === undefined) k2 = k;
+-    o[k2] = m[k];
+-}));
+-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+-    Object.defineProperty(o, "default", { enumerable: true, value: v });
+-}) : function(o, v) {
+-    o["default"] = v;
+-});
+-var __importStar = (this && this.__importStar) || function (mod) {
++"use client";
++var __createBinding =
++  (this && this.__createBinding) ||
++  (Object.create
++    ? function (o, m, k, k2) {
++        if (k2 === undefined) k2 = k;
++        var desc = Object.getOwnPropertyDescriptor(m, k);
++        if (
++          !desc ||
++          ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)
++        ) {
++          desc = {
++            enumerable: true,
++            get: function () {
++              return m[k];
++            },
++          };
++        }
++        Object.defineProperty(o, k2, desc);
++      }
++    : function (o, m, k, k2) {
++        if (k2 === undefined) k2 = k;
++        o[k2] = m[k];
++      });
++var __setModuleDefault =
++  (this && this.__setModuleDefault) ||
++  (Object.create
++    ? function (o, v) {
++        Object.defineProperty(o, "default", { enumerable: true, value: v });
++      }
++    : function (o, v) {
++        o["default"] = v;
++      });
++var __importStar =
++  (this && this.__importStar) ||
++  function (mod) {
+     if (mod && mod.__esModule) return mod;
+     var result = {};
+-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
++    if (mod != null)
++      for (var k in mod)
++        if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
++          __createBinding(result, mod, k);
+     __setModuleDefault(result, mod);
+     return result;
+-};
+-var __importDefault = (this && this.__importDefault) || function (mod) {
+-    return (mod && mod.__esModule) ? mod : { "default": mod };
+-};
++  };
++var __importDefault =
++  (this && this.__importDefault) ||
++  function (mod) {
++    return mod && mod.__esModule ? mod : { default: mod };
++  };
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.default = AnnotationLayer;
+ const jsx_runtime_1 = require("react/jsx-runtime");
+ const react_1 = require("react");
+-const make_cancellable_promise_1 = __importDefault(require("make-cancellable-promise"));
++const make_cancellable_promise_1 = __importDefault(
++  require("make-cancellable-promise")
++);
+ const clsx_1 = __importDefault(require("clsx"));
+ const tiny_invariant_1 = __importDefault(require("tiny-invariant"));
+ const warning_1 = __importDefault(require("warning"));
+ const pdfjs = __importStar(require("pdfjs-dist"));
+-const useDocumentContext_js_1 = __importDefault(require("../shared/hooks/useDocumentContext.js"));
+-const usePageContext_js_1 = __importDefault(require("../shared/hooks/usePageContext.js"));
+-const useResolver_js_1 = __importDefault(require("../shared/hooks/useResolver.js"));
++const useDocumentContext_js_1 = __importDefault(
++  require("../shared/hooks/useDocumentContext.js")
++);
++const usePageContext_js_1 = __importDefault(
++  require("../shared/hooks/usePageContext.js")
++);
++const useResolver_js_1 = __importDefault(
++  require("../shared/hooks/useResolver.js")
++);
+ const utils_js_1 = require("../shared/utils.js");
+ function AnnotationLayer() {
+-    const documentContext = (0, useDocumentContext_js_1.default)();
+-    const pageContext = (0, usePageContext_js_1.default)();
+-    (0, tiny_invariant_1.default)(pageContext, 'Unable to find Page context.');
+-    const mergedProps = Object.assign(Object.assign({}, documentContext), pageContext);
+-    const { imageResourcesPath, linkService, onGetAnnotationsError: onGetAnnotationsErrorProps, onGetAnnotationsSuccess: onGetAnnotationsSuccessProps, onRenderAnnotationLayerError: onRenderAnnotationLayerErrorProps, onRenderAnnotationLayerSuccess: onRenderAnnotationLayerSuccessProps, page, pdf, renderForms, rotate, scale = 1, } = mergedProps;
+-    (0, tiny_invariant_1.default)(pdf, 'Attempted to load page annotations, but no document was specified. Wrap <Page /> in a <Document /> or pass explicit `pdf` prop.');
+-    (0, tiny_invariant_1.default)(page, 'Attempted to load page annotations, but no page was specified.');
+-    (0, tiny_invariant_1.default)(linkService, 'Attempted to load page annotations, but no linkService was specified.');
+-    const [annotationsState, annotationsDispatch] = (0, useResolver_js_1.default)();
+-    const { value: annotations, error: annotationsError } = annotationsState;
+-    const layerElement = (0, react_1.useRef)(null);
+-    (0, warning_1.default)(Number.parseInt(window.getComputedStyle(document.body).getPropertyValue('--react-pdf-annotation-layer'), 10) === 1, 'AnnotationLayer styles not found. Read more: https://github.com/wojtekmaj/react-pdf#support-for-annotations');
+-    function onLoadSuccess() {
+-        if (!annotations) {
+-            // Impossible, but TypeScript doesn't know that
+-            return;
+-        }
+-        if (onGetAnnotationsSuccessProps) {
+-            onGetAnnotationsSuccessProps(annotations);
+-        }
++  const documentContext = (0, useDocumentContext_js_1.default)();
++  const pageContext = (0, usePageContext_js_1.default)();
++  (0, tiny_invariant_1.default)(pageContext, "Unable to find Page context.");
++  const mergedProps = Object.assign(
++    Object.assign({}, documentContext),
++    pageContext
++  );
++  const {
++    imageResourcesPath,
++    linkService,
++    onGetAnnotationsError: onGetAnnotationsErrorProps,
++    onGetAnnotationsSuccess: onGetAnnotationsSuccessProps,
++    onRenderAnnotationLayerError: onRenderAnnotationLayerErrorProps,
++    onRenderAnnotationLayerSuccess: onRenderAnnotationLayerSuccessProps,
++    page,
++    pdf,
++    renderForms,
++    rotate,
++    scale = 1,
++  } = mergedProps;
++  (0, tiny_invariant_1.default)(
++    pdf,
++    "Attempted to load page annotations, but no document was specified. Wrap <Page /> in a <Document /> or pass explicit `pdf` prop."
++  );
++  (0, tiny_invariant_1.default)(
++    page,
++    "Attempted to load page annotations, but no page was specified."
++  );
++  (0, tiny_invariant_1.default)(
++    linkService,
++    "Attempted to load page annotations, but no linkService was specified."
++  );
++  const [annotationsState, annotationsDispatch] = (0,
++  useResolver_js_1.default)();
++  const { value: annotations, error: annotationsError } = annotationsState;
++  const layerElement = (0, react_1.useRef)(null);
++  (0, warning_1.default)(
++    Number.parseInt(
++      window
++        .getComputedStyle(document.body)
++        .getPropertyValue("--react-pdf-annotation-layer"),
++      10
++    ) === 1,
++    "AnnotationLayer styles not found. Read more: https://github.com/wojtekmaj/react-pdf#support-for-annotations"
++  );
++  function onLoadSuccess() {
++    if (!annotations) {
++      // Impossible, but TypeScript doesn't know that
++      return;
+     }
+-    function onLoadError() {
+-        if (!annotationsError) {
+-            // Impossible, but TypeScript doesn't know that
+-            return;
+-        }
+-        (0, warning_1.default)(false, annotationsError.toString());
+-        if (onGetAnnotationsErrorProps) {
+-            onGetAnnotationsErrorProps(annotationsError);
+-        }
++    if (onGetAnnotationsSuccessProps) {
++      onGetAnnotationsSuccessProps(annotations);
+     }
+-    // biome-ignore lint/correctness/useExhaustiveDependencies: useEffect intentionally triggered on page change
+-    (0, react_1.useEffect)(function resetAnnotations() {
+-        annotationsDispatch({ type: 'RESET' });
+-    }, [annotationsDispatch, page]);
+-    (0, react_1.useEffect)(function loadAnnotations() {
+-        if (!page) {
+-            return;
+-        }
+-        const cancellable = (0, make_cancellable_promise_1.default)(page.getAnnotations());
+-        const runningTask = cancellable;
+-        cancellable.promise
+-            .then((nextAnnotations) => {
+-            annotationsDispatch({ type: 'RESOLVE', value: nextAnnotations });
++  }
++  function onLoadError() {
++    if (!annotationsError) {
++      // Impossible, but TypeScript doesn't know that
++      return;
++    }
++    (0, warning_1.default)(false, annotationsError.toString());
++    if (onGetAnnotationsErrorProps) {
++      onGetAnnotationsErrorProps(annotationsError);
++    }
++  }
++  // biome-ignore lint/correctness/useExhaustiveDependencies: useEffect intentionally triggered on page change
++  (0, react_1.useEffect)(
++    function resetAnnotations() {
++      annotationsDispatch({ type: "RESET" });
++    },
++    [annotationsDispatch, page]
++  );
++  (0, react_1.useEffect)(
++    function loadAnnotations() {
++      if (!page) {
++        return;
++      }
++      const cancellable = (0, make_cancellable_promise_1.default)(
++        page.getAnnotations()
++      );
++      const runningTask = cancellable;
++      cancellable.promise
++        .then((nextAnnotations) => {
++          annotationsDispatch({ type: "RESOLVE", value: nextAnnotations });
+         })
+-            .catch((error) => {
+-            annotationsDispatch({ type: 'REJECT', error });
++        .catch((error) => {
++          annotationsDispatch({ type: "REJECT", error });
+         });
+-        return () => {
+-            (0, utils_js_1.cancelRunningTask)(runningTask);
+-        };
+-    }, [annotationsDispatch, page]);
+-    // biome-ignore lint/correctness/useExhaustiveDependencies: Ommitted callbacks so they are not called every time they change
+-    (0, react_1.useEffect)(() => {
+-        if (annotations === undefined) {
+-            return;
+-        }
+-        if (annotations === false) {
+-            onLoadError();
+-            return;
+-        }
+-        onLoadSuccess();
+-    }, [annotations]);
+-    function onRenderSuccess() {
+-        if (onRenderAnnotationLayerSuccessProps) {
+-            onRenderAnnotationLayerSuccessProps();
+-        }
++      return () => {
++        (0, utils_js_1.cancelRunningTask)(runningTask);
++      };
++    },
++    [annotationsDispatch, page]
++  );
++  // biome-ignore lint/correctness/useExhaustiveDependencies: Ommitted callbacks so they are not called every time they change
++  (0, react_1.useEffect)(() => {
++    if (annotations === undefined) {
++      return;
+     }
+-    function onRenderError(error) {
+-        (0, warning_1.default)(false, `${error}`);
+-        if (onRenderAnnotationLayerErrorProps) {
+-            onRenderAnnotationLayerErrorProps(error);
+-        }
++    if (annotations === false) {
++      onLoadError();
++      return;
+     }
+-    const viewport = (0, react_1.useMemo)(() => page.getViewport({ scale, rotation: rotate }), [page, rotate, scale]);
+-    // biome-ignore lint/correctness/useExhaustiveDependencies: Ommitted callbacks so they are not called every time they change
+-    (0, react_1.useEffect)(function renderAnnotationLayer() {
+-        if (!pdf || !page || !linkService || !annotations) {
+-            return;
+-        }
+-        const { current: layer } = layerElement;
+-        if (!layer) {
+-            return;
+-        }
+-        const clonedViewport = viewport.clone({ dontFlip: true });
+-        const annotationLayerParameters = {
+-            accessibilityManager: null, // TODO: Implement this
+-            annotationCanvasMap: null, // TODO: Implement this
+-            annotationEditorUIManager: null, // TODO: Implement this
+-            div: layer,
+-            l10n: null, // TODO: Implement this
+-            page,
+-            structTreeLayer: null, // TODO: Implement this
+-            viewport: clonedViewport,
+-        };
+-        const renderParameters = {
+-            annotations,
+-            annotationStorage: pdf.annotationStorage,
+-            div: layer,
+-            imageResourcesPath,
+-            linkService,
+-            page,
+-            renderForms,
+-            viewport: clonedViewport,
+-        };
+-        layer.innerHTML = '';
+-        try {
+-            new pdfjs.AnnotationLayer(annotationLayerParameters).render(renderParameters);
+-            // Intentional immediate callback
+-            onRenderSuccess();
+-        }
+-        catch (error) {
+-            onRenderError(error);
+-        }
+-        return () => {
+-            // TODO: Cancel running task?
+-        };
+-    }, [annotations, imageResourcesPath, linkService, page, pdf, renderForms, viewport]);
+-    return ((0, jsx_runtime_1.jsx)("div", { className: (0, clsx_1.default)('react-pdf__Page__annotations', 'annotationLayer'), ref: layerElement }));
++    onLoadSuccess();
++  }, [annotations]);
++  function onRenderSuccess() {
++    if (onRenderAnnotationLayerSuccessProps) {
++      onRenderAnnotationLayerSuccessProps();
++    }
++  }
++  function onRenderError(error) {
++    (0, warning_1.default)(false, `${error}`);
++    if (onRenderAnnotationLayerErrorProps) {
++      onRenderAnnotationLayerErrorProps(error);
++    }
++  }
++  const viewport = (0, react_1.useMemo)(
++    () => page.getViewport({ scale, rotation: rotate }),
++    [page, rotate, scale]
++  );
++  // biome-ignore lint/correctness/useExhaustiveDependencies: Ommitted callbacks so they are not called every time they change
++  (0, react_1.useEffect)(
++    function renderAnnotationLayer() {
++      if (!pdf || !page || !linkService || !annotations) {
++        return;
++      }
++      const { current: layer } = layerElement;
++      if (!layer) {
++        return;
++      }
++      const clonedViewport = viewport.clone({ dontFlip: true });
++      const annotationLayerParameters = {
++        accessibilityManager: null, // TODO: Implement this
++        annotationCanvasMap: null, // TODO: Implement this
++        annotationEditorUIManager: null, // TODO: Implement this
++        div: layer,
++        l10n: null, // TODO: Implement this
++        page,
++        structTreeLayer: null, // TODO: Implement this
++        viewport: clonedViewport,
++      };
++      const renderParameters = {
++        annotations,
++        annotationStorage: pdf.annotationStorage,
++        div: layer,
++        imageResourcesPath,
++        linkService,
++        page,
++        renderForms,
++        viewport: clonedViewport,
++      };
++      layer.innerHTML = "";
++      try {
++        window.pdfLinkService = renderParameters.linkService;
++        new pdfjs.AnnotationLayer(annotationLayerParameters).render(
++          renderParameters
++        );
++        // Intentional immediate callback
++        onRenderSuccess();
++      } catch (error) {
++        onRenderError(error);
++      }
++      return () => {
++        // TODO: Cancel running task?
++      };
++    },
++    [
++      annotations,
++      imageResourcesPath,
++      linkService,
++      page,
++      pdf,
++      renderForms,
++      viewport,
++    ]
++  );
++  return (0, jsx_runtime_1.jsx)("div", {
++    className: (0, clsx_1.default)(
++      "react-pdf__Page__annotations",
++      "annotationLayer"
++    ),
++    ref: layerElement,
++  });
+ }
+diff --git a/node_modules/react-pdf/dist/cjs/Page/Canvas.d.ts b/node_modules/react-pdf/dist/cjs/Page/Canvas.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Page/Canvas.js b/node_modules/react-pdf/dist/cjs/Page/Canvas.js
+old mode 100644
+new mode 100755
+index 4ef8ac2..b00fa87
+--- a/node_modules/react-pdf/dist/cjs/Page/Canvas.js
++++ b/node_modules/react-pdf/dist/cjs/Page/Canvas.js
+@@ -1,31 +1,54 @@
+ "use strict";
+-'use client';
+-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+-    if (k2 === undefined) k2 = k;
+-    var desc = Object.getOwnPropertyDescriptor(m, k);
+-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+-      desc = { enumerable: true, get: function() { return m[k]; } };
+-    }
+-    Object.defineProperty(o, k2, desc);
+-}) : (function(o, m, k, k2) {
+-    if (k2 === undefined) k2 = k;
+-    o[k2] = m[k];
+-}));
+-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+-    Object.defineProperty(o, "default", { enumerable: true, value: v });
+-}) : function(o, v) {
+-    o["default"] = v;
+-});
+-var __importStar = (this && this.__importStar) || function (mod) {
++"use client";
++var __createBinding =
++  (this && this.__createBinding) ||
++  (Object.create
++    ? function (o, m, k, k2) {
++        if (k2 === undefined) k2 = k;
++        var desc = Object.getOwnPropertyDescriptor(m, k);
++        if (
++          !desc ||
++          ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)
++        ) {
++          desc = {
++            enumerable: true,
++            get: function () {
++              return m[k];
++            },
++          };
++        }
++        Object.defineProperty(o, k2, desc);
++      }
++    : function (o, m, k, k2) {
++        if (k2 === undefined) k2 = k;
++        o[k2] = m[k];
++      });
++var __setModuleDefault =
++  (this && this.__setModuleDefault) ||
++  (Object.create
++    ? function (o, v) {
++        Object.defineProperty(o, "default", { enumerable: true, value: v });
++      }
++    : function (o, v) {
++        o["default"] = v;
++      });
++var __importStar =
++  (this && this.__importStar) ||
++  function (mod) {
+     if (mod && mod.__esModule) return mod;
+     var result = {};
+-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
++    if (mod != null)
++      for (var k in mod)
++        if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
++          __createBinding(result, mod, k);
+     __setModuleDefault(result, mod);
+     return result;
+-};
+-var __importDefault = (this && this.__importDefault) || function (mod) {
+-    return (mod && mod.__esModule) ? mod : { "default": mod };
+-};
++  };
++var __importDefault =
++  (this && this.__importDefault) ||
++  function (mod) {
++    return mod && mod.__esModule ? mod : { default: mod };
++  };
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.default = Canvas;
+ const jsx_runtime_1 = require("react/jsx-runtime");
+@@ -35,91 +58,129 @@ const tiny_invariant_1 = __importDefault(require("tiny-invariant"));
+ const warning_1 = __importDefault(require("warning"));
+ const pdfjs = __importStar(require("pdfjs-dist"));
+ const StructTree_js_1 = __importDefault(require("../StructTree.js"));
+-const usePageContext_js_1 = __importDefault(require("../shared/hooks/usePageContext.js"));
++const usePageContext_js_1 = __importDefault(
++  require("../shared/hooks/usePageContext.js")
++);
+ const utils_js_1 = require("../shared/utils.js");
+ const ANNOTATION_MODE = pdfjs.AnnotationMode;
+ function Canvas(props) {
+-    const pageContext = (0, usePageContext_js_1.default)();
+-    (0, tiny_invariant_1.default)(pageContext, 'Unable to find Page context.');
+-    const mergedProps = Object.assign(Object.assign({}, pageContext), props);
+-    const { _className, canvasBackground, devicePixelRatio = (0, utils_js_1.getDevicePixelRatio)(), onRenderError: onRenderErrorProps, onRenderSuccess: onRenderSuccessProps, page, renderForms, renderTextLayer, rotate, scale, } = mergedProps;
+-    const { canvasRef } = props;
+-    (0, tiny_invariant_1.default)(page, 'Attempted to render page canvas, but no page was specified.');
+-    const canvasElement = (0, react_1.useRef)(null);
+-    /**
+-     * Called when a page is rendered successfully.
+-     */
+-    function onRenderSuccess() {
+-        if (!page) {
+-            // Impossible, but TypeScript doesn't know that
+-            return;
+-        }
+-        if (onRenderSuccessProps) {
+-            onRenderSuccessProps((0, utils_js_1.makePageCallback)(page, scale));
+-        }
++  const pageContext = (0, usePageContext_js_1.default)();
++  (0, tiny_invariant_1.default)(pageContext, "Unable to find Page context.");
++  const mergedProps = Object.assign(Object.assign({}, pageContext), props);
++  const {
++    _className,
++    canvasBackground,
++    devicePixelRatio = (0, utils_js_1.getDevicePixelRatio)(),
++    onRenderError: onRenderErrorProps,
++    onRenderSuccess: onRenderSuccessProps,
++    page,
++    renderForms,
++    renderTextLayer,
++    rotate,
++    scale,
++  } = mergedProps;
++  const { canvasRef } = props;
++  (0, tiny_invariant_1.default)(
++    page,
++    "Attempted to render page canvas, but no page was specified."
++  );
++  const canvasElement = (0, react_1.useRef)(null);
++  /**
++   * Called when a page is rendered successfully.
++   */
++  function onRenderSuccess() {
++    if (!page) {
++      // Impossible, but TypeScript doesn't know that
++      return;
++    }
++    if (onRenderSuccessProps) {
++      onRenderSuccessProps((0, utils_js_1.makePageCallback)(page, scale));
++    }
++  }
++  /**
++   * Called when a page fails to render.
++   */
++  function onRenderError(error) {
++    if ((0, utils_js_1.isCancelException)(error)) {
++      return;
++    }
++    (0, warning_1.default)(false, error.toString());
++    if (onRenderErrorProps) {
++      onRenderErrorProps(error);
+     }
++  }
++  const renderViewport = (0, react_1.useMemo)(
++    () =>
++      page.getViewport({ scale: scale * devicePixelRatio, rotation: rotate }),
++    [devicePixelRatio, page, rotate, scale]
++  );
++  const viewport = (0, react_1.useMemo)(
++    () => page.getViewport({ scale, rotation: rotate }),
++    [page, rotate, scale]
++  );
++  // biome-ignore lint/correctness/useExhaustiveDependencies: Ommitted callbacks so they are not called every time they change
++  (0, react_1.useEffect)(
++    function drawPageOnCanvas() {
++      if (!page) {
++        return;
++      }
++      // Ensures the canvas will be re-rendered from scratch. Otherwise all form data will stay.
++      page.cleanup();
++      const { current: canvas } = canvasElement;
++      if (!canvas) {
++        return;
++      }
++      canvas.width = renderViewport.width;
++      canvas.height = renderViewport.height;
++      canvas.style.width = `${Math.floor(viewport.width)}px`;
++      canvas.style.height = `${Math.floor(viewport.height)}px`;
++      canvas.style.visibility = "hidden";
++
++      const renderContext = {
++        annotationMode: renderForms
++          ? ANNOTATION_MODE.ENABLE_FORMS
++          : ANNOTATION_MODE.ENABLE,
++        canvasContext: canvas.getContext("2d", { alpha: false }),
++        viewport: renderViewport,
++        pageColors: window.pdfPageColors,
++      };
++      if (canvasBackground) {
++        renderContext.background = canvasBackground;
++      }
++      const cancellable = page.render(renderContext);
++      const runningTask = cancellable;
++      cancellable.promise
++        .then(() => {
++          canvas.style.visibility = "";
++          onRenderSuccess();
++        })
++        .catch(onRenderError);
++      return () => (0, utils_js_1.cancelRunningTask)(runningTask);
++    },
++    [canvasBackground, page, renderForms, renderViewport, viewport]
++  );
++  const cleanup = (0, react_1.useCallback)(() => {
++    const { current: canvas } = canvasElement;
+     /**
+-     * Called when a page fails to render.
++     * Zeroing the width and height cause most browsers to release graphics
++     * resources immediately, which can greatly reduce memory consumption.
+      */
+-    function onRenderError(error) {
+-        if ((0, utils_js_1.isCancelException)(error)) {
+-            return;
+-        }
+-        (0, warning_1.default)(false, error.toString());
+-        if (onRenderErrorProps) {
+-            onRenderErrorProps(error);
+-        }
++    if (canvas) {
++      canvas.width = 0;
++      canvas.height = 0;
+     }
+-    const renderViewport = (0, react_1.useMemo)(() => page.getViewport({ scale: scale * devicePixelRatio, rotation: rotate }), [devicePixelRatio, page, rotate, scale]);
+-    const viewport = (0, react_1.useMemo)(() => page.getViewport({ scale, rotation: rotate }), [page, rotate, scale]);
+-    // biome-ignore lint/correctness/useExhaustiveDependencies: Ommitted callbacks so they are not called every time they change
+-    (0, react_1.useEffect)(function drawPageOnCanvas() {
+-        if (!page) {
+-            return;
+-        }
+-        // Ensures the canvas will be re-rendered from scratch. Otherwise all form data will stay.
+-        page.cleanup();
+-        const { current: canvas } = canvasElement;
+-        if (!canvas) {
+-            return;
+-        }
+-        canvas.width = renderViewport.width;
+-        canvas.height = renderViewport.height;
+-        canvas.style.width = `${Math.floor(viewport.width)}px`;
+-        canvas.style.height = `${Math.floor(viewport.height)}px`;
+-        canvas.style.visibility = 'hidden';
+-        const renderContext = {
+-            annotationMode: renderForms ? ANNOTATION_MODE.ENABLE_FORMS : ANNOTATION_MODE.ENABLE,
+-            canvasContext: canvas.getContext('2d', { alpha: false }),
+-            viewport: renderViewport,
+-        };
+-        if (canvasBackground) {
+-            renderContext.background = canvasBackground;
+-        }
+-        const cancellable = page.render(renderContext);
+-        const runningTask = cancellable;
+-        cancellable.promise
+-            .then(() => {
+-            canvas.style.visibility = '';
+-            onRenderSuccess();
+-        })
+-            .catch(onRenderError);
+-        return () => (0, utils_js_1.cancelRunningTask)(runningTask);
+-    }, [canvasBackground, page, renderForms, renderViewport, viewport]);
+-    const cleanup = (0, react_1.useCallback)(() => {
+-        const { current: canvas } = canvasElement;
+-        /**
+-         * Zeroing the width and height cause most browsers to release graphics
+-         * resources immediately, which can greatly reduce memory consumption.
+-         */
+-        if (canvas) {
+-            canvas.width = 0;
+-            canvas.height = 0;
+-        }
+-    }, []);
+-    (0, react_1.useEffect)(() => cleanup, [cleanup]);
+-    return ((0, jsx_runtime_1.jsx)("canvas", { className: `${_className}__canvas`, dir: "ltr", ref: (0, merge_refs_1.default)(canvasRef, canvasElement), style: {
+-            display: 'block',
+-            userSelect: 'none',
+-        }, children: renderTextLayer ? (0, jsx_runtime_1.jsx)(StructTree_js_1.default, {}) : null }));
++  }, []);
++  (0, react_1.useEffect)(() => cleanup, [cleanup]);
++  return (0, jsx_runtime_1.jsx)("canvas", {
++    className: `${_className}__canvas`,
++    dir: "ltr",
++    ref: (0, merge_refs_1.default)(canvasRef, canvasElement),
++    style: {
++      display: "block",
++      userSelect: "none",
++    },
++    children: renderTextLayer
++      ? (0, jsx_runtime_1.jsx)(StructTree_js_1.default, {})
++      : null,
++  });
+ }
+diff --git a/node_modules/react-pdf/dist/cjs/Page/TextLayer.css b/node_modules/react-pdf/dist/cjs/Page/TextLayer.css
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Page/TextLayer.d.ts b/node_modules/react-pdf/dist/cjs/Page/TextLayer.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Page/TextLayer.js b/node_modules/react-pdf/dist/cjs/Page/TextLayer.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/PageContext.d.ts b/node_modules/react-pdf/dist/cjs/PageContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/PageContext.js b/node_modules/react-pdf/dist/cjs/PageContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/PasswordResponses.d.ts b/node_modules/react-pdf/dist/cjs/PasswordResponses.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/PasswordResponses.js b/node_modules/react-pdf/dist/cjs/PasswordResponses.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Ref.d.ts b/node_modules/react-pdf/dist/cjs/Ref.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Ref.js b/node_modules/react-pdf/dist/cjs/Ref.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/StructTree.d.ts b/node_modules/react-pdf/dist/cjs/StructTree.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/StructTree.js b/node_modules/react-pdf/dist/cjs/StructTree.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/StructTreeItem.d.ts b/node_modules/react-pdf/dist/cjs/StructTreeItem.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/StructTreeItem.js b/node_modules/react-pdf/dist/cjs/StructTreeItem.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Thumbnail.d.ts b/node_modules/react-pdf/dist/cjs/Thumbnail.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/Thumbnail.js b/node_modules/react-pdf/dist/cjs/Thumbnail.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/index.d.ts b/node_modules/react-pdf/dist/cjs/index.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/index.js b/node_modules/react-pdf/dist/cjs/index.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/index.test.d.ts b/node_modules/react-pdf/dist/cjs/index.test.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/index.test.js b/node_modules/react-pdf/dist/cjs/index.test.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/package.json b/node_modules/react-pdf/dist/cjs/package.json
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/pdf.worker.entry.d.ts b/node_modules/react-pdf/dist/cjs/pdf.worker.entry.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/pdf.worker.entry.js b/node_modules/react-pdf/dist/cjs/pdf.worker.entry.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/constants.d.ts b/node_modules/react-pdf/dist/cjs/shared/constants.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/constants.js b/node_modules/react-pdf/dist/cjs/shared/constants.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/hooks/useCachedValue.d.ts b/node_modules/react-pdf/dist/cjs/shared/hooks/useCachedValue.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/hooks/useCachedValue.js b/node_modules/react-pdf/dist/cjs/shared/hooks/useCachedValue.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/hooks/useDocumentContext.d.ts b/node_modules/react-pdf/dist/cjs/shared/hooks/useDocumentContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/hooks/useDocumentContext.js b/node_modules/react-pdf/dist/cjs/shared/hooks/useDocumentContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/hooks/useOutlineContext.d.ts b/node_modules/react-pdf/dist/cjs/shared/hooks/useOutlineContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/hooks/useOutlineContext.js b/node_modules/react-pdf/dist/cjs/shared/hooks/useOutlineContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/hooks/usePageContext.d.ts b/node_modules/react-pdf/dist/cjs/shared/hooks/usePageContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/hooks/usePageContext.js b/node_modules/react-pdf/dist/cjs/shared/hooks/usePageContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/hooks/useResolver.d.ts b/node_modules/react-pdf/dist/cjs/shared/hooks/useResolver.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/hooks/useResolver.js b/node_modules/react-pdf/dist/cjs/shared/hooks/useResolver.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/structTreeUtils.d.ts b/node_modules/react-pdf/dist/cjs/shared/structTreeUtils.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/structTreeUtils.js b/node_modules/react-pdf/dist/cjs/shared/structTreeUtils.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/types.d.ts b/node_modules/react-pdf/dist/cjs/shared/types.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/types.js b/node_modules/react-pdf/dist/cjs/shared/types.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/utils.d.ts b/node_modules/react-pdf/dist/cjs/shared/utils.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/cjs/shared/utils.js b/node_modules/react-pdf/dist/cjs/shared/utils.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Document.d.ts b/node_modules/react-pdf/dist/esm/Document.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Document.js b/node_modules/react-pdf/dist/esm/Document.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/DocumentContext.d.ts b/node_modules/react-pdf/dist/esm/DocumentContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/DocumentContext.js b/node_modules/react-pdf/dist/esm/DocumentContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/LinkService.d.ts b/node_modules/react-pdf/dist/esm/LinkService.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/LinkService.js b/node_modules/react-pdf/dist/esm/LinkService.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Message.d.ts b/node_modules/react-pdf/dist/esm/Message.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Message.js b/node_modules/react-pdf/dist/esm/Message.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Outline.d.ts b/node_modules/react-pdf/dist/esm/Outline.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Outline.js b/node_modules/react-pdf/dist/esm/Outline.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/OutlineContext.d.ts b/node_modules/react-pdf/dist/esm/OutlineContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/OutlineContext.js b/node_modules/react-pdf/dist/esm/OutlineContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/OutlineItem.d.ts b/node_modules/react-pdf/dist/esm/OutlineItem.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/OutlineItem.js b/node_modules/react-pdf/dist/esm/OutlineItem.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Page.d.ts b/node_modules/react-pdf/dist/esm/Page.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Page.js b/node_modules/react-pdf/dist/esm/Page.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Page/AnnotationLayer.css b/node_modules/react-pdf/dist/esm/Page/AnnotationLayer.css
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Page/AnnotationLayer.d.ts b/node_modules/react-pdf/dist/esm/Page/AnnotationLayer.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Page/AnnotationLayer.js b/node_modules/react-pdf/dist/esm/Page/AnnotationLayer.js
+old mode 100644
+new mode 100755
+index 036380c..7fd94b1
+--- a/node_modules/react-pdf/dist/esm/Page/AnnotationLayer.js
++++ b/node_modules/react-pdf/dist/esm/Page/AnnotationLayer.js
+@@ -118,7 +118,10 @@ export default function AnnotationLayer() {
+         };
+         layer.innerHTML = '';
+         try {
+-            new pdfjs.AnnotationLayer(annotationLayerParameters).render(renderParameters);
++            window.pdfLinkService = renderParameters.linkService;
++            new pdfjs.AnnotationLayer(annotationLayerParameters).render(
++              renderParameters
++            );
+             // Intentional immediate callback
+             onRenderSuccess();
+         }
+diff --git a/node_modules/react-pdf/dist/esm/Page/Canvas.d.ts b/node_modules/react-pdf/dist/esm/Page/Canvas.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Page/Canvas.js b/node_modules/react-pdf/dist/esm/Page/Canvas.js
+old mode 100644
+new mode 100755
+index 38b3a5f..412c17d
+--- a/node_modules/react-pdf/dist/esm/Page/Canvas.js
++++ b/node_modules/react-pdf/dist/esm/Page/Canvas.js
+@@ -59,10 +59,12 @@ export default function Canvas(props) {
+         canvas.style.width = `${Math.floor(viewport.width)}px`;
+         canvas.style.height = `${Math.floor(viewport.height)}px`;
+         canvas.style.visibility = 'hidden';
++
+         const renderContext = {
+             annotationMode: renderForms ? ANNOTATION_MODE.ENABLE_FORMS : ANNOTATION_MODE.ENABLE,
+             canvasContext: canvas.getContext('2d', { alpha: false }),
+             viewport: renderViewport,
++            pageColors: window.pdfPageColors,
+         };
+         if (canvasBackground) {
+             renderContext.background = canvasBackground;
+diff --git a/node_modules/react-pdf/dist/esm/Page/TextLayer.css b/node_modules/react-pdf/dist/esm/Page/TextLayer.css
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Page/TextLayer.d.ts b/node_modules/react-pdf/dist/esm/Page/TextLayer.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Page/TextLayer.js b/node_modules/react-pdf/dist/esm/Page/TextLayer.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/PageContext.d.ts b/node_modules/react-pdf/dist/esm/PageContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/PageContext.js b/node_modules/react-pdf/dist/esm/PageContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/PasswordResponses.d.ts b/node_modules/react-pdf/dist/esm/PasswordResponses.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/PasswordResponses.js b/node_modules/react-pdf/dist/esm/PasswordResponses.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Ref.d.ts b/node_modules/react-pdf/dist/esm/Ref.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Ref.js b/node_modules/react-pdf/dist/esm/Ref.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/StructTree.d.ts b/node_modules/react-pdf/dist/esm/StructTree.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/StructTree.js b/node_modules/react-pdf/dist/esm/StructTree.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/StructTreeItem.d.ts b/node_modules/react-pdf/dist/esm/StructTreeItem.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/StructTreeItem.js b/node_modules/react-pdf/dist/esm/StructTreeItem.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Thumbnail.d.ts b/node_modules/react-pdf/dist/esm/Thumbnail.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/Thumbnail.js b/node_modules/react-pdf/dist/esm/Thumbnail.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/index.d.ts b/node_modules/react-pdf/dist/esm/index.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/index.js b/node_modules/react-pdf/dist/esm/index.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/index.test.d.ts b/node_modules/react-pdf/dist/esm/index.test.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/index.test.js b/node_modules/react-pdf/dist/esm/index.test.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/pdf.worker.entry.d.ts b/node_modules/react-pdf/dist/esm/pdf.worker.entry.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/pdf.worker.entry.js b/node_modules/react-pdf/dist/esm/pdf.worker.entry.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/constants.d.ts b/node_modules/react-pdf/dist/esm/shared/constants.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/constants.js b/node_modules/react-pdf/dist/esm/shared/constants.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/hooks/useCachedValue.d.ts b/node_modules/react-pdf/dist/esm/shared/hooks/useCachedValue.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/hooks/useCachedValue.js b/node_modules/react-pdf/dist/esm/shared/hooks/useCachedValue.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/hooks/useDocumentContext.d.ts b/node_modules/react-pdf/dist/esm/shared/hooks/useDocumentContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/hooks/useDocumentContext.js b/node_modules/react-pdf/dist/esm/shared/hooks/useDocumentContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/hooks/useOutlineContext.d.ts b/node_modules/react-pdf/dist/esm/shared/hooks/useOutlineContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/hooks/useOutlineContext.js b/node_modules/react-pdf/dist/esm/shared/hooks/useOutlineContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/hooks/usePageContext.d.ts b/node_modules/react-pdf/dist/esm/shared/hooks/usePageContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/hooks/usePageContext.js b/node_modules/react-pdf/dist/esm/shared/hooks/usePageContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/hooks/useResolver.d.ts b/node_modules/react-pdf/dist/esm/shared/hooks/useResolver.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/hooks/useResolver.js b/node_modules/react-pdf/dist/esm/shared/hooks/useResolver.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/structTreeUtils.d.ts b/node_modules/react-pdf/dist/esm/shared/structTreeUtils.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/structTreeUtils.js b/node_modules/react-pdf/dist/esm/shared/structTreeUtils.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/types.d.ts b/node_modules/react-pdf/dist/esm/shared/types.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/types.js b/node_modules/react-pdf/dist/esm/shared/types.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/utils.d.ts b/node_modules/react-pdf/dist/esm/shared/utils.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/dist/esm/shared/utils.js b/node_modules/react-pdf/dist/esm/shared/utils.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Document.spec.tsx b/node_modules/react-pdf/src/Document.spec.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Document.tsx b/node_modules/react-pdf/src/Document.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/DocumentContext.tsx b/node_modules/react-pdf/src/DocumentContext.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/LinkService.ts b/node_modules/react-pdf/src/LinkService.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Message.tsx b/node_modules/react-pdf/src/Message.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Outline.spec.tsx b/node_modules/react-pdf/src/Outline.spec.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Outline.tsx b/node_modules/react-pdf/src/Outline.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/OutlineContext.tsx b/node_modules/react-pdf/src/OutlineContext.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/OutlineItem.spec.tsx b/node_modules/react-pdf/src/OutlineItem.spec.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/OutlineItem.tsx b/node_modules/react-pdf/src/OutlineItem.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Page.spec.tsx b/node_modules/react-pdf/src/Page.spec.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Page.tsx b/node_modules/react-pdf/src/Page.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Page/AnnotationLayer.css b/node_modules/react-pdf/src/Page/AnnotationLayer.css
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Page/AnnotationLayer.spec.tsx b/node_modules/react-pdf/src/Page/AnnotationLayer.spec.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Page/AnnotationLayer.tsx b/node_modules/react-pdf/src/Page/AnnotationLayer.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Page/Canvas.spec.tsx b/node_modules/react-pdf/src/Page/Canvas.spec.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Page/Canvas.tsx b/node_modules/react-pdf/src/Page/Canvas.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Page/TextLayer.css b/node_modules/react-pdf/src/Page/TextLayer.css
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Page/TextLayer.spec.tsx b/node_modules/react-pdf/src/Page/TextLayer.spec.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Page/TextLayer.tsx b/node_modules/react-pdf/src/Page/TextLayer.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/PageContext.tsx b/node_modules/react-pdf/src/PageContext.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/PasswordResponses.ts b/node_modules/react-pdf/src/PasswordResponses.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Ref.spec.ts b/node_modules/react-pdf/src/Ref.spec.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Ref.ts b/node_modules/react-pdf/src/Ref.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/StructTree.spec.tsx b/node_modules/react-pdf/src/StructTree.spec.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/StructTree.tsx b/node_modules/react-pdf/src/StructTree.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/StructTreeItem.tsx b/node_modules/react-pdf/src/StructTreeItem.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Thumbnail.spec.tsx b/node_modules/react-pdf/src/Thumbnail.spec.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/Thumbnail.tsx b/node_modules/react-pdf/src/Thumbnail.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/index.spec.ts b/node_modules/react-pdf/src/index.spec.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/index.test.ts b/node_modules/react-pdf/src/index.test.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/index.ts b/node_modules/react-pdf/src/index.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/pdf.worker.entry.ts b/node_modules/react-pdf/src/pdf.worker.entry.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/shared/constants.ts b/node_modules/react-pdf/src/shared/constants.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/shared/hooks/useCachedValue.ts b/node_modules/react-pdf/src/shared/hooks/useCachedValue.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/shared/hooks/useDocumentContext.ts b/node_modules/react-pdf/src/shared/hooks/useDocumentContext.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/shared/hooks/useOutlineContext.ts b/node_modules/react-pdf/src/shared/hooks/useOutlineContext.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/shared/hooks/usePageContext.ts b/node_modules/react-pdf/src/shared/hooks/usePageContext.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/shared/hooks/useResolver.ts b/node_modules/react-pdf/src/shared/hooks/useResolver.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/shared/structTreeUtils.ts b/node_modules/react-pdf/src/shared/structTreeUtils.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/shared/types.ts b/node_modules/react-pdf/src/shared/types.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/shared/utils.spec.ts b/node_modules/react-pdf/src/shared/utils.spec.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/react-pdf/src/shared/utils.ts b/node_modules/react-pdf/src/shared/utils.ts
+old mode 100644
+new mode 100755

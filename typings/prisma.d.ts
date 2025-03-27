@@ -49,6 +49,11 @@ export type category = $Result.DefaultSelection<Prisma.$categoryPayload>
  */
 export type customer = $Result.DefaultSelection<Prisma.$customerPayload>
 /**
+ * Model customer_reader
+ * 
+ */
+export type customer_reader = $Result.DefaultSelection<Prisma.$customer_readerPayload>
+/**
  * Model customer_track
  * 
  */
@@ -292,6 +297,16 @@ export class PrismaClient<
   get customer(): Prisma.customerDelegate<ExtArgs>;
 
   /**
+   * `prisma.customer_reader`: Exposes CRUD operations for the **customer_reader** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Customer_readers
+    * const customer_readers = await prisma.customer_reader.findMany()
+    * ```
+    */
+  get customer_reader(): Prisma.customer_readerDelegate<ExtArgs>;
+
+  /**
    * `prisma.customer_track`: Exposes CRUD operations for the **customer_track** model.
     * Example usage:
     * ```ts
@@ -448,7 +463,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 5.17.0
-   * Query Engine version: 393aa359c9ad4a4bb28630fb5613f9c281cde053
+   * Query Engine version: 605197351a3c8bdd595af2d2a9bc3025bca48ea2
    */
   export type PrismaVersion = {
     client: string
@@ -874,6 +889,7 @@ export namespace Prisma {
     bundle_product: 'bundle_product',
     category: 'category',
     customer: 'customer',
+    customer_reader: 'customer_reader',
     customer_track: 'customer_track',
     landing: 'landing',
     landing_items: 'landing_items',
@@ -899,7 +915,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "author" | "banner" | "bundle" | "bundle_category" | "bundle_product" | "category" | "customer" | "customer_track" | "landing" | "landing_items" | "midtrx" | "product" | "product_category" | "t_sales" | "t_sales_download" | "t_sales_line" | "user"
+      modelProps: "author" | "banner" | "bundle" | "bundle_category" | "bundle_product" | "category" | "customer" | "customer_reader" | "customer_track" | "landing" | "landing_items" | "midtrx" | "product" | "product_category" | "t_sales" | "t_sales_download" | "t_sales_line" | "user"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1390,6 +1406,76 @@ export namespace Prisma {
           count: {
             args: Prisma.customerCountArgs<ExtArgs>
             result: $Utils.Optional<CustomerCountAggregateOutputType> | number
+          }
+        }
+      }
+      customer_reader: {
+        payload: Prisma.$customer_readerPayload<ExtArgs>
+        fields: Prisma.customer_readerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.customer_readerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$customer_readerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.customer_readerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$customer_readerPayload>
+          }
+          findFirst: {
+            args: Prisma.customer_readerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$customer_readerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.customer_readerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$customer_readerPayload>
+          }
+          findMany: {
+            args: Prisma.customer_readerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$customer_readerPayload>[]
+          }
+          create: {
+            args: Prisma.customer_readerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$customer_readerPayload>
+          }
+          createMany: {
+            args: Prisma.customer_readerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.customer_readerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$customer_readerPayload>[]
+          }
+          delete: {
+            args: Prisma.customer_readerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$customer_readerPayload>
+          }
+          update: {
+            args: Prisma.customer_readerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$customer_readerPayload>
+          }
+          deleteMany: {
+            args: Prisma.customer_readerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.customer_readerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.customer_readerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$customer_readerPayload>
+          }
+          aggregate: {
+            args: Prisma.Customer_readerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCustomer_reader>
+          }
+          groupBy: {
+            args: Prisma.customer_readerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Customer_readerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.customer_readerCountArgs<ExtArgs>
+            result: $Utils.Optional<Customer_readerCountAggregateOutputType> | number
           }
         }
       }
@@ -2383,11 +2469,13 @@ export namespace Prisma {
    */
 
   export type CustomerCountOutputType = {
+    customer_reader: number
     t_sales: number
     t_sales_download: number
   }
 
   export type CustomerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    customer_reader?: boolean | CustomerCountOutputTypeCountCustomer_readerArgs
     t_sales?: boolean | CustomerCountOutputTypeCountT_salesArgs
     t_sales_download?: boolean | CustomerCountOutputTypeCountT_sales_downloadArgs
   }
@@ -2401,6 +2489,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the CustomerCountOutputType
      */
     select?: CustomerCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CustomerCountOutputType without action
+   */
+  export type CustomerCountOutputTypeCountCustomer_readerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: customer_readerWhereInput
   }
 
   /**
@@ -2486,6 +2581,7 @@ export namespace Prisma {
 
   export type ProductCountOutputType = {
     bundle_product: number
+    customer_reader: number
     product_category: number
     t_sales_download: number
     t_sales_line: number
@@ -2493,6 +2589,7 @@ export namespace Prisma {
 
   export type ProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bundle_product?: boolean | ProductCountOutputTypeCountBundle_productArgs
+    customer_reader?: boolean | ProductCountOutputTypeCountCustomer_readerArgs
     product_category?: boolean | ProductCountOutputTypeCountProduct_categoryArgs
     t_sales_download?: boolean | ProductCountOutputTypeCountT_sales_downloadArgs
     t_sales_line?: boolean | ProductCountOutputTypeCountT_sales_lineArgs
@@ -2514,6 +2611,13 @@ export namespace Prisma {
    */
   export type ProductCountOutputTypeCountBundle_productArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: bundle_productWhereInput
+  }
+
+  /**
+   * ProductCountOutputType without action
+   */
+  export type ProductCountOutputTypeCountCustomer_readerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: customer_readerWhereInput
   }
 
   /**
@@ -8671,6 +8775,7 @@ export namespace Prisma {
     whatsapp?: boolean
     deleted_at?: boolean
     otp?: boolean
+    customer_reader?: boolean | customer$customer_readerArgs<ExtArgs>
     t_sales?: boolean | customer$t_salesArgs<ExtArgs>
     t_sales_download?: boolean | customer$t_sales_downloadArgs<ExtArgs>
     _count?: boolean | CustomerCountOutputTypeDefaultArgs<ExtArgs>
@@ -8695,6 +8800,7 @@ export namespace Prisma {
   }
 
   export type customerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    customer_reader?: boolean | customer$customer_readerArgs<ExtArgs>
     t_sales?: boolean | customer$t_salesArgs<ExtArgs>
     t_sales_download?: boolean | customer$t_sales_downloadArgs<ExtArgs>
     _count?: boolean | CustomerCountOutputTypeDefaultArgs<ExtArgs>
@@ -8704,6 +8810,7 @@ export namespace Prisma {
   export type $customerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "customer"
     objects: {
+      customer_reader: Prisma.$customer_readerPayload<ExtArgs>[]
       t_sales: Prisma.$t_salesPayload<ExtArgs>[]
       t_sales_download: Prisma.$t_sales_downloadPayload<ExtArgs>[]
     }
@@ -9078,6 +9185,7 @@ export namespace Prisma {
    */
   export interface Prisma__customerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    customer_reader<T extends customer$customer_readerArgs<ExtArgs> = {}>(args?: Subset<T, customer$customer_readerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$customer_readerPayload<ExtArgs>, T, "findMany"> | Null>
     t_sales<T extends customer$t_salesArgs<ExtArgs> = {}>(args?: Subset<T, customer$t_salesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$t_salesPayload<ExtArgs>, T, "findMany"> | Null>
     t_sales_download<T extends customer$t_sales_downloadArgs<ExtArgs> = {}>(args?: Subset<T, customer$t_sales_downloadArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$t_sales_downloadPayload<ExtArgs>, T, "findMany"> | Null>
     /**
@@ -9429,6 +9537,26 @@ export namespace Prisma {
   }
 
   /**
+   * customer.customer_reader
+   */
+  export type customer$customer_readerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the customer_reader
+     */
+    select?: customer_readerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: customer_readerInclude<ExtArgs> | null
+    where?: customer_readerWhereInput
+    orderBy?: customer_readerOrderByWithRelationInput | customer_readerOrderByWithRelationInput[]
+    cursor?: customer_readerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Customer_readerScalarFieldEnum | Customer_readerScalarFieldEnum[]
+  }
+
+  /**
    * customer.t_sales
    */
   export type customer$t_salesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9480,6 +9608,983 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: customerInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model customer_reader
+   */
+
+  export type AggregateCustomer_reader = {
+    _count: Customer_readerCountAggregateOutputType | null
+    _avg: Customer_readerAvgAggregateOutputType | null
+    _sum: Customer_readerSumAggregateOutputType | null
+    _min: Customer_readerMinAggregateOutputType | null
+    _max: Customer_readerMaxAggregateOutputType | null
+  }
+
+  export type Customer_readerAvgAggregateOutputType = {
+    last_page: number | null
+    percent: number | null
+  }
+
+  export type Customer_readerSumAggregateOutputType = {
+    last_page: number | null
+    percent: number | null
+  }
+
+  export type Customer_readerMinAggregateOutputType = {
+    id: string | null
+    id_customer: string | null
+    id_product: string | null
+    last_page: number | null
+    percent: number | null
+  }
+
+  export type Customer_readerMaxAggregateOutputType = {
+    id: string | null
+    id_customer: string | null
+    id_product: string | null
+    last_page: number | null
+    percent: number | null
+  }
+
+  export type Customer_readerCountAggregateOutputType = {
+    id: number
+    id_customer: number
+    id_product: number
+    last_page: number
+    percent: number
+    _all: number
+  }
+
+
+  export type Customer_readerAvgAggregateInputType = {
+    last_page?: true
+    percent?: true
+  }
+
+  export type Customer_readerSumAggregateInputType = {
+    last_page?: true
+    percent?: true
+  }
+
+  export type Customer_readerMinAggregateInputType = {
+    id?: true
+    id_customer?: true
+    id_product?: true
+    last_page?: true
+    percent?: true
+  }
+
+  export type Customer_readerMaxAggregateInputType = {
+    id?: true
+    id_customer?: true
+    id_product?: true
+    last_page?: true
+    percent?: true
+  }
+
+  export type Customer_readerCountAggregateInputType = {
+    id?: true
+    id_customer?: true
+    id_product?: true
+    last_page?: true
+    percent?: true
+    _all?: true
+  }
+
+  export type Customer_readerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which customer_reader to aggregate.
+     */
+    where?: customer_readerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of customer_readers to fetch.
+     */
+    orderBy?: customer_readerOrderByWithRelationInput | customer_readerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: customer_readerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` customer_readers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` customer_readers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned customer_readers
+    **/
+    _count?: true | Customer_readerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Customer_readerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Customer_readerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Customer_readerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Customer_readerMaxAggregateInputType
+  }
+
+  export type GetCustomer_readerAggregateType<T extends Customer_readerAggregateArgs> = {
+        [P in keyof T & keyof AggregateCustomer_reader]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCustomer_reader[P]>
+      : GetScalarType<T[P], AggregateCustomer_reader[P]>
+  }
+
+
+
+
+  export type customer_readerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: customer_readerWhereInput
+    orderBy?: customer_readerOrderByWithAggregationInput | customer_readerOrderByWithAggregationInput[]
+    by: Customer_readerScalarFieldEnum[] | Customer_readerScalarFieldEnum
+    having?: customer_readerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Customer_readerCountAggregateInputType | true
+    _avg?: Customer_readerAvgAggregateInputType
+    _sum?: Customer_readerSumAggregateInputType
+    _min?: Customer_readerMinAggregateInputType
+    _max?: Customer_readerMaxAggregateInputType
+  }
+
+  export type Customer_readerGroupByOutputType = {
+    id: string
+    id_customer: string
+    id_product: string
+    last_page: number
+    percent: number
+    _count: Customer_readerCountAggregateOutputType | null
+    _avg: Customer_readerAvgAggregateOutputType | null
+    _sum: Customer_readerSumAggregateOutputType | null
+    _min: Customer_readerMinAggregateOutputType | null
+    _max: Customer_readerMaxAggregateOutputType | null
+  }
+
+  type GetCustomer_readerGroupByPayload<T extends customer_readerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Customer_readerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Customer_readerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Customer_readerGroupByOutputType[P]>
+            : GetScalarType<T[P], Customer_readerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type customer_readerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    id_customer?: boolean
+    id_product?: boolean
+    last_page?: boolean
+    percent?: boolean
+    customer?: boolean | customerDefaultArgs<ExtArgs>
+    product?: boolean | productDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customer_reader"]>
+
+  export type customer_readerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    id_customer?: boolean
+    id_product?: boolean
+    last_page?: boolean
+    percent?: boolean
+    customer?: boolean | customerDefaultArgs<ExtArgs>
+    product?: boolean | productDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customer_reader"]>
+
+  export type customer_readerSelectScalar = {
+    id?: boolean
+    id_customer?: boolean
+    id_product?: boolean
+    last_page?: boolean
+    percent?: boolean
+  }
+
+  export type customer_readerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    customer?: boolean | customerDefaultArgs<ExtArgs>
+    product?: boolean | productDefaultArgs<ExtArgs>
+  }
+  export type customer_readerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    customer?: boolean | customerDefaultArgs<ExtArgs>
+    product?: boolean | productDefaultArgs<ExtArgs>
+  }
+
+  export type $customer_readerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "customer_reader"
+    objects: {
+      customer: Prisma.$customerPayload<ExtArgs>
+      product: Prisma.$productPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      id_customer: string
+      id_product: string
+      last_page: number
+      percent: number
+    }, ExtArgs["result"]["customer_reader"]>
+    composites: {}
+  }
+
+  type customer_readerGetPayload<S extends boolean | null | undefined | customer_readerDefaultArgs> = $Result.GetResult<Prisma.$customer_readerPayload, S>
+
+  type customer_readerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<customer_readerFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Customer_readerCountAggregateInputType | true
+    }
+
+  export interface customer_readerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['customer_reader'], meta: { name: 'customer_reader' } }
+    /**
+     * Find zero or one Customer_reader that matches the filter.
+     * @param {customer_readerFindUniqueArgs} args - Arguments to find a Customer_reader
+     * @example
+     * // Get one Customer_reader
+     * const customer_reader = await prisma.customer_reader.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends customer_readerFindUniqueArgs>(args: SelectSubset<T, customer_readerFindUniqueArgs<ExtArgs>>): Prisma__customer_readerClient<$Result.GetResult<Prisma.$customer_readerPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Customer_reader that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {customer_readerFindUniqueOrThrowArgs} args - Arguments to find a Customer_reader
+     * @example
+     * // Get one Customer_reader
+     * const customer_reader = await prisma.customer_reader.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends customer_readerFindUniqueOrThrowArgs>(args: SelectSubset<T, customer_readerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__customer_readerClient<$Result.GetResult<Prisma.$customer_readerPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Customer_reader that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {customer_readerFindFirstArgs} args - Arguments to find a Customer_reader
+     * @example
+     * // Get one Customer_reader
+     * const customer_reader = await prisma.customer_reader.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends customer_readerFindFirstArgs>(args?: SelectSubset<T, customer_readerFindFirstArgs<ExtArgs>>): Prisma__customer_readerClient<$Result.GetResult<Prisma.$customer_readerPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Customer_reader that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {customer_readerFindFirstOrThrowArgs} args - Arguments to find a Customer_reader
+     * @example
+     * // Get one Customer_reader
+     * const customer_reader = await prisma.customer_reader.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends customer_readerFindFirstOrThrowArgs>(args?: SelectSubset<T, customer_readerFindFirstOrThrowArgs<ExtArgs>>): Prisma__customer_readerClient<$Result.GetResult<Prisma.$customer_readerPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Customer_readers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {customer_readerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Customer_readers
+     * const customer_readers = await prisma.customer_reader.findMany()
+     * 
+     * // Get first 10 Customer_readers
+     * const customer_readers = await prisma.customer_reader.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const customer_readerWithIdOnly = await prisma.customer_reader.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends customer_readerFindManyArgs>(args?: SelectSubset<T, customer_readerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$customer_readerPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Customer_reader.
+     * @param {customer_readerCreateArgs} args - Arguments to create a Customer_reader.
+     * @example
+     * // Create one Customer_reader
+     * const Customer_reader = await prisma.customer_reader.create({
+     *   data: {
+     *     // ... data to create a Customer_reader
+     *   }
+     * })
+     * 
+     */
+    create<T extends customer_readerCreateArgs>(args: SelectSubset<T, customer_readerCreateArgs<ExtArgs>>): Prisma__customer_readerClient<$Result.GetResult<Prisma.$customer_readerPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Customer_readers.
+     * @param {customer_readerCreateManyArgs} args - Arguments to create many Customer_readers.
+     * @example
+     * // Create many Customer_readers
+     * const customer_reader = await prisma.customer_reader.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends customer_readerCreateManyArgs>(args?: SelectSubset<T, customer_readerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Customer_readers and returns the data saved in the database.
+     * @param {customer_readerCreateManyAndReturnArgs} args - Arguments to create many Customer_readers.
+     * @example
+     * // Create many Customer_readers
+     * const customer_reader = await prisma.customer_reader.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Customer_readers and only return the `id`
+     * const customer_readerWithIdOnly = await prisma.customer_reader.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends customer_readerCreateManyAndReturnArgs>(args?: SelectSubset<T, customer_readerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$customer_readerPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Customer_reader.
+     * @param {customer_readerDeleteArgs} args - Arguments to delete one Customer_reader.
+     * @example
+     * // Delete one Customer_reader
+     * const Customer_reader = await prisma.customer_reader.delete({
+     *   where: {
+     *     // ... filter to delete one Customer_reader
+     *   }
+     * })
+     * 
+     */
+    delete<T extends customer_readerDeleteArgs>(args: SelectSubset<T, customer_readerDeleteArgs<ExtArgs>>): Prisma__customer_readerClient<$Result.GetResult<Prisma.$customer_readerPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Customer_reader.
+     * @param {customer_readerUpdateArgs} args - Arguments to update one Customer_reader.
+     * @example
+     * // Update one Customer_reader
+     * const customer_reader = await prisma.customer_reader.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends customer_readerUpdateArgs>(args: SelectSubset<T, customer_readerUpdateArgs<ExtArgs>>): Prisma__customer_readerClient<$Result.GetResult<Prisma.$customer_readerPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Customer_readers.
+     * @param {customer_readerDeleteManyArgs} args - Arguments to filter Customer_readers to delete.
+     * @example
+     * // Delete a few Customer_readers
+     * const { count } = await prisma.customer_reader.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends customer_readerDeleteManyArgs>(args?: SelectSubset<T, customer_readerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Customer_readers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {customer_readerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Customer_readers
+     * const customer_reader = await prisma.customer_reader.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends customer_readerUpdateManyArgs>(args: SelectSubset<T, customer_readerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Customer_reader.
+     * @param {customer_readerUpsertArgs} args - Arguments to update or create a Customer_reader.
+     * @example
+     * // Update or create a Customer_reader
+     * const customer_reader = await prisma.customer_reader.upsert({
+     *   create: {
+     *     // ... data to create a Customer_reader
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Customer_reader we want to update
+     *   }
+     * })
+     */
+    upsert<T extends customer_readerUpsertArgs>(args: SelectSubset<T, customer_readerUpsertArgs<ExtArgs>>): Prisma__customer_readerClient<$Result.GetResult<Prisma.$customer_readerPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Customer_readers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {customer_readerCountArgs} args - Arguments to filter Customer_readers to count.
+     * @example
+     * // Count the number of Customer_readers
+     * const count = await prisma.customer_reader.count({
+     *   where: {
+     *     // ... the filter for the Customer_readers we want to count
+     *   }
+     * })
+    **/
+    count<T extends customer_readerCountArgs>(
+      args?: Subset<T, customer_readerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Customer_readerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Customer_reader.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Customer_readerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Customer_readerAggregateArgs>(args: Subset<T, Customer_readerAggregateArgs>): Prisma.PrismaPromise<GetCustomer_readerAggregateType<T>>
+
+    /**
+     * Group by Customer_reader.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {customer_readerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends customer_readerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: customer_readerGroupByArgs['orderBy'] }
+        : { orderBy?: customer_readerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, customer_readerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCustomer_readerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the customer_reader model
+   */
+  readonly fields: customer_readerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for customer_reader.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__customer_readerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    customer<T extends customerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, customerDefaultArgs<ExtArgs>>): Prisma__customerClient<$Result.GetResult<Prisma.$customerPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    product<T extends productDefaultArgs<ExtArgs> = {}>(args?: Subset<T, productDefaultArgs<ExtArgs>>): Prisma__productClient<$Result.GetResult<Prisma.$productPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the customer_reader model
+   */ 
+  interface customer_readerFieldRefs {
+    readonly id: FieldRef<"customer_reader", 'String'>
+    readonly id_customer: FieldRef<"customer_reader", 'String'>
+    readonly id_product: FieldRef<"customer_reader", 'String'>
+    readonly last_page: FieldRef<"customer_reader", 'Int'>
+    readonly percent: FieldRef<"customer_reader", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * customer_reader findUnique
+   */
+  export type customer_readerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the customer_reader
+     */
+    select?: customer_readerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: customer_readerInclude<ExtArgs> | null
+    /**
+     * Filter, which customer_reader to fetch.
+     */
+    where: customer_readerWhereUniqueInput
+  }
+
+  /**
+   * customer_reader findUniqueOrThrow
+   */
+  export type customer_readerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the customer_reader
+     */
+    select?: customer_readerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: customer_readerInclude<ExtArgs> | null
+    /**
+     * Filter, which customer_reader to fetch.
+     */
+    where: customer_readerWhereUniqueInput
+  }
+
+  /**
+   * customer_reader findFirst
+   */
+  export type customer_readerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the customer_reader
+     */
+    select?: customer_readerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: customer_readerInclude<ExtArgs> | null
+    /**
+     * Filter, which customer_reader to fetch.
+     */
+    where?: customer_readerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of customer_readers to fetch.
+     */
+    orderBy?: customer_readerOrderByWithRelationInput | customer_readerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for customer_readers.
+     */
+    cursor?: customer_readerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` customer_readers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` customer_readers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of customer_readers.
+     */
+    distinct?: Customer_readerScalarFieldEnum | Customer_readerScalarFieldEnum[]
+  }
+
+  /**
+   * customer_reader findFirstOrThrow
+   */
+  export type customer_readerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the customer_reader
+     */
+    select?: customer_readerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: customer_readerInclude<ExtArgs> | null
+    /**
+     * Filter, which customer_reader to fetch.
+     */
+    where?: customer_readerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of customer_readers to fetch.
+     */
+    orderBy?: customer_readerOrderByWithRelationInput | customer_readerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for customer_readers.
+     */
+    cursor?: customer_readerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` customer_readers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` customer_readers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of customer_readers.
+     */
+    distinct?: Customer_readerScalarFieldEnum | Customer_readerScalarFieldEnum[]
+  }
+
+  /**
+   * customer_reader findMany
+   */
+  export type customer_readerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the customer_reader
+     */
+    select?: customer_readerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: customer_readerInclude<ExtArgs> | null
+    /**
+     * Filter, which customer_readers to fetch.
+     */
+    where?: customer_readerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of customer_readers to fetch.
+     */
+    orderBy?: customer_readerOrderByWithRelationInput | customer_readerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing customer_readers.
+     */
+    cursor?: customer_readerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` customer_readers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` customer_readers.
+     */
+    skip?: number
+    distinct?: Customer_readerScalarFieldEnum | Customer_readerScalarFieldEnum[]
+  }
+
+  /**
+   * customer_reader create
+   */
+  export type customer_readerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the customer_reader
+     */
+    select?: customer_readerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: customer_readerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a customer_reader.
+     */
+    data: XOR<customer_readerCreateInput, customer_readerUncheckedCreateInput>
+  }
+
+  /**
+   * customer_reader createMany
+   */
+  export type customer_readerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many customer_readers.
+     */
+    data: customer_readerCreateManyInput | customer_readerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * customer_reader createManyAndReturn
+   */
+  export type customer_readerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the customer_reader
+     */
+    select?: customer_readerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many customer_readers.
+     */
+    data: customer_readerCreateManyInput | customer_readerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: customer_readerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * customer_reader update
+   */
+  export type customer_readerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the customer_reader
+     */
+    select?: customer_readerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: customer_readerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a customer_reader.
+     */
+    data: XOR<customer_readerUpdateInput, customer_readerUncheckedUpdateInput>
+    /**
+     * Choose, which customer_reader to update.
+     */
+    where: customer_readerWhereUniqueInput
+  }
+
+  /**
+   * customer_reader updateMany
+   */
+  export type customer_readerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update customer_readers.
+     */
+    data: XOR<customer_readerUpdateManyMutationInput, customer_readerUncheckedUpdateManyInput>
+    /**
+     * Filter which customer_readers to update
+     */
+    where?: customer_readerWhereInput
+  }
+
+  /**
+   * customer_reader upsert
+   */
+  export type customer_readerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the customer_reader
+     */
+    select?: customer_readerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: customer_readerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the customer_reader to update in case it exists.
+     */
+    where: customer_readerWhereUniqueInput
+    /**
+     * In case the customer_reader found by the `where` argument doesn't exist, create a new customer_reader with this data.
+     */
+    create: XOR<customer_readerCreateInput, customer_readerUncheckedCreateInput>
+    /**
+     * In case the customer_reader was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<customer_readerUpdateInput, customer_readerUncheckedUpdateInput>
+  }
+
+  /**
+   * customer_reader delete
+   */
+  export type customer_readerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the customer_reader
+     */
+    select?: customer_readerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: customer_readerInclude<ExtArgs> | null
+    /**
+     * Filter which customer_reader to delete.
+     */
+    where: customer_readerWhereUniqueInput
+  }
+
+  /**
+   * customer_reader deleteMany
+   */
+  export type customer_readerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which customer_readers to delete
+     */
+    where?: customer_readerWhereInput
+  }
+
+  /**
+   * customer_reader without action
+   */
+  export type customer_readerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the customer_reader
+     */
+    select?: customer_readerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: customer_readerInclude<ExtArgs> | null
   }
 
 
@@ -13608,6 +14713,7 @@ export namespace Prisma {
     id_author?: boolean
     published_date?: boolean
     bundle_product?: boolean | product$bundle_productArgs<ExtArgs>
+    customer_reader?: boolean | product$customer_readerArgs<ExtArgs>
     author?: boolean | product$authorArgs<ExtArgs>
     product_category?: boolean | product$product_categoryArgs<ExtArgs>
     t_sales_download?: boolean | product$t_sales_downloadArgs<ExtArgs>
@@ -13656,6 +14762,7 @@ export namespace Prisma {
 
   export type productInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bundle_product?: boolean | product$bundle_productArgs<ExtArgs>
+    customer_reader?: boolean | product$customer_readerArgs<ExtArgs>
     author?: boolean | product$authorArgs<ExtArgs>
     product_category?: boolean | product$product_categoryArgs<ExtArgs>
     t_sales_download?: boolean | product$t_sales_downloadArgs<ExtArgs>
@@ -13670,6 +14777,7 @@ export namespace Prisma {
     name: "product"
     objects: {
       bundle_product: Prisma.$bundle_productPayload<ExtArgs>[]
+      customer_reader: Prisma.$customer_readerPayload<ExtArgs>[]
       author: Prisma.$authorPayload<ExtArgs> | null
       product_category: Prisma.$product_categoryPayload<ExtArgs>[]
       t_sales_download: Prisma.$t_sales_downloadPayload<ExtArgs>[]
@@ -14057,6 +15165,7 @@ export namespace Prisma {
   export interface Prisma__productClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     bundle_product<T extends product$bundle_productArgs<ExtArgs> = {}>(args?: Subset<T, product$bundle_productArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$bundle_productPayload<ExtArgs>, T, "findMany"> | Null>
+    customer_reader<T extends product$customer_readerArgs<ExtArgs> = {}>(args?: Subset<T, product$customer_readerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$customer_readerPayload<ExtArgs>, T, "findMany"> | Null>
     author<T extends product$authorArgs<ExtArgs> = {}>(args?: Subset<T, product$authorArgs<ExtArgs>>): Prisma__authorClient<$Result.GetResult<Prisma.$authorPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     product_category<T extends product$product_categoryArgs<ExtArgs> = {}>(args?: Subset<T, product$product_categoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$product_categoryPayload<ExtArgs>, T, "findMany"> | Null>
     t_sales_download<T extends product$t_sales_downloadArgs<ExtArgs> = {}>(args?: Subset<T, product$t_sales_downloadArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$t_sales_downloadPayload<ExtArgs>, T, "findMany"> | Null>
@@ -14441,6 +15550,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Bundle_productScalarFieldEnum | Bundle_productScalarFieldEnum[]
+  }
+
+  /**
+   * product.customer_reader
+   */
+  export type product$customer_readerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the customer_reader
+     */
+    select?: customer_readerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: customer_readerInclude<ExtArgs> | null
+    where?: customer_readerWhereInput
+    orderBy?: customer_readerOrderByWithRelationInput | customer_readerOrderByWithRelationInput[]
+    cursor?: customer_readerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Customer_readerScalarFieldEnum | Customer_readerScalarFieldEnum[]
   }
 
   /**
@@ -19546,6 +20675,17 @@ export namespace Prisma {
   export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
 
 
+  export const Customer_readerScalarFieldEnum: {
+    id: 'id',
+    id_customer: 'id_customer',
+    id_product: 'id_product',
+    last_page: 'last_page',
+    percent: 'percent'
+  };
+
+  export type Customer_readerScalarFieldEnum = (typeof Customer_readerScalarFieldEnum)[keyof typeof Customer_readerScalarFieldEnum]
+
+
   export const Customer_trackScalarFieldEnum: {
     id: 'id',
     ts: 'ts',
@@ -20203,6 +21343,7 @@ export namespace Prisma {
     whatsapp?: StringFilter<"customer"> | string
     deleted_at?: DateTimeNullableFilter<"customer"> | Date | string | null
     otp?: IntNullableFilter<"customer"> | number | null
+    customer_reader?: Customer_readerListRelationFilter
     t_sales?: T_salesListRelationFilter
     t_sales_download?: T_sales_downloadListRelationFilter
   }
@@ -20214,6 +21355,7 @@ export namespace Prisma {
     whatsapp?: SortOrder
     deleted_at?: SortOrderInput | SortOrder
     otp?: SortOrderInput | SortOrder
+    customer_reader?: customer_readerOrderByRelationAggregateInput
     t_sales?: t_salesOrderByRelationAggregateInput
     t_sales_download?: t_sales_downloadOrderByRelationAggregateInput
   }
@@ -20228,6 +21370,7 @@ export namespace Prisma {
     whatsapp?: StringFilter<"customer"> | string
     deleted_at?: DateTimeNullableFilter<"customer"> | Date | string | null
     otp?: IntNullableFilter<"customer"> | number | null
+    customer_reader?: Customer_readerListRelationFilter
     t_sales?: T_salesListRelationFilter
     t_sales_download?: T_sales_downloadListRelationFilter
   }, "id">
@@ -20256,6 +21399,66 @@ export namespace Prisma {
     whatsapp?: StringWithAggregatesFilter<"customer"> | string
     deleted_at?: DateTimeNullableWithAggregatesFilter<"customer"> | Date | string | null
     otp?: IntNullableWithAggregatesFilter<"customer"> | number | null
+  }
+
+  export type customer_readerWhereInput = {
+    AND?: customer_readerWhereInput | customer_readerWhereInput[]
+    OR?: customer_readerWhereInput[]
+    NOT?: customer_readerWhereInput | customer_readerWhereInput[]
+    id?: UuidFilter<"customer_reader"> | string
+    id_customer?: UuidFilter<"customer_reader"> | string
+    id_product?: UuidFilter<"customer_reader"> | string
+    last_page?: IntFilter<"customer_reader"> | number
+    percent?: IntFilter<"customer_reader"> | number
+    customer?: XOR<CustomerRelationFilter, customerWhereInput>
+    product?: XOR<ProductRelationFilter, productWhereInput>
+  }
+
+  export type customer_readerOrderByWithRelationInput = {
+    id?: SortOrder
+    id_customer?: SortOrder
+    id_product?: SortOrder
+    last_page?: SortOrder
+    percent?: SortOrder
+    customer?: customerOrderByWithRelationInput
+    product?: productOrderByWithRelationInput
+  }
+
+  export type customer_readerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: customer_readerWhereInput | customer_readerWhereInput[]
+    OR?: customer_readerWhereInput[]
+    NOT?: customer_readerWhereInput | customer_readerWhereInput[]
+    id_customer?: UuidFilter<"customer_reader"> | string
+    id_product?: UuidFilter<"customer_reader"> | string
+    last_page?: IntFilter<"customer_reader"> | number
+    percent?: IntFilter<"customer_reader"> | number
+    customer?: XOR<CustomerRelationFilter, customerWhereInput>
+    product?: XOR<ProductRelationFilter, productWhereInput>
+  }, "id">
+
+  export type customer_readerOrderByWithAggregationInput = {
+    id?: SortOrder
+    id_customer?: SortOrder
+    id_product?: SortOrder
+    last_page?: SortOrder
+    percent?: SortOrder
+    _count?: customer_readerCountOrderByAggregateInput
+    _avg?: customer_readerAvgOrderByAggregateInput
+    _max?: customer_readerMaxOrderByAggregateInput
+    _min?: customer_readerMinOrderByAggregateInput
+    _sum?: customer_readerSumOrderByAggregateInput
+  }
+
+  export type customer_readerScalarWhereWithAggregatesInput = {
+    AND?: customer_readerScalarWhereWithAggregatesInput | customer_readerScalarWhereWithAggregatesInput[]
+    OR?: customer_readerScalarWhereWithAggregatesInput[]
+    NOT?: customer_readerScalarWhereWithAggregatesInput | customer_readerScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"customer_reader"> | string
+    id_customer?: UuidWithAggregatesFilter<"customer_reader"> | string
+    id_product?: UuidWithAggregatesFilter<"customer_reader"> | string
+    last_page?: IntWithAggregatesFilter<"customer_reader"> | number
+    percent?: IntWithAggregatesFilter<"customer_reader"> | number
   }
 
   export type customer_trackWhereInput = {
@@ -20528,6 +21731,7 @@ export namespace Prisma {
     id_author?: UuidNullableFilter<"product"> | string | null
     published_date?: DateTimeFilter<"product"> | Date | string
     bundle_product?: Bundle_productListRelationFilter
+    customer_reader?: Customer_readerListRelationFilter
     author?: XOR<AuthorNullableRelationFilter, authorWhereInput> | null
     product_category?: Product_categoryListRelationFilter
     t_sales_download?: T_sales_downloadListRelationFilter
@@ -20552,6 +21756,7 @@ export namespace Prisma {
     id_author?: SortOrderInput | SortOrder
     published_date?: SortOrder
     bundle_product?: bundle_productOrderByRelationAggregateInput
+    customer_reader?: customer_readerOrderByRelationAggregateInput
     author?: authorOrderByWithRelationInput
     product_category?: product_categoryOrderByRelationAggregateInput
     t_sales_download?: t_sales_downloadOrderByRelationAggregateInput
@@ -20579,6 +21784,7 @@ export namespace Prisma {
     id_author?: UuidNullableFilter<"product"> | string | null
     published_date?: DateTimeFilter<"product"> | Date | string
     bundle_product?: Bundle_productListRelationFilter
+    customer_reader?: Customer_readerListRelationFilter
     author?: XOR<AuthorNullableRelationFilter, authorWhereInput> | null
     product_category?: Product_categoryListRelationFilter
     t_sales_download?: T_sales_downloadListRelationFilter
@@ -21365,6 +22571,7 @@ export namespace Prisma {
     whatsapp: string
     deleted_at?: Date | string | null
     otp?: number | null
+    customer_reader?: customer_readerCreateNestedManyWithoutCustomerInput
     t_sales?: t_salesCreateNestedManyWithoutCustomerInput
     t_sales_download?: t_sales_downloadCreateNestedManyWithoutCustomerInput
   }
@@ -21376,6 +22583,7 @@ export namespace Prisma {
     whatsapp: string
     deleted_at?: Date | string | null
     otp?: number | null
+    customer_reader?: customer_readerUncheckedCreateNestedManyWithoutCustomerInput
     t_sales?: t_salesUncheckedCreateNestedManyWithoutCustomerInput
     t_sales_download?: t_sales_downloadUncheckedCreateNestedManyWithoutCustomerInput
   }
@@ -21387,6 +22595,7 @@ export namespace Prisma {
     whatsapp?: StringFieldUpdateOperationsInput | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     otp?: NullableIntFieldUpdateOperationsInput | number | null
+    customer_reader?: customer_readerUpdateManyWithoutCustomerNestedInput
     t_sales?: t_salesUpdateManyWithoutCustomerNestedInput
     t_sales_download?: t_sales_downloadUpdateManyWithoutCustomerNestedInput
   }
@@ -21398,6 +22607,7 @@ export namespace Prisma {
     whatsapp?: StringFieldUpdateOperationsInput | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     otp?: NullableIntFieldUpdateOperationsInput | number | null
+    customer_reader?: customer_readerUncheckedUpdateManyWithoutCustomerNestedInput
     t_sales?: t_salesUncheckedUpdateManyWithoutCustomerNestedInput
     t_sales_download?: t_sales_downloadUncheckedUpdateManyWithoutCustomerNestedInput
   }
@@ -21427,6 +22637,60 @@ export namespace Prisma {
     whatsapp?: StringFieldUpdateOperationsInput | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     otp?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type customer_readerCreateInput = {
+    id?: string
+    last_page?: number
+    percent?: number
+    customer: customerCreateNestedOneWithoutCustomer_readerInput
+    product: productCreateNestedOneWithoutCustomer_readerInput
+  }
+
+  export type customer_readerUncheckedCreateInput = {
+    id?: string
+    id_customer: string
+    id_product: string
+    last_page?: number
+    percent?: number
+  }
+
+  export type customer_readerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    last_page?: IntFieldUpdateOperationsInput | number
+    percent?: IntFieldUpdateOperationsInput | number
+    customer?: customerUpdateOneRequiredWithoutCustomer_readerNestedInput
+    product?: productUpdateOneRequiredWithoutCustomer_readerNestedInput
+  }
+
+  export type customer_readerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    id_customer?: StringFieldUpdateOperationsInput | string
+    id_product?: StringFieldUpdateOperationsInput | string
+    last_page?: IntFieldUpdateOperationsInput | number
+    percent?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type customer_readerCreateManyInput = {
+    id?: string
+    id_customer: string
+    id_product: string
+    last_page?: number
+    percent?: number
+  }
+
+  export type customer_readerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    last_page?: IntFieldUpdateOperationsInput | number
+    percent?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type customer_readerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    id_customer?: StringFieldUpdateOperationsInput | string
+    id_product?: StringFieldUpdateOperationsInput | string
+    last_page?: IntFieldUpdateOperationsInput | number
+    percent?: IntFieldUpdateOperationsInput | number
   }
 
   export type customer_trackCreateInput = {
@@ -21711,6 +22975,7 @@ export namespace Prisma {
     sku?: string
     published_date?: Date | string
     bundle_product?: bundle_productCreateNestedManyWithoutProductInput
+    customer_reader?: customer_readerCreateNestedManyWithoutProductInput
     author?: authorCreateNestedOneWithoutProductInput
     product_category?: product_categoryCreateNestedManyWithoutProductInput
     t_sales_download?: t_sales_downloadCreateNestedManyWithoutProductInput
@@ -21735,6 +23000,7 @@ export namespace Prisma {
     id_author?: string | null
     published_date?: Date | string
     bundle_product?: bundle_productUncheckedCreateNestedManyWithoutProductInput
+    customer_reader?: customer_readerUncheckedCreateNestedManyWithoutProductInput
     product_category?: product_categoryUncheckedCreateNestedManyWithoutProductInput
     t_sales_download?: t_sales_downloadUncheckedCreateNestedManyWithoutProductInput
     t_sales_line?: t_sales_lineUncheckedCreateNestedManyWithoutProductInput
@@ -21757,6 +23023,7 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     published_date?: DateTimeFieldUpdateOperationsInput | Date | string
     bundle_product?: bundle_productUpdateManyWithoutProductNestedInput
+    customer_reader?: customer_readerUpdateManyWithoutProductNestedInput
     author?: authorUpdateOneWithoutProductNestedInput
     product_category?: product_categoryUpdateManyWithoutProductNestedInput
     t_sales_download?: t_sales_downloadUpdateManyWithoutProductNestedInput
@@ -21781,6 +23048,7 @@ export namespace Prisma {
     id_author?: NullableStringFieldUpdateOperationsInput | string | null
     published_date?: DateTimeFieldUpdateOperationsInput | Date | string
     bundle_product?: bundle_productUncheckedUpdateManyWithoutProductNestedInput
+    customer_reader?: customer_readerUncheckedUpdateManyWithoutProductNestedInput
     product_category?: product_categoryUncheckedUpdateManyWithoutProductNestedInput
     t_sales_download?: t_sales_downloadUncheckedUpdateManyWithoutProductNestedInput
     t_sales_line?: t_sales_lineUncheckedUpdateManyWithoutProductNestedInput
@@ -22716,6 +23984,12 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type Customer_readerListRelationFilter = {
+    every?: customer_readerWhereInput
+    some?: customer_readerWhereInput
+    none?: customer_readerWhereInput
+  }
+
   export type T_salesListRelationFilter = {
     every?: t_salesWhereInput
     some?: t_salesWhereInput
@@ -22726,6 +24000,10 @@ export namespace Prisma {
     every?: t_sales_downloadWhereInput
     some?: t_sales_downloadWhereInput
     none?: t_sales_downloadWhereInput
+  }
+
+  export type customer_readerOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type t_salesOrderByRelationAggregateInput = {
@@ -22769,6 +24047,72 @@ export namespace Prisma {
 
   export type customerSumOrderByAggregateInput = {
     otp?: SortOrder
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type CustomerRelationFilter = {
+    is?: customerWhereInput
+    isNot?: customerWhereInput
+  }
+
+  export type customer_readerCountOrderByAggregateInput = {
+    id?: SortOrder
+    id_customer?: SortOrder
+    id_product?: SortOrder
+    last_page?: SortOrder
+    percent?: SortOrder
+  }
+
+  export type customer_readerAvgOrderByAggregateInput = {
+    last_page?: SortOrder
+    percent?: SortOrder
+  }
+
+  export type customer_readerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    id_customer?: SortOrder
+    id_product?: SortOrder
+    last_page?: SortOrder
+    percent?: SortOrder
+  }
+
+  export type customer_readerMinOrderByAggregateInput = {
+    id?: SortOrder
+    id_customer?: SortOrder
+    id_product?: SortOrder
+    last_page?: SortOrder
+    percent?: SortOrder
+  }
+
+  export type customer_readerSumOrderByAggregateInput = {
+    last_page?: SortOrder
+    percent?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -22839,17 +24183,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type Landing_itemsListRelationFilter = {
     every?: landing_itemsWhereInput
     some?: landing_itemsWhereInput
@@ -22893,22 +24226,6 @@ export namespace Prisma {
 
   export type landingSumOrderByAggregateInput = {
     views?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type LandingRelationFilter = {
@@ -23084,11 +24401,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type CustomerRelationFilter = {
-    is?: customerWhereInput
-    isNot?: customerWhereInput
   }
 
   export type t_salesCountOrderByAggregateInput = {
@@ -23695,6 +25007,13 @@ export namespace Prisma {
     deleteMany?: product_categoryScalarWhereInput | product_categoryScalarWhereInput[]
   }
 
+  export type customer_readerCreateNestedManyWithoutCustomerInput = {
+    create?: XOR<customer_readerCreateWithoutCustomerInput, customer_readerUncheckedCreateWithoutCustomerInput> | customer_readerCreateWithoutCustomerInput[] | customer_readerUncheckedCreateWithoutCustomerInput[]
+    connectOrCreate?: customer_readerCreateOrConnectWithoutCustomerInput | customer_readerCreateOrConnectWithoutCustomerInput[]
+    createMany?: customer_readerCreateManyCustomerInputEnvelope
+    connect?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+  }
+
   export type t_salesCreateNestedManyWithoutCustomerInput = {
     create?: XOR<t_salesCreateWithoutCustomerInput, t_salesUncheckedCreateWithoutCustomerInput> | t_salesCreateWithoutCustomerInput[] | t_salesUncheckedCreateWithoutCustomerInput[]
     connectOrCreate?: t_salesCreateOrConnectWithoutCustomerInput | t_salesCreateOrConnectWithoutCustomerInput[]
@@ -23709,6 +25028,13 @@ export namespace Prisma {
     connect?: t_sales_downloadWhereUniqueInput | t_sales_downloadWhereUniqueInput[]
   }
 
+  export type customer_readerUncheckedCreateNestedManyWithoutCustomerInput = {
+    create?: XOR<customer_readerCreateWithoutCustomerInput, customer_readerUncheckedCreateWithoutCustomerInput> | customer_readerCreateWithoutCustomerInput[] | customer_readerUncheckedCreateWithoutCustomerInput[]
+    connectOrCreate?: customer_readerCreateOrConnectWithoutCustomerInput | customer_readerCreateOrConnectWithoutCustomerInput[]
+    createMany?: customer_readerCreateManyCustomerInputEnvelope
+    connect?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+  }
+
   export type t_salesUncheckedCreateNestedManyWithoutCustomerInput = {
     create?: XOR<t_salesCreateWithoutCustomerInput, t_salesUncheckedCreateWithoutCustomerInput> | t_salesCreateWithoutCustomerInput[] | t_salesUncheckedCreateWithoutCustomerInput[]
     connectOrCreate?: t_salesCreateOrConnectWithoutCustomerInput | t_salesCreateOrConnectWithoutCustomerInput[]
@@ -23721,6 +25047,20 @@ export namespace Prisma {
     connectOrCreate?: t_sales_downloadCreateOrConnectWithoutCustomerInput | t_sales_downloadCreateOrConnectWithoutCustomerInput[]
     createMany?: t_sales_downloadCreateManyCustomerInputEnvelope
     connect?: t_sales_downloadWhereUniqueInput | t_sales_downloadWhereUniqueInput[]
+  }
+
+  export type customer_readerUpdateManyWithoutCustomerNestedInput = {
+    create?: XOR<customer_readerCreateWithoutCustomerInput, customer_readerUncheckedCreateWithoutCustomerInput> | customer_readerCreateWithoutCustomerInput[] | customer_readerUncheckedCreateWithoutCustomerInput[]
+    connectOrCreate?: customer_readerCreateOrConnectWithoutCustomerInput | customer_readerCreateOrConnectWithoutCustomerInput[]
+    upsert?: customer_readerUpsertWithWhereUniqueWithoutCustomerInput | customer_readerUpsertWithWhereUniqueWithoutCustomerInput[]
+    createMany?: customer_readerCreateManyCustomerInputEnvelope
+    set?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    disconnect?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    delete?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    connect?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    update?: customer_readerUpdateWithWhereUniqueWithoutCustomerInput | customer_readerUpdateWithWhereUniqueWithoutCustomerInput[]
+    updateMany?: customer_readerUpdateManyWithWhereWithoutCustomerInput | customer_readerUpdateManyWithWhereWithoutCustomerInput[]
+    deleteMany?: customer_readerScalarWhereInput | customer_readerScalarWhereInput[]
   }
 
   export type t_salesUpdateManyWithoutCustomerNestedInput = {
@@ -23751,6 +25091,20 @@ export namespace Prisma {
     deleteMany?: t_sales_downloadScalarWhereInput | t_sales_downloadScalarWhereInput[]
   }
 
+  export type customer_readerUncheckedUpdateManyWithoutCustomerNestedInput = {
+    create?: XOR<customer_readerCreateWithoutCustomerInput, customer_readerUncheckedCreateWithoutCustomerInput> | customer_readerCreateWithoutCustomerInput[] | customer_readerUncheckedCreateWithoutCustomerInput[]
+    connectOrCreate?: customer_readerCreateOrConnectWithoutCustomerInput | customer_readerCreateOrConnectWithoutCustomerInput[]
+    upsert?: customer_readerUpsertWithWhereUniqueWithoutCustomerInput | customer_readerUpsertWithWhereUniqueWithoutCustomerInput[]
+    createMany?: customer_readerCreateManyCustomerInputEnvelope
+    set?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    disconnect?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    delete?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    connect?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    update?: customer_readerUpdateWithWhereUniqueWithoutCustomerInput | customer_readerUpdateWithWhereUniqueWithoutCustomerInput[]
+    updateMany?: customer_readerUpdateManyWithWhereWithoutCustomerInput | customer_readerUpdateManyWithWhereWithoutCustomerInput[]
+    deleteMany?: customer_readerScalarWhereInput | customer_readerScalarWhereInput[]
+  }
+
   export type t_salesUncheckedUpdateManyWithoutCustomerNestedInput = {
     create?: XOR<t_salesCreateWithoutCustomerInput, t_salesUncheckedCreateWithoutCustomerInput> | t_salesCreateWithoutCustomerInput[] | t_salesUncheckedCreateWithoutCustomerInput[]
     connectOrCreate?: t_salesCreateOrConnectWithoutCustomerInput | t_salesCreateOrConnectWithoutCustomerInput[]
@@ -23777,6 +25131,42 @@ export namespace Prisma {
     update?: t_sales_downloadUpdateWithWhereUniqueWithoutCustomerInput | t_sales_downloadUpdateWithWhereUniqueWithoutCustomerInput[]
     updateMany?: t_sales_downloadUpdateManyWithWhereWithoutCustomerInput | t_sales_downloadUpdateManyWithWhereWithoutCustomerInput[]
     deleteMany?: t_sales_downloadScalarWhereInput | t_sales_downloadScalarWhereInput[]
+  }
+
+  export type customerCreateNestedOneWithoutCustomer_readerInput = {
+    create?: XOR<customerCreateWithoutCustomer_readerInput, customerUncheckedCreateWithoutCustomer_readerInput>
+    connectOrCreate?: customerCreateOrConnectWithoutCustomer_readerInput
+    connect?: customerWhereUniqueInput
+  }
+
+  export type productCreateNestedOneWithoutCustomer_readerInput = {
+    create?: XOR<productCreateWithoutCustomer_readerInput, productUncheckedCreateWithoutCustomer_readerInput>
+    connectOrCreate?: productCreateOrConnectWithoutCustomer_readerInput
+    connect?: productWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type customerUpdateOneRequiredWithoutCustomer_readerNestedInput = {
+    create?: XOR<customerCreateWithoutCustomer_readerInput, customerUncheckedCreateWithoutCustomer_readerInput>
+    connectOrCreate?: customerCreateOrConnectWithoutCustomer_readerInput
+    upsert?: customerUpsertWithoutCustomer_readerInput
+    connect?: customerWhereUniqueInput
+    update?: XOR<XOR<customerUpdateToOneWithWhereWithoutCustomer_readerInput, customerUpdateWithoutCustomer_readerInput>, customerUncheckedUpdateWithoutCustomer_readerInput>
+  }
+
+  export type productUpdateOneRequiredWithoutCustomer_readerNestedInput = {
+    create?: XOR<productCreateWithoutCustomer_readerInput, productUncheckedCreateWithoutCustomer_readerInput>
+    connectOrCreate?: productCreateOrConnectWithoutCustomer_readerInput
+    upsert?: productUpsertWithoutCustomer_readerInput
+    connect?: productWhereUniqueInput
+    update?: XOR<XOR<productUpdateToOneWithWhereWithoutCustomer_readerInput, productUpdateWithoutCustomer_readerInput>, productUncheckedUpdateWithoutCustomer_readerInput>
   }
 
   export type customer_trackCreateNestedOneWithoutOther_customer_trackInput = {
@@ -23853,14 +25243,6 @@ export namespace Prisma {
     connect?: landing_itemsWhereUniqueInput | landing_itemsWhereUniqueInput[]
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type landing_itemsUpdateManyWithoutLandingNestedInput = {
     create?: XOR<landing_itemsCreateWithoutLandingInput, landing_itemsUncheckedCreateWithoutLandingInput> | landing_itemsCreateWithoutLandingInput[] | landing_itemsUncheckedCreateWithoutLandingInput[]
     connectOrCreate?: landing_itemsCreateOrConnectWithoutLandingInput | landing_itemsCreateOrConnectWithoutLandingInput[]
@@ -23910,6 +25292,13 @@ export namespace Prisma {
     connect?: bundle_productWhereUniqueInput | bundle_productWhereUniqueInput[]
   }
 
+  export type customer_readerCreateNestedManyWithoutProductInput = {
+    create?: XOR<customer_readerCreateWithoutProductInput, customer_readerUncheckedCreateWithoutProductInput> | customer_readerCreateWithoutProductInput[] | customer_readerUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: customer_readerCreateOrConnectWithoutProductInput | customer_readerCreateOrConnectWithoutProductInput[]
+    createMany?: customer_readerCreateManyProductInputEnvelope
+    connect?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+  }
+
   export type authorCreateNestedOneWithoutProductInput = {
     create?: XOR<authorCreateWithoutProductInput, authorUncheckedCreateWithoutProductInput>
     connectOrCreate?: authorCreateOrConnectWithoutProductInput
@@ -23942,6 +25331,13 @@ export namespace Prisma {
     connectOrCreate?: bundle_productCreateOrConnectWithoutProductInput | bundle_productCreateOrConnectWithoutProductInput[]
     createMany?: bundle_productCreateManyProductInputEnvelope
     connect?: bundle_productWhereUniqueInput | bundle_productWhereUniqueInput[]
+  }
+
+  export type customer_readerUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<customer_readerCreateWithoutProductInput, customer_readerUncheckedCreateWithoutProductInput> | customer_readerCreateWithoutProductInput[] | customer_readerUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: customer_readerCreateOrConnectWithoutProductInput | customer_readerCreateOrConnectWithoutProductInput[]
+    createMany?: customer_readerCreateManyProductInputEnvelope
+    connect?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
   }
 
   export type product_categoryUncheckedCreateNestedManyWithoutProductInput = {
@@ -23977,6 +25373,20 @@ export namespace Prisma {
     update?: bundle_productUpdateWithWhereUniqueWithoutProductInput | bundle_productUpdateWithWhereUniqueWithoutProductInput[]
     updateMany?: bundle_productUpdateManyWithWhereWithoutProductInput | bundle_productUpdateManyWithWhereWithoutProductInput[]
     deleteMany?: bundle_productScalarWhereInput | bundle_productScalarWhereInput[]
+  }
+
+  export type customer_readerUpdateManyWithoutProductNestedInput = {
+    create?: XOR<customer_readerCreateWithoutProductInput, customer_readerUncheckedCreateWithoutProductInput> | customer_readerCreateWithoutProductInput[] | customer_readerUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: customer_readerCreateOrConnectWithoutProductInput | customer_readerCreateOrConnectWithoutProductInput[]
+    upsert?: customer_readerUpsertWithWhereUniqueWithoutProductInput | customer_readerUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: customer_readerCreateManyProductInputEnvelope
+    set?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    disconnect?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    delete?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    connect?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    update?: customer_readerUpdateWithWhereUniqueWithoutProductInput | customer_readerUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: customer_readerUpdateManyWithWhereWithoutProductInput | customer_readerUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: customer_readerScalarWhereInput | customer_readerScalarWhereInput[]
   }
 
   export type authorUpdateOneWithoutProductNestedInput = {
@@ -24043,6 +25453,20 @@ export namespace Prisma {
     update?: bundle_productUpdateWithWhereUniqueWithoutProductInput | bundle_productUpdateWithWhereUniqueWithoutProductInput[]
     updateMany?: bundle_productUpdateManyWithWhereWithoutProductInput | bundle_productUpdateManyWithWhereWithoutProductInput[]
     deleteMany?: bundle_productScalarWhereInput | bundle_productScalarWhereInput[]
+  }
+
+  export type customer_readerUncheckedUpdateManyWithoutProductNestedInput = {
+    create?: XOR<customer_readerCreateWithoutProductInput, customer_readerUncheckedCreateWithoutProductInput> | customer_readerCreateWithoutProductInput[] | customer_readerUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: customer_readerCreateOrConnectWithoutProductInput | customer_readerCreateOrConnectWithoutProductInput[]
+    upsert?: customer_readerUpsertWithWhereUniqueWithoutProductInput | customer_readerUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: customer_readerCreateManyProductInputEnvelope
+    set?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    disconnect?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    delete?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    connect?: customer_readerWhereUniqueInput | customer_readerWhereUniqueInput[]
+    update?: customer_readerUpdateWithWhereUniqueWithoutProductInput | customer_readerUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: customer_readerUpdateManyWithWhereWithoutProductInput | customer_readerUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: customer_readerScalarWhereInput | customer_readerScalarWhereInput[]
   }
 
   export type product_categoryUncheckedUpdateManyWithoutProductNestedInput = {
@@ -24549,31 +25973,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -24599,6 +25998,31 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
   export type NestedJsonNullableFilter<$PrismaModel = never> = 
     | PatchUndefined<
@@ -24659,6 +26083,7 @@ export namespace Prisma {
     sku?: string
     published_date?: Date | string
     bundle_product?: bundle_productCreateNestedManyWithoutProductInput
+    customer_reader?: customer_readerCreateNestedManyWithoutProductInput
     product_category?: product_categoryCreateNestedManyWithoutProductInput
     t_sales_download?: t_sales_downloadCreateNestedManyWithoutProductInput
     t_sales_line?: t_sales_lineCreateNestedManyWithoutProductInput
@@ -24681,6 +26106,7 @@ export namespace Prisma {
     sku?: string
     published_date?: Date | string
     bundle_product?: bundle_productUncheckedCreateNestedManyWithoutProductInput
+    customer_reader?: customer_readerUncheckedCreateNestedManyWithoutProductInput
     product_category?: product_categoryUncheckedCreateNestedManyWithoutProductInput
     t_sales_download?: t_sales_downloadUncheckedCreateNestedManyWithoutProductInput
     t_sales_line?: t_sales_lineUncheckedCreateNestedManyWithoutProductInput
@@ -25114,6 +26540,7 @@ export namespace Prisma {
     product_file?: string
     sku?: string
     published_date?: Date | string
+    customer_reader?: customer_readerCreateNestedManyWithoutProductInput
     author?: authorCreateNestedOneWithoutProductInput
     product_category?: product_categoryCreateNestedManyWithoutProductInput
     t_sales_download?: t_sales_downloadCreateNestedManyWithoutProductInput
@@ -25137,6 +26564,7 @@ export namespace Prisma {
     sku?: string
     id_author?: string | null
     published_date?: Date | string
+    customer_reader?: customer_readerUncheckedCreateNestedManyWithoutProductInput
     product_category?: product_categoryUncheckedCreateNestedManyWithoutProductInput
     t_sales_download?: t_sales_downloadUncheckedCreateNestedManyWithoutProductInput
     t_sales_line?: t_sales_lineUncheckedCreateNestedManyWithoutProductInput
@@ -25221,6 +26649,7 @@ export namespace Prisma {
     product_file?: StringFieldUpdateOperationsInput | string
     sku?: StringFieldUpdateOperationsInput | string
     published_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    customer_reader?: customer_readerUpdateManyWithoutProductNestedInput
     author?: authorUpdateOneWithoutProductNestedInput
     product_category?: product_categoryUpdateManyWithoutProductNestedInput
     t_sales_download?: t_sales_downloadUpdateManyWithoutProductNestedInput
@@ -25244,6 +26673,7 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     id_author?: NullableStringFieldUpdateOperationsInput | string | null
     published_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    customer_reader?: customer_readerUncheckedUpdateManyWithoutProductNestedInput
     product_category?: product_categoryUncheckedUpdateManyWithoutProductNestedInput
     t_sales_download?: t_sales_downloadUncheckedUpdateManyWithoutProductNestedInput
     t_sales_line?: t_sales_lineUncheckedUpdateManyWithoutProductNestedInput
@@ -25450,6 +26880,30 @@ export namespace Prisma {
     id?: UuidFilter<"product_category"> | string
   }
 
+  export type customer_readerCreateWithoutCustomerInput = {
+    id?: string
+    last_page?: number
+    percent?: number
+    product: productCreateNestedOneWithoutCustomer_readerInput
+  }
+
+  export type customer_readerUncheckedCreateWithoutCustomerInput = {
+    id?: string
+    id_product: string
+    last_page?: number
+    percent?: number
+  }
+
+  export type customer_readerCreateOrConnectWithoutCustomerInput = {
+    where: customer_readerWhereUniqueInput
+    create: XOR<customer_readerCreateWithoutCustomerInput, customer_readerUncheckedCreateWithoutCustomerInput>
+  }
+
+  export type customer_readerCreateManyCustomerInputEnvelope = {
+    data: customer_readerCreateManyCustomerInput | customer_readerCreateManyCustomerInput[]
+    skipDuplicates?: boolean
+  }
+
   export type t_salesCreateWithoutCustomerInput = {
     id?: string
     status?: string
@@ -25518,6 +26972,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type customer_readerUpsertWithWhereUniqueWithoutCustomerInput = {
+    where: customer_readerWhereUniqueInput
+    update: XOR<customer_readerUpdateWithoutCustomerInput, customer_readerUncheckedUpdateWithoutCustomerInput>
+    create: XOR<customer_readerCreateWithoutCustomerInput, customer_readerUncheckedCreateWithoutCustomerInput>
+  }
+
+  export type customer_readerUpdateWithWhereUniqueWithoutCustomerInput = {
+    where: customer_readerWhereUniqueInput
+    data: XOR<customer_readerUpdateWithoutCustomerInput, customer_readerUncheckedUpdateWithoutCustomerInput>
+  }
+
+  export type customer_readerUpdateManyWithWhereWithoutCustomerInput = {
+    where: customer_readerScalarWhereInput
+    data: XOR<customer_readerUpdateManyMutationInput, customer_readerUncheckedUpdateManyWithoutCustomerInput>
+  }
+
+  export type customer_readerScalarWhereInput = {
+    AND?: customer_readerScalarWhereInput | customer_readerScalarWhereInput[]
+    OR?: customer_readerScalarWhereInput[]
+    NOT?: customer_readerScalarWhereInput | customer_readerScalarWhereInput[]
+    id?: UuidFilter<"customer_reader"> | string
+    id_customer?: UuidFilter<"customer_reader"> | string
+    id_product?: UuidFilter<"customer_reader"> | string
+    last_page?: IntFilter<"customer_reader"> | number
+    percent?: IntFilter<"customer_reader"> | number
+  }
+
   export type t_salesUpsertWithWhereUniqueWithoutCustomerInput = {
     where: t_salesWhereUniqueInput
     update: XOR<t_salesUpdateWithoutCustomerInput, t_salesUncheckedUpdateWithoutCustomerInput>
@@ -25579,6 +27060,174 @@ export namespace Prisma {
     downloaded_at?: DateTimeNullableFilter<"t_sales_download"> | Date | string | null
     ip_address?: StringNullableFilter<"t_sales_download"> | string | null
     download_key?: StringFilter<"t_sales_download"> | string
+  }
+
+  export type customerCreateWithoutCustomer_readerInput = {
+    id?: string
+    name: string
+    email: string
+    whatsapp: string
+    deleted_at?: Date | string | null
+    otp?: number | null
+    t_sales?: t_salesCreateNestedManyWithoutCustomerInput
+    t_sales_download?: t_sales_downloadCreateNestedManyWithoutCustomerInput
+  }
+
+  export type customerUncheckedCreateWithoutCustomer_readerInput = {
+    id?: string
+    name: string
+    email: string
+    whatsapp: string
+    deleted_at?: Date | string | null
+    otp?: number | null
+    t_sales?: t_salesUncheckedCreateNestedManyWithoutCustomerInput
+    t_sales_download?: t_sales_downloadUncheckedCreateNestedManyWithoutCustomerInput
+  }
+
+  export type customerCreateOrConnectWithoutCustomer_readerInput = {
+    where: customerWhereUniqueInput
+    create: XOR<customerCreateWithoutCustomer_readerInput, customerUncheckedCreateWithoutCustomer_readerInput>
+  }
+
+  export type productCreateWithoutCustomer_readerInput = {
+    id?: string
+    name: string
+    slug: string
+    strike_price?: Decimal | DecimalJsLike | number | string | null
+    real_price: Decimal | DecimalJsLike | number | string
+    desc?: string
+    info?: JsonNullValueInput | InputJsonValue
+    status?: string
+    currency?: string
+    deleted_at?: Date | string | null
+    img_file?: string
+    cover?: string
+    product_file?: string
+    sku?: string
+    published_date?: Date | string
+    bundle_product?: bundle_productCreateNestedManyWithoutProductInput
+    author?: authorCreateNestedOneWithoutProductInput
+    product_category?: product_categoryCreateNestedManyWithoutProductInput
+    t_sales_download?: t_sales_downloadCreateNestedManyWithoutProductInput
+    t_sales_line?: t_sales_lineCreateNestedManyWithoutProductInput
+  }
+
+  export type productUncheckedCreateWithoutCustomer_readerInput = {
+    id?: string
+    name: string
+    slug: string
+    strike_price?: Decimal | DecimalJsLike | number | string | null
+    real_price: Decimal | DecimalJsLike | number | string
+    desc?: string
+    info?: JsonNullValueInput | InputJsonValue
+    status?: string
+    currency?: string
+    deleted_at?: Date | string | null
+    img_file?: string
+    cover?: string
+    product_file?: string
+    sku?: string
+    id_author?: string | null
+    published_date?: Date | string
+    bundle_product?: bundle_productUncheckedCreateNestedManyWithoutProductInput
+    product_category?: product_categoryUncheckedCreateNestedManyWithoutProductInput
+    t_sales_download?: t_sales_downloadUncheckedCreateNestedManyWithoutProductInput
+    t_sales_line?: t_sales_lineUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type productCreateOrConnectWithoutCustomer_readerInput = {
+    where: productWhereUniqueInput
+    create: XOR<productCreateWithoutCustomer_readerInput, productUncheckedCreateWithoutCustomer_readerInput>
+  }
+
+  export type customerUpsertWithoutCustomer_readerInput = {
+    update: XOR<customerUpdateWithoutCustomer_readerInput, customerUncheckedUpdateWithoutCustomer_readerInput>
+    create: XOR<customerCreateWithoutCustomer_readerInput, customerUncheckedCreateWithoutCustomer_readerInput>
+    where?: customerWhereInput
+  }
+
+  export type customerUpdateToOneWithWhereWithoutCustomer_readerInput = {
+    where?: customerWhereInput
+    data: XOR<customerUpdateWithoutCustomer_readerInput, customerUncheckedUpdateWithoutCustomer_readerInput>
+  }
+
+  export type customerUpdateWithoutCustomer_readerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    whatsapp?: StringFieldUpdateOperationsInput | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    otp?: NullableIntFieldUpdateOperationsInput | number | null
+    t_sales?: t_salesUpdateManyWithoutCustomerNestedInput
+    t_sales_download?: t_sales_downloadUpdateManyWithoutCustomerNestedInput
+  }
+
+  export type customerUncheckedUpdateWithoutCustomer_readerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    whatsapp?: StringFieldUpdateOperationsInput | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    otp?: NullableIntFieldUpdateOperationsInput | number | null
+    t_sales?: t_salesUncheckedUpdateManyWithoutCustomerNestedInput
+    t_sales_download?: t_sales_downloadUncheckedUpdateManyWithoutCustomerNestedInput
+  }
+
+  export type productUpsertWithoutCustomer_readerInput = {
+    update: XOR<productUpdateWithoutCustomer_readerInput, productUncheckedUpdateWithoutCustomer_readerInput>
+    create: XOR<productCreateWithoutCustomer_readerInput, productUncheckedCreateWithoutCustomer_readerInput>
+    where?: productWhereInput
+  }
+
+  export type productUpdateToOneWithWhereWithoutCustomer_readerInput = {
+    where?: productWhereInput
+    data: XOR<productUpdateWithoutCustomer_readerInput, productUncheckedUpdateWithoutCustomer_readerInput>
+  }
+
+  export type productUpdateWithoutCustomer_readerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    strike_price?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    real_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    desc?: StringFieldUpdateOperationsInput | string
+    info?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    img_file?: StringFieldUpdateOperationsInput | string
+    cover?: StringFieldUpdateOperationsInput | string
+    product_file?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    published_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    bundle_product?: bundle_productUpdateManyWithoutProductNestedInput
+    author?: authorUpdateOneWithoutProductNestedInput
+    product_category?: product_categoryUpdateManyWithoutProductNestedInput
+    t_sales_download?: t_sales_downloadUpdateManyWithoutProductNestedInput
+    t_sales_line?: t_sales_lineUpdateManyWithoutProductNestedInput
+  }
+
+  export type productUncheckedUpdateWithoutCustomer_readerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    strike_price?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    real_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    desc?: StringFieldUpdateOperationsInput | string
+    info?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    currency?: StringFieldUpdateOperationsInput | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    img_file?: StringFieldUpdateOperationsInput | string
+    cover?: StringFieldUpdateOperationsInput | string
+    product_file?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    id_author?: NullableStringFieldUpdateOperationsInput | string | null
+    published_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    bundle_product?: bundle_productUncheckedUpdateManyWithoutProductNestedInput
+    product_category?: product_categoryUncheckedUpdateManyWithoutProductNestedInput
+    t_sales_download?: t_sales_downloadUncheckedUpdateManyWithoutProductNestedInput
+    t_sales_line?: t_sales_lineUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type customer_trackCreateWithoutOther_customer_trackInput = {
@@ -25830,6 +27479,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type customer_readerCreateWithoutProductInput = {
+    id?: string
+    last_page?: number
+    percent?: number
+    customer: customerCreateNestedOneWithoutCustomer_readerInput
+  }
+
+  export type customer_readerUncheckedCreateWithoutProductInput = {
+    id?: string
+    id_customer: string
+    last_page?: number
+    percent?: number
+  }
+
+  export type customer_readerCreateOrConnectWithoutProductInput = {
+    where: customer_readerWhereUniqueInput
+    create: XOR<customer_readerCreateWithoutProductInput, customer_readerUncheckedCreateWithoutProductInput>
+  }
+
+  export type customer_readerCreateManyProductInputEnvelope = {
+    data: customer_readerCreateManyProductInput | customer_readerCreateManyProductInput[]
+    skipDuplicates?: boolean
+  }
+
   export type authorCreateWithoutProductInput = {
     id?: string
     name: string
@@ -25935,6 +27608,22 @@ export namespace Prisma {
   export type bundle_productUpdateManyWithWhereWithoutProductInput = {
     where: bundle_productScalarWhereInput
     data: XOR<bundle_productUpdateManyMutationInput, bundle_productUncheckedUpdateManyWithoutProductInput>
+  }
+
+  export type customer_readerUpsertWithWhereUniqueWithoutProductInput = {
+    where: customer_readerWhereUniqueInput
+    update: XOR<customer_readerUpdateWithoutProductInput, customer_readerUncheckedUpdateWithoutProductInput>
+    create: XOR<customer_readerCreateWithoutProductInput, customer_readerUncheckedCreateWithoutProductInput>
+  }
+
+  export type customer_readerUpdateWithWhereUniqueWithoutProductInput = {
+    where: customer_readerWhereUniqueInput
+    data: XOR<customer_readerUpdateWithoutProductInput, customer_readerUncheckedUpdateWithoutProductInput>
+  }
+
+  export type customer_readerUpdateManyWithWhereWithoutProductInput = {
+    where: customer_readerScalarWhereInput
+    data: XOR<customer_readerUpdateManyMutationInput, customer_readerUncheckedUpdateManyWithoutProductInput>
   }
 
   export type authorUpsertWithoutProductInput = {
@@ -26052,6 +27741,7 @@ export namespace Prisma {
     sku?: string
     published_date?: Date | string
     bundle_product?: bundle_productCreateNestedManyWithoutProductInput
+    customer_reader?: customer_readerCreateNestedManyWithoutProductInput
     author?: authorCreateNestedOneWithoutProductInput
     t_sales_download?: t_sales_downloadCreateNestedManyWithoutProductInput
     t_sales_line?: t_sales_lineCreateNestedManyWithoutProductInput
@@ -26075,6 +27765,7 @@ export namespace Prisma {
     id_author?: string | null
     published_date?: Date | string
     bundle_product?: bundle_productUncheckedCreateNestedManyWithoutProductInput
+    customer_reader?: customer_readerUncheckedCreateNestedManyWithoutProductInput
     t_sales_download?: t_sales_downloadUncheckedCreateNestedManyWithoutProductInput
     t_sales_line?: t_sales_lineUncheckedCreateNestedManyWithoutProductInput
   }
@@ -26145,6 +27836,7 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     published_date?: DateTimeFieldUpdateOperationsInput | Date | string
     bundle_product?: bundle_productUpdateManyWithoutProductNestedInput
+    customer_reader?: customer_readerUpdateManyWithoutProductNestedInput
     author?: authorUpdateOneWithoutProductNestedInput
     t_sales_download?: t_sales_downloadUpdateManyWithoutProductNestedInput
     t_sales_line?: t_sales_lineUpdateManyWithoutProductNestedInput
@@ -26168,6 +27860,7 @@ export namespace Prisma {
     id_author?: NullableStringFieldUpdateOperationsInput | string | null
     published_date?: DateTimeFieldUpdateOperationsInput | Date | string
     bundle_product?: bundle_productUncheckedUpdateManyWithoutProductNestedInput
+    customer_reader?: customer_readerUncheckedUpdateManyWithoutProductNestedInput
     t_sales_download?: t_sales_downloadUncheckedUpdateManyWithoutProductNestedInput
     t_sales_line?: t_sales_lineUncheckedUpdateManyWithoutProductNestedInput
   }
@@ -26179,6 +27872,7 @@ export namespace Prisma {
     whatsapp: string
     deleted_at?: Date | string | null
     otp?: number | null
+    customer_reader?: customer_readerCreateNestedManyWithoutCustomerInput
     t_sales_download?: t_sales_downloadCreateNestedManyWithoutCustomerInput
   }
 
@@ -26189,6 +27883,7 @@ export namespace Prisma {
     whatsapp: string
     deleted_at?: Date | string | null
     otp?: number | null
+    customer_reader?: customer_readerUncheckedCreateNestedManyWithoutCustomerInput
     t_sales_download?: t_sales_downloadUncheckedCreateNestedManyWithoutCustomerInput
   }
 
@@ -26243,6 +27938,7 @@ export namespace Prisma {
     whatsapp?: StringFieldUpdateOperationsInput | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     otp?: NullableIntFieldUpdateOperationsInput | number | null
+    customer_reader?: customer_readerUpdateManyWithoutCustomerNestedInput
     t_sales_download?: t_sales_downloadUpdateManyWithoutCustomerNestedInput
   }
 
@@ -26253,6 +27949,7 @@ export namespace Prisma {
     whatsapp?: StringFieldUpdateOperationsInput | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     otp?: NullableIntFieldUpdateOperationsInput | number | null
+    customer_reader?: customer_readerUncheckedUpdateManyWithoutCustomerNestedInput
     t_sales_download?: t_sales_downloadUncheckedUpdateManyWithoutCustomerNestedInput
   }
 
@@ -26279,6 +27976,7 @@ export namespace Prisma {
     whatsapp: string
     deleted_at?: Date | string | null
     otp?: number | null
+    customer_reader?: customer_readerCreateNestedManyWithoutCustomerInput
     t_sales?: t_salesCreateNestedManyWithoutCustomerInput
   }
 
@@ -26289,6 +27987,7 @@ export namespace Prisma {
     whatsapp: string
     deleted_at?: Date | string | null
     otp?: number | null
+    customer_reader?: customer_readerUncheckedCreateNestedManyWithoutCustomerInput
     t_sales?: t_salesUncheckedCreateNestedManyWithoutCustomerInput
   }
 
@@ -26314,6 +28013,7 @@ export namespace Prisma {
     sku?: string
     published_date?: Date | string
     bundle_product?: bundle_productCreateNestedManyWithoutProductInput
+    customer_reader?: customer_readerCreateNestedManyWithoutProductInput
     author?: authorCreateNestedOneWithoutProductInput
     product_category?: product_categoryCreateNestedManyWithoutProductInput
     t_sales_line?: t_sales_lineCreateNestedManyWithoutProductInput
@@ -26337,6 +28037,7 @@ export namespace Prisma {
     id_author?: string | null
     published_date?: Date | string
     bundle_product?: bundle_productUncheckedCreateNestedManyWithoutProductInput
+    customer_reader?: customer_readerUncheckedCreateNestedManyWithoutProductInput
     product_category?: product_categoryUncheckedCreateNestedManyWithoutProductInput
     t_sales_line?: t_sales_lineUncheckedCreateNestedManyWithoutProductInput
   }
@@ -26364,6 +28065,7 @@ export namespace Prisma {
     whatsapp?: StringFieldUpdateOperationsInput | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     otp?: NullableIntFieldUpdateOperationsInput | number | null
+    customer_reader?: customer_readerUpdateManyWithoutCustomerNestedInput
     t_sales?: t_salesUpdateManyWithoutCustomerNestedInput
   }
 
@@ -26374,6 +28076,7 @@ export namespace Prisma {
     whatsapp?: StringFieldUpdateOperationsInput | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     otp?: NullableIntFieldUpdateOperationsInput | number | null
+    customer_reader?: customer_readerUncheckedUpdateManyWithoutCustomerNestedInput
     t_sales?: t_salesUncheckedUpdateManyWithoutCustomerNestedInput
   }
 
@@ -26405,6 +28108,7 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     published_date?: DateTimeFieldUpdateOperationsInput | Date | string
     bundle_product?: bundle_productUpdateManyWithoutProductNestedInput
+    customer_reader?: customer_readerUpdateManyWithoutProductNestedInput
     author?: authorUpdateOneWithoutProductNestedInput
     product_category?: product_categoryUpdateManyWithoutProductNestedInput
     t_sales_line?: t_sales_lineUpdateManyWithoutProductNestedInput
@@ -26428,6 +28132,7 @@ export namespace Prisma {
     id_author?: NullableStringFieldUpdateOperationsInput | string | null
     published_date?: DateTimeFieldUpdateOperationsInput | Date | string
     bundle_product?: bundle_productUncheckedUpdateManyWithoutProductNestedInput
+    customer_reader?: customer_readerUncheckedUpdateManyWithoutProductNestedInput
     product_category?: product_categoryUncheckedUpdateManyWithoutProductNestedInput
     t_sales_line?: t_sales_lineUncheckedUpdateManyWithoutProductNestedInput
   }
@@ -26490,6 +28195,7 @@ export namespace Prisma {
     sku?: string
     published_date?: Date | string
     bundle_product?: bundle_productCreateNestedManyWithoutProductInput
+    customer_reader?: customer_readerCreateNestedManyWithoutProductInput
     author?: authorCreateNestedOneWithoutProductInput
     product_category?: product_categoryCreateNestedManyWithoutProductInput
     t_sales_download?: t_sales_downloadCreateNestedManyWithoutProductInput
@@ -26513,6 +28219,7 @@ export namespace Prisma {
     id_author?: string | null
     published_date?: Date | string
     bundle_product?: bundle_productUncheckedCreateNestedManyWithoutProductInput
+    customer_reader?: customer_readerUncheckedCreateNestedManyWithoutProductInput
     product_category?: product_categoryUncheckedCreateNestedManyWithoutProductInput
     t_sales_download?: t_sales_downloadUncheckedCreateNestedManyWithoutProductInput
   }
@@ -26634,6 +28341,7 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     published_date?: DateTimeFieldUpdateOperationsInput | Date | string
     bundle_product?: bundle_productUpdateManyWithoutProductNestedInput
+    customer_reader?: customer_readerUpdateManyWithoutProductNestedInput
     author?: authorUpdateOneWithoutProductNestedInput
     product_category?: product_categoryUpdateManyWithoutProductNestedInput
     t_sales_download?: t_sales_downloadUpdateManyWithoutProductNestedInput
@@ -26657,6 +28365,7 @@ export namespace Prisma {
     id_author?: NullableStringFieldUpdateOperationsInput | string | null
     published_date?: DateTimeFieldUpdateOperationsInput | Date | string
     bundle_product?: bundle_productUncheckedUpdateManyWithoutProductNestedInput
+    customer_reader?: customer_readerUncheckedUpdateManyWithoutProductNestedInput
     product_category?: product_categoryUncheckedUpdateManyWithoutProductNestedInput
     t_sales_download?: t_sales_downloadUncheckedUpdateManyWithoutProductNestedInput
   }
@@ -26786,6 +28495,7 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     published_date?: DateTimeFieldUpdateOperationsInput | Date | string
     bundle_product?: bundle_productUpdateManyWithoutProductNestedInput
+    customer_reader?: customer_readerUpdateManyWithoutProductNestedInput
     product_category?: product_categoryUpdateManyWithoutProductNestedInput
     t_sales_download?: t_sales_downloadUpdateManyWithoutProductNestedInput
     t_sales_line?: t_sales_lineUpdateManyWithoutProductNestedInput
@@ -26808,6 +28518,7 @@ export namespace Prisma {
     sku?: StringFieldUpdateOperationsInput | string
     published_date?: DateTimeFieldUpdateOperationsInput | Date | string
     bundle_product?: bundle_productUncheckedUpdateManyWithoutProductNestedInput
+    customer_reader?: customer_readerUncheckedUpdateManyWithoutProductNestedInput
     product_category?: product_categoryUncheckedUpdateManyWithoutProductNestedInput
     t_sales_download?: t_sales_downloadUncheckedUpdateManyWithoutProductNestedInput
     t_sales_line?: t_sales_lineUncheckedUpdateManyWithoutProductNestedInput
@@ -26989,6 +28700,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
   }
 
+  export type customer_readerCreateManyCustomerInput = {
+    id?: string
+    id_product: string
+    last_page?: number
+    percent?: number
+  }
+
   export type t_salesCreateManyCustomerInput = {
     id?: string
     status?: string
@@ -27010,6 +28728,27 @@ export namespace Prisma {
     downloaded_at?: Date | string | null
     ip_address?: string | null
     download_key?: string
+  }
+
+  export type customer_readerUpdateWithoutCustomerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    last_page?: IntFieldUpdateOperationsInput | number
+    percent?: IntFieldUpdateOperationsInput | number
+    product?: productUpdateOneRequiredWithoutCustomer_readerNestedInput
+  }
+
+  export type customer_readerUncheckedUpdateWithoutCustomerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    id_product?: StringFieldUpdateOperationsInput | string
+    last_page?: IntFieldUpdateOperationsInput | number
+    percent?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type customer_readerUncheckedUpdateManyWithoutCustomerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    id_product?: StringFieldUpdateOperationsInput | string
+    last_page?: IntFieldUpdateOperationsInput | number
+    percent?: IntFieldUpdateOperationsInput | number
   }
 
   export type t_salesUpdateWithoutCustomerInput = {
@@ -27167,6 +28906,13 @@ export namespace Prisma {
     qty?: number | null
   }
 
+  export type customer_readerCreateManyProductInput = {
+    id?: string
+    id_customer: string
+    last_page?: number
+    percent?: number
+  }
+
   export type product_categoryCreateManyProductInput = {
     id_category: string
     id?: string
@@ -27205,6 +28951,27 @@ export namespace Prisma {
     id_bundle?: StringFieldUpdateOperationsInput | string
     id?: StringFieldUpdateOperationsInput | string
     qty?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type customer_readerUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    last_page?: IntFieldUpdateOperationsInput | number
+    percent?: IntFieldUpdateOperationsInput | number
+    customer?: customerUpdateOneRequiredWithoutCustomer_readerNestedInput
+  }
+
+  export type customer_readerUncheckedUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    id_customer?: StringFieldUpdateOperationsInput | string
+    last_page?: IntFieldUpdateOperationsInput | number
+    percent?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type customer_readerUncheckedUpdateManyWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    id_customer?: StringFieldUpdateOperationsInput | string
+    last_page?: IntFieldUpdateOperationsInput | number
+    percent?: IntFieldUpdateOperationsInput | number
   }
 
   export type product_categoryUpdateWithoutProductInput = {
@@ -27400,6 +29167,10 @@ export namespace Prisma {
      * @deprecated Use customerDefaultArgs instead
      */
     export type customerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = customerDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use customer_readerDefaultArgs instead
+     */
+    export type customer_readerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = customer_readerDefaultArgs<ExtArgs>
     /**
      * @deprecated Use customer_trackDefaultArgs instead
      */

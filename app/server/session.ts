@@ -44,17 +44,21 @@ export const newEsensiSession = (router: any) => {
           session.save(ses_data);
           session.status = "active";
           session.current = ses_data;
-          // navigate("/home");
         } else {
           session.status = "guest";
           session.clear();
         }
       },
       async afterLogout(session) {
-        if (typeof window !== 'undefined' && !(window as any).isEditor) {
+        if (typeof window !== "undefined" && !(window as any).isEditor) {
           session.status = "guest";
           this.clear();
-          location.href = '/store'
+
+          if (localStorage.getItem("isReader") === "true") {
+            location.href = "/reader";
+          } else {
+            location.href = "/store";
+          }
         }
       },
     },

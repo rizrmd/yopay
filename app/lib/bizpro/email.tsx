@@ -23,66 +23,69 @@ export const sendEmail = async (arg: {
   body: string | ReactElement;
   code?: string;
   footer?: string;
+  raw?: boolean;
 }) => {
   try {
-    const htmlBody = await render(
-      <Html>
-        <Head />
-        <Body style={main}>
-          <Preview>{arg.subject}</Preview>
-          <Container style={container}>
-            <Section style={logoContainer}>
-              <Img
-                src={`https://esensi.online/logo.webp`}
-                width="50"
-                height="50"
-                alt="Esensi Online"
-              />
-            </Section>
-
-            {isValidElement(arg.body) ? (
-              arg.body
-            ) : (
-              <>
-                <Heading style={h1}>{arg.subject}</Heading>
-                <Text style={heroText}>{arg.body}</Text>
-              </>
-            )}
-
-            {arg.code && (
-              <Section style={codeBox}>
-                <Text style={confirmationCodeText}>{arg.code}</Text>
-              </Section>
-            )}
-
-            {arg.footer && <Text style={text}>{arg.footer}</Text>}
-
-            <Hr className="border-t border-gray-300" />
-            <Section>
-              <Row>
-                <Column style={{ width: "50px" }}>
+    const htmlBody = arg.raw
+      ? arg?.body as string
+      : await render(
+          <Html>
+            <Head />
+            <Body style={main}>
+              <Preview>{arg.subject}</Preview>
+              <Container style={container}>
+                <Section style={logoContainer}>
                   <Img
                     src={`https://esensi.online/logo.webp`}
-                    width="40"
-                    height="40"
+                    width="50"
+                    height="50"
                     alt="Esensi Online"
                   />
-                </Column>
-                <Column>
-                  <Text className="m-0">
-                    Esensi Online
-                    <br />
-                    PT. Meraih Ilmu Semesta
-                  </Text>
-                </Column>
-              </Row>
-            </Section>
-          </Container>
-        </Body>
-      </Html>,
-      { pretty: true }
-    );
- 
+                </Section>
+
+                {isValidElement(arg.body) ? (
+                  arg.body
+                ) : (
+                  <>
+                    <Heading style={h1}>{arg.subject}</Heading>
+                    <Text style={heroText}>{arg.body}</Text>
+                  </>
+                )}
+
+                {arg.code && (
+                  <Section style={codeBox}>
+                    <Text style={confirmationCodeText}>{arg.code}</Text>
+                  </Section>
+                )}
+
+                {arg.footer && <Text style={text}>{arg.footer}</Text>}
+
+                <Hr className="border-t border-gray-300" />
+                <Section>
+                  <Row>
+                    <Column style={{ width: "50px" }}>
+                      <Img
+                        src={`https://esensi.online/logo.webp`}
+                        width="40"
+                        height="40"
+                        alt="Esensi Online"
+                      />
+                    </Column>
+                    <Column>
+                      <Text className="m-0">
+                        Esensi Online
+                        <br />
+                        PT. Meraih Ilmu Semesta
+                      </Text>
+                    </Column>
+                  </Row>
+                </Section>
+              </Container>
+            </Body>
+          </Html>,
+          { pretty: true }
+        );
+
     if (typeof window === "undefined") {
       const nodemailer = (await import("nodemailer")).default;
       const dotenv = (await import("dotenv")).default;

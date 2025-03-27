@@ -12,5 +12,6 @@ export const fbq: (
     content_ids?: string[];
     content_type?: string;
     num_items?: number;
+    orderID?: string;
   }
 ) => void = (window as any).fbq || (() => {});

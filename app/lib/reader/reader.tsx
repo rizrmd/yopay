@@ -1,68 +1,32 @@
-import type { NavItem, Rendition } from "epubjs";
-import { Popover } from "lib/comps/custom/Popover";
 import { Spinner } from "lib/comps/ui/field-loading";
 import { useLocal } from "lib/utils/use-local";
-import { useEffect, useRef } from "react";
-import { ReactReader, ReactReaderStyle } from "react-reader";
+import { FC, ReactNode, useEffect } from "react";
 import { validate } from "uuid";
 import { product } from "../../../typings/prisma";
+import { PDFReader } from "./parts/pdf-reader";
+import { readerSettings } from "./parts/reader-settings";
 import { ReaderTop } from "./parts/reader-top";
-
-const epub_link =
-  location.pathname.indexOf("alice") > 0
-    ? "https://raw.githubusercontent.com/altmshfkgudtjr/react-epub-viewer/refs/heads/main/public/files/Alices%20Adventures%20in%20Wonderland.epub"
-    : `https://prasi.avolut.com/prod/bf706e40-2a3a-4148-9cdd-75d4483328d7/coba.epub`;
 
 // const epub_link =  "https://raw.githubusercontent.com/altmshfkgudtjr/react-epub-viewer/refs/heads/main/public/files/Alices%20Adventures%20in%20Wonderland.epub"
 
-export const Reader = () => {
-  const rendition = useRef<Rendition | undefined>(undefined);
-  const toc = useRef<NavItem[]>([]);
-  const { displayed, href } = rendition.current?.location.start || {
-    displayed: { page: 0, total: 0 },
-    href: "",
-  };
+type ChildFn = (arg: {
+  font: { current: number; increase: () => void; decrease: () => void };
+}) => ReactNode;
 
+export const Reader: FC<{
+  children: [ChildFn] | ChildFn;
+}> = ({ children }) => {
   const local = useLocal({
-    book: null as null | Partial<product>,
-    link: "",
-    chapter: "",
-    show_toc: false,
-    page: <></>,
-    location: 0 as string | number,
-    slider: { value: 0, timeout: null as any },
-    async reloadMeta() {
-      if (!rendition.current || !toc.current) {
-        await new Promise<void>((done) => {
-          const ival = setInterval(() => {
-            if (rendition.current?.location && toc.current) {
-              clearInterval(ival);
-              done();
-            }
-          }, 100);
-        });
-      }
-      if (rendition.current && toc.current) {
-        const { displayed, href } = rendition.current.location.start || {
-          displayed: { page: 0, total: 0 },
-          href: "",
-        };
-        local.slider.value = displayed.page;
-        const chapter = toc.current.find((item) => item.href === href);
-        local.page = (
-          <>
-            <sup className="c-whitespace-nowrap">{displayed.page}</sup>
-            <div>/</div>
-            <sub className="c-whitespace-nowrap">{displayed.total}</sub>
-          </>
-        );
-        local.chapter = chapter ? chapter.label : "Alice in Wonderland";
-        local.render();
-      }
+    product: null as null | Partial<product>,
+    link: {
+      pdf: "",
+      epub: "",
     },
+    setting: false,
   });
+  readerSettings.render = local.render;
   useEffect(() => {
-    if (local.book?.id !== params.id && validate(params.id)) {
+    if (local.product?.id !== params.id && validate(params.id)) {
       db.product
         .findFirst({
           where: {
@@ -70,45 +34,26 @@ export const Reader = () => {
           },
         })
         .then((book) => {
-          local.book = book;
+          local.product = book;
 
           if (book) {
             try {
-              const file = (JSON.parse(book.product_file) as string[]).find(
-                (e) => e.includes(".epub")
-              );
-              if (file) {
-                local.link = siteurl(file);
+              const files = JSON.parse(book.product_file) as string[];
+              const epub = files.find((e) => e.endsWith(".epub"));
+              const pdf = files.find((e) => e.endsWith(".pdf"));
+              if (epub) {
+                local.link.epub = siteurl(epub);
+              } else if (pdf) {
+                local.link.pdf = siteurl(pdf);
               }
             } catch (e) {}
           }
-          if (!local.link) {
-            local.link = epub_link;
-          }
+          readerSettings.page.load(params.id);
 
           local.render();
         });
-    } else {
-      if (!isEditor) {
-        local.link = epub_link;
-
-        local.render();
-      }
     }
   }, [params.id]);
-
-  useEffect(() => {
-    if (local.link) {
-      const savedPage = localStorage.getItem(`readerPage_${local.link}`);
-      if (savedPage) {
-        local.location = savedPage;
-        local.render();
-        local.reloadMeta();
-      }
-    } else {
-      local.reloadMeta();
-    }
-  }, [local.link]);
 
   if (!local.link)
     return (
@@ -119,130 +64,75 @@ export const Reader = () => {
     );
 
   return (
-    <div
-      className={cx(
-        "c-flex c-flex-col c-items-stretch c-w-full c-h-full c-relative"
+    <>
+      {(readerSettings.show || isEditor) && (
+        <>
+          {Array.isArray(children)
+            ? children[0](readerSettings)
+            : children(readerSettings)}
+        </>
       )}
-    >
-      <style
-        dangerouslySetInnerHTML={{ __html: `body { overflow:hidden; }` }}
-      ></style>
-      {local.show_toc && (
-        <div className="absolute z-10 left-0 top-0 w-64 h-full bg-white border-r shadow-lg p-4 overflow-auto">
-          {toc.current.map((item, idx) => (
+      <div
+        className={cx(
+          "c-flex c-flex-col c-items-stretch c-w-full c-h-full c-relative"
+        )}
+      >
+        <ReaderTop
+          left={
             <div
-              key={idx}
-              className="py-2 px-3 hover:bg-gray-100 cursor-pointer"
+              className={cx(
+                "c-self-stretch c-flex c-items-center",
+                css`
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                `
+              )}
+            >
+              {local.product?.name?.substring(0, 30)}...
+            </div>
+          }
+          right={
+            <div
+              className="c-items-center c-flex c-justify-center c-self-stretch"
               onClick={() => {
-                rendition.current?.display(item.href);
-                local.show_toc = false;
+                readerSettings.show = true;
                 local.render();
               }}
             >
-              {item.label}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                className="lucide lucide-list-todo-icon lucide-list-todo"
+                viewBox="0 0 24 24"
+              >
+                <rect width="6" height="6" x="3" y="5" rx="1"></rect>
+                <path d="m3 17 2 2 4-4M13 6h8M13 12h8M13 18h8"></path>
+              </svg>
             </div>
-          ))}
-        </div>
-      )}
-      <ReaderTop
-        left={
-          <div
-            onClick={() => {
-              local.show_toc = true;
+          }
+        />
+        {local.link.pdf ? (
+          <PDFReader
+            scale={readerSettings.font.current}
+            url={local.link.pdf}
+            currentPage={readerSettings.page.current}
+            onPageChanged={(page) => {
+              readerSettings.page.current = page;
               local.render();
             }}
-            className="cursor-pointer flex items-center"
-          >
-            {local.show_toc ? "Daftar Isi" : local.chapter}
-          </div>
-        }
-        right={
-          <Popover
-            content={
-              <div className="flex flex-col gap-2 p-3">
-                <div className="text-center mb-2">
-                  Page {local.slider.value || 1} of{" "}
-                  {rendition.current?.location.start.displayed.total || 1}
-                </div>
-                <input
-                  type="range"
-                  min={1}
-                  max={displayed.total}
-                  value={local.slider.value}
-                  onChange={(e) => {
-                    local.slider.value = parseInt(e.currentTarget.value);
-                    local.render();
-
-                    clearTimeout(local.slider.timeout);
-                    local.slider.timeout = setTimeout(() => {
-                      const direction =
-                        local.slider.value > displayed.page ? "next" : "prev";
-
-                      for (
-                        let i = 0;
-                        i < Math.abs(local.slider.value - displayed.page);
-                        i++
-                      ) {
-                        if (direction === "next") {
-                          rendition.current?.next();
-                        } else {
-                          rendition.current?.prev();
-                        }
-                      }
-                    }, 500);
-                  }}
-                  className="w-full min-w-[200px]"
-                />
-              </div>
-            }
-          >
-            <div className="px-2 cursor-pointer flex items-center">
-              {local.page}
-            </div>
-          </Popover>
-        }
-      />
-      <ReactReader
-        url={local.link}
-        location={local.location}
-        showToc={false}
-        getRendition={(_rendition: Rendition) => {
-          rendition.current = _rendition;
-        }}
-        epubOptions={{ allowScriptedContent: true, allowPopups: true }}
-        readerStyles={{
-          ...ReactReaderStyle,
-          next: {
-            right: 1,
-            bottom: 0,
-            top: 0,
-            width: "50%",
-            opacity: 0,
-          },
-          prev: {
-            opacity: 0,
-            left: 1,
-            bottom: 0,
-            top: 0,
-            width: "50%",
-          },
-          reader: {
-            position: "absolute",
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-          },
-        }}
-        isRTL={false}
-        tocChanged={(_toc) => (toc.current = _toc)}
-        locationChanged={(loc: string) => {
-          local.location = loc;
-          local.render();
-          localStorage.setItem(`readerPage_${local.link}`, loc);
-          local.reloadMeta();
-        }}
-      />
-    </div>
+            mode={readerSettings.mode}
+          />
+        ) : (
+          <></>
+        )}
+      </div>
+    </>
   );
 };

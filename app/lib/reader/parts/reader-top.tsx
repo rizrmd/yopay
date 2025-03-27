@@ -8,12 +8,21 @@ export const ReaderTop = ({
   left: ReactNode;
   right: ReactNode;
 }) => {
+  const pageColors = (window as any).pdfPageColors as {
+    foreground: string;
+    background: string;
+  };
   return (
     <div
       className={cx(
         css`
           height: 40px;
         `,
+        pageColors &&
+          css`
+            background: ${pageColors.background};
+            color: ${pageColors.foreground};
+          `,
         "c-border-b c-flex c-items-stretch w-full"
       )}
     >
@@ -31,7 +40,12 @@ export const ReaderTop = ({
         <ChevronLeft size={20} />
       </div>
       <div
-        className={"c-flex c-items-stretch c-text-xs c-px-2 c-justify-between c-flex-1"}
+        className={
+          "c-flex c-items-stretch c-text-xs c-px-2 c-justify-between c-flex-1"
+        }
+        onDoubleClick={() => {
+          location.reload();
+        }}
       >
         {left}
         <div className="c-flex c-items-center">{right}</div>

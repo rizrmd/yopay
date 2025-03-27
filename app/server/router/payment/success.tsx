@@ -1,13 +1,30 @@
-import { Column, Row, Section, Text } from "@react-email/components";
 import type { CartItem } from "app/lib/bizpro/cart";
 import { sendEmail } from "app/lib/bizpro/email";
 import { generateReceipt } from "app/server/lib/gen-receipt";
+import { EsensiSession } from "app/server/session";
+import { prasiApi } from "lib/server/server-route";
+import { SessionContext } from "lib/session/type";
+import { templateTerimaKasih } from "./template/terimakasih";
 
-export default async function (sales_id: string) {
-  console.log(sales_id);
+export default prasiApi(async function (
+  this: SessionContext<EsensiSession>,
+  sales_id: string
+) {
+  let id = sales_id;
+  if (!sales_id) {
+    const parts = this.req.url.split("/");
+    id = parts[parts.length - 1];
+  }
+  if (!id) {
+    return {
+      ok: false,
+      status: "failed",
+    };
+  }
+
   const res = await db.t_sales.findFirst({
     where: {
-      id: sales_id,
+      id: id,
     },
     select: {
       customer: {
@@ -22,7 +39,6 @@ export default async function (sales_id: string) {
     },
   });
 
-  console.log(res);
   if (res?.status !== "paid") {
     return {
       ok: false,
@@ -31,7 +47,7 @@ export default async function (sales_id: string) {
   }
 
   const info = res?.info as unknown as { cart: CartItem[] };
-  if (info && info.cart) {
+  if (info && info.cart && res?.customer && res) {
     const struk = generateReceipt(info.cart, res?.midtrans_order_id || "");
     const formData = new FormData();
 
@@ -39,15 +55,15 @@ export default async function (sales_id: string) {
     formData.append(
       "message",
       `
-Terima kasih telah berbelanja di Esensi Online! Berikut adalah
-struk pembayaran Anda:
+Terima kasih telah berbelanja di Esensi Online!
+Berikut adalah struk pembayaran Anda:
 
 \`\`\`
 ${struk.receipt.trim()}
 \`\`\`
 `
     );
-    fetch("https://api.fonnte.com/send", {
+    await fetch("https://api.fonnte.com/send", {
       method: "POST",
       body: formData,
       headers: {
@@ -55,40 +71,15 @@ ${struk.receipt.trim()}
       },
     });
 
-    sendEmail({
+    await sendEmail({
       to: res.customer.email,
-      subject: "Struk Pembayaran Esensi: Rp. " + struk.total,
-      body: (
-        <>
-          <Section>
-            <Row>
-              <Column>
-                <Text>
-                  Terima kasih telah berbelanja di Esensi Online! Berikut adalah
-                  struk pembayaran Anda:
-                </Text>
-              </Column>
-            </Row>
-          </Section>
-          <Section style={{ padding: "30px", background: "#ececeb" }}>
-            <pre
-              style={{
-                fontFamily: "monospace",
-                fontSize: "12px",
-                lineHeight: "15px",
-                textAlign: "left",
-                margin: 0,
-              }}
-              dangerouslySetInnerHTML={{ __html: struk.receipt.trim() }}
-            ></pre>
-          </Section>
-        </>
-      ),
+      subject: "Esensi: Pembayaran Berhasil Rp. " + struk.total,
+      body: templateTerimaKasih(info.cart),
+      raw: true
     });
 
     return {
       ok: true,
-      struk,
       status: "completed",
     };
   } else {
@@ -97,4 +88,4 @@ ${struk.receipt.trim()}
       status: "failed",
     };
   }
-}
+});
